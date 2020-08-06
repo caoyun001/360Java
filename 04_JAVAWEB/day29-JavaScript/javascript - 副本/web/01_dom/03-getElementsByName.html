@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>form.html</title>
+		<meta charset="UTF-8">
+		
+	</head>
+	<body>
+		<form name="form1" action="test.html" method="post">
+			<input type="text" name="tname" value="传智播客13周年_1" id="tid_1"><br>
+			<input type="text" name="tname" value="传智播客13周年_2" id="tid_2"><br>
+			<input type="text" name="tname" value="传智播客13周年_3" id="tid_3"><br>
+		</form>
+
+		<br />
+		<br />
+		<input type="button" value="需求1: 获取所有name为tname元素的value属性值"  onclick="fun1()" /><br />
+		<input type="button" value="需求2: 为所有name为tname的元素,添加onchange事件, 当值改变时, 输出改变的值"/><br />
+
+		<script type="text/javascript">
+			//需求1: 获取所有name为tname元素的value属性值
+			function fun1() {
+				var inputs = document.getElementsByName("tname");
+				for(var i=0;i<inputs.length;i++){
+				    console.log(inputs[i].value);
+				}
+            }
+
+            //需求2: 为所有name为tname的元素,添加onchange事件, 当值改变时, 输出改变的值
+			var inputs = document.getElementsByName("tname");
+			for(var i=0;i<inputs.length;i++){
+                //遍历的过程中,为每个input标签添加事件
+                //事件发生,调用函数进行处理
+                inputs[i].onchange = function(){
+                    /**
+                     * 时间差:
+                     *   inputs[i] 数组中每个元素
+                     *   变量i 生命周期,循环for结束,变量i 结束
+					 *   事件后发生的,事件调用匿名函数,变量i消失
+                     */
+                    console.log(this.value);
+                }
+            }
+		</script>
+	</body>
+</html>

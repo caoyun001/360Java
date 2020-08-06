@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BOM对象location</title>
+
+    <script type="text/javascript">
+        /**
+         *  location对象,表示浏览器的地址栏
+         *  对象的属性 href 设置获取浏览器的地址栏
+         */
+
+        function fn() {
+            //location.href = "http://www.itheima.com";
+            console.log(location.href);
+        }
+
+        function fn2() {
+            location.href = "http://www.itheima.com";
+        }
+    </script>
+</head>
+<body>
+  <button onclick="fn()">按钮</button>
+
+<img src="1.jpg" onclick="fn2()">
+</body>
+</html>

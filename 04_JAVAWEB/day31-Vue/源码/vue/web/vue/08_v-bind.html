@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue指令v-bind</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind 指令可以给标签的属性赋值 -->
+        <font v-bind:color="ys1">文本颜色</font>  <hr>
+        <font :color="ys2">文本颜色</font>  <hr>
+        <a :href="jd">京东</a>  <hr>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el:"#app",
+            data:{
+                ys1:"red",
+                ys2:"yellow",
+                jd:"http://www.jd.com"
+            }
+        });
+    </script>
+</body>
+</html>

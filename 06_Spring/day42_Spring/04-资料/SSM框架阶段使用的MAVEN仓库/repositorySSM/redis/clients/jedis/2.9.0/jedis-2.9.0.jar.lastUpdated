@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sat Nov 09 12:11:45 CST 2019
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1573272705749
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact redis.clients\:jedis\:jar\:2.9.0 from/to central (https\://repo.maven.apache.org/maven2)\: Connect to repo.maven.apache.org\:443 [repo.maven.apache.org/151.101.24.215] failed\: Connection timed out\: connect

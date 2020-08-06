@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+">
+    <!--创建日期对象-->
+    <bean id="Mydate" class="java.util.Date"></bean>
+    <!--配置accountService对象-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <!--采用set方法的方式, 进行依赖注入-->
+        <!--字符串数组 依赖注入-->
+        <property name="myStrs">
+            <array>
+                <value>JavaSE</value>
+                <value>JavaWeb</value>
+                <value>SSM</value>
+            </array>
+        </property>
+        <!--List集合 依赖注入-->
+        <property name="myList">
+            <list>
+                <value>JavaSE</value>
+                <value>JavaWeb</value>
+                <value>SSM</value>
+                <value>SSM</value>
+            </list>
+        </property>
+        <!--set集合 依赖注入 -->
+        <property name="mySet">
+            <set>
+                <value>JavaSE</value>
+                <value>JavaWeb</value>
+                <value>SSM</value>
+                <value>SSM</value>
+            </set>
+        </property>
+        <!--map集合 依赖注入-->
+        <property name="myMap">
+            <map>
+                <entry key="001" value="JavaSE"></entry>
+                <entry key="002" value="JavaWeb"></entry>
+                <entry key="003" value="SSM"></entry>
+                <entry key="003" value="传智健康项目"></entry>
+            </map>
+        </property>
+        <!--props集合 依赖注入-->
+        <property name="myProps">
+            <props>
+                <prop key="001">JavaSE</prop>
+                <prop key="002">JavaWeb</prop>
+                <prop key="003">SSM</prop>
+                <prop key="004">传智健康项目</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

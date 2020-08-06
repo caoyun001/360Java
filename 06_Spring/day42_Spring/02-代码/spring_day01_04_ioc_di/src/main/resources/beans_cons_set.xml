@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+">
+    <!--创建日期对象, 存到SpringIOC容器中-->
+    <bean id="Mydate" class="java.util.Date"></bean>
+    <!--配置accountService对象-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <!--采用set方法的方式, 进行依赖注入-->
+        <property name="name" value="赵六"></property>
+        <property name="age" value="25"></property>
+        <property name="date" ref="Mydate"></property>
+
+        <!--方式一, 采用构造方法, 进行依赖注入-->
+        <!--<constructor-arg name="name" value="zhang3"></constructor-arg>-->
+        <!--<constructor-arg name="age" value="20"></constructor-arg>-->
+        <!--<constructor-arg name="date" ref="Mydate"></constructor-arg>-->
+
+        <!--方式二, 采用构造方法, 进行依赖注入-->
+        <!--<constructor-arg index="0" value="lisi"></constructor-arg>-->
+        <!--<constructor-arg index="1" value="21"></constructor-arg>-->
+        <!--<constructor-arg index="2" ref="Mydate"></constructor-arg>-->
+
+        <!--方式三, 采用构造方法, 进行依赖注入-->
+        <!--<constructor-arg type="java.lang.String" value="王五"></constructor-arg>-->
+        <!--<constructor-arg type="java.lang.Integer" value="22"></constructor-arg>-->
+        <!--<constructor-arg type="java.util.Date" ref="Mydate"></constructor-arg>-->
+    </bean>
+
+</beans>

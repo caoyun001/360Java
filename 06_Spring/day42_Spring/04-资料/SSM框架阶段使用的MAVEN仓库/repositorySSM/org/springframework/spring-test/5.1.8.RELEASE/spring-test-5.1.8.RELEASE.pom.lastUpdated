@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sat Nov 09 12:12:07 CST 2019
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1573272727222
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.springframework\:spring-test\:pom\:5.1.8.RELEASE from/to central (https\://repo.maven.apache.org/maven2)\: Connect to repo.maven.apache.org\:443 [repo.maven.apache.org/151.101.24.215] failed\: Connection timed out\: connect

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery的AJAX</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js">
+
+    </script>
+
+    <script type="text/javascript">
+        /**
+         * jQuery的封装好的ajax,实现异步请求
+         * get请求
+         * ajax的函数 get
+         *
+         * get函数,带方法签名
+         * 方法签名:值
+         */
+        function getFn() {
+            $.get({
+                //参数: 请求服务器的地址
+                url:"/ajax",
+                //提交到服务器的参数,HTTP协议内容
+                data:"name=lisi&age=30",
+                //服务器响应成功后,需要调用函数进行处理
+                //匿名函数中,传递参数,该参数就是服务器响应回来的数据
+                success:function(data){
+                    console.log("服务器响应::"+data);
+                },
+                //服务器响应回来的数据类型
+                dataType:"text"
+            });
+        }
+    </script>
+</head>
+<body>
+
+   <input type="button" value="get请求" onclick="getFn()">
+</body>
+</html>

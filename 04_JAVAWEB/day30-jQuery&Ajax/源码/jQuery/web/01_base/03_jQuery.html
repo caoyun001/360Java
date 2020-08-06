@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DOM对象转成jQuery对象</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+        function fn() {
+            //document对象 ,获取文本框
+            var user = document.getElementById("user");
+            //user是DOM对象,转成jQuery对象
+            // DOM ==> jQuery  穿马甲, DOM对象上添加$包装
+            var userJquery = $(user);
+            console.log( userJquery.val() );
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="user">
+    <input type="button" value="按钮" onclick="fn()" >
+</body>
+</html>

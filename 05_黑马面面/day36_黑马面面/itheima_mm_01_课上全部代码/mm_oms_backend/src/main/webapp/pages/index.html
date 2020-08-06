@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>黑马面面</title>
+    <meta name="description" content="黑马面面">
+    <meta name="keywords" content="黑马面面">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../css/element-ui.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+<div id="app">
+    <el-container>
+        <el-header class="main-header" style="height:70px;">
+            <nav class="navbar navbar-static-top" :class=''>
+                <!-- Logo -->
+                <a href="all-admin-index.html" class="logo" style="text-align:center">
+                    <span class="logo-mini" v-show='isCollapse'><img src="../img/minilogo_new.png"></span>
+                    <span class="logo-lg" v-show='!isCollapse'><img src="../img/logo_new.png"></span>
+                </a>
+                <a href="#" class="sidebar-toggle" @click="isClossTabFun">
+                    <i aria-hidden="true"
+                       :class="isCollapse?'fa fa-indent':'fa fa-outdent'"></i>
+                </a>
+                <div class="nav-search">
+                    <el-input v-model="input" placeholder="请输入内容" size="small" prefix-icon="el-icon-search"></el-input>
+                </div>
+                <div class="right-menu">
+                    <!--<span class="help"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>帮助</span>-->
+                    <el-dropdown class="avatar-container right-menu-item" trigger="click">
+                        <div class="avatar-wrapper">
+                            <img src="../img/avatar5.png" class="user-avatar">
+                            &nbsp;{{userName}}
+                        </div>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item divided>
+                                <span style="display:block;">修改密码</span>
+                            </el-dropdown-item>
+                            <el-dropdown-item divided>
+                                <span style="display:block;"><a href="#" @click="logout()">退出</a></span>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+            </nav>
+        </el-header>
+        <el-container>
+            <el-aside :width="tabWidth+'px'">
+                <el-menu default-active="5-1" class="el-menu-vertical-demo" background-color="#108ee9"
+                         @open="handleOpen"
+                         @close="handleClose"
+                         :collapse="isCollapse">
+                    <sidebar-item v-for="menu in menuList" :key="menu.path" :item="menu"/>
+                </el-menu>
+            </el-aside>
+            <el-container>
+                <iframe name="right" id="iframepage" class="el-main"
+                        src="questionBasicList.html" width="100%" height="100%" frameborder="0" ranat="server"></iframe>
+            </el-container>
+        </el-container>
+    </el-container>
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="../js/vue.js"></script>
+<script src="../js/element-ui.js"></script>
+<script src="../plugins/jquery/dist/jquery.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    Vue.component('sidebar-item', {
+        props: {
+            item: {
+                type: Object,
+                required: true
+            }
+        },
+        template: `
+        <div v-if="item.children">
+            <template v-if="item.children.length == 0">
+                <el-menu-item :index="item.path">
+                <img :src="item.icon">&nbsp;&nbsp;
+                {{item.title}}
+                </el-menu-item>
+            </template>
+
+            <el-submenu v-else :index="item.path">
+            <template slot="title" >
+                    <img :src="item.icon">&nbsp;&nbsp;
+                {{item.title}}
+            </template>
+
+            <template v-for="child in item.children">
+                <sidebar-item
+                v-if="child.children&&child.children.length>0"
+                :item="child"
+                :key="child.path"/>
+                <el-menu-item v-else :key="child.path" :index="child.path" style='padding-left:53px'>
+                <a :href="child.linkUrl" target="right">{{child.title}}</a>
+                </el-menu-item>
+            </template>
+            </el-submenu>
+        </div>`
+    })
+    new Vue({
+        el: '#app',
+        // router,
+        data() {
+            return {
+                userName: sessionStorage.getItem("userName"),
+                visible: false,
+                isCollapse: false,
+                tabWidth: 200,
+                test1: 1,
+                intelval: null,
+                winfo: 'winfo',
+                data: [],
+                menuList: [],
+                input: ''
+            }
+        },
+        created() {
+            this.menuList = nemu.data
+            if (this.userName != 'admin') {
+                this.menuList.shift();
+            }
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                // console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                // console.log(key, keyPath);
+            },
+            logout(){
+                //window.location.href = "../login.html";
+                // 发送axios请求，通知后台（销毁Session），退出
+                axios.get(app_path+"/user/logout.do").then((response)=>{
+                    if(response.data.flag){
+                        window.location.href = "../login.html";
+                    }
+                });
+            },
+            isClossTabFun() {
+                if (!this.isCollapse) {
+                    this.tabWidth = 48;
+                } else {
+                    this.tabWidth = 200;
+                }
+                this.isCollapse = !this.isCollapse;
+            }
+        }
+    })
+</script>
+</html>

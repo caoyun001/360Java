@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定时广告</title>
+		<style>
+			.ad {
+				width: 1200px;
+				margin: 0 auto;
+				display: none;
+			}
+			
+			.color a {
+				color: white;
+			}	
+		</style>
+
+		<script type="text/javascript">
+            /**
+			 * 定时器: 页面加载完成后3秒,显示广告
+			 * 广告用户看3秒,收起
+			 *
+			 * div标签的CSS样式,属性display:block 显示, 块级元素,占用一个
+             */
+            setTimeout( function () {
+				//获取div标签
+				var ad = document.getElementById("ad");
+				//CSS样式,显示
+				ad.style.display = "block";
+            } ,3000);
+
+
+            setTimeout(function () {
+                //获取div标签
+                var ad = document.getElementById("ad");
+                //CSS样式,显示
+                ad.style.display = "none";
+            },6000)
+		</script>
+		</head>
+	<body>
+		<!-- 广告 -->
+		<div class="ad" id="ad" >
+			<img src="../img/ad.gif" />
+		</div>
+		<!-- 头部, 1x3表格 -->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center">
+			<tr>
+				<td>
+					<img src="../img/logo2.png" >
+				</td>
+				<td>
+					<img src="../img/header.jpg" >
+				</td>
+				<td>
+					<a href="#">登录</a>
+					<a href="#">注册</a>
+					<a href="#">购物车</a>
+				</td>
+			</tr>
+		</table>
+		<!-- 导航, 1x1表格 -->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center" bgcolor="black" height="25">
+			<tr>
+				<td class="color">
+					<a href="#">首页</a>
+					<a href="#">手机数码</a>
+					<a href="#">电脑办公</a>
+					<a href="#">电脑办公</a>
+					<a href="#">电脑办公</a>
+				</td>
+			</tr>
+		</table>
+		<!-- 轮播图, 1x1表格 -->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center">
+			<tr>
+				<td>
+					<img src="../img/1.jpg" width="1200" >
+				</td>
+			</tr>
+		</table>
+		<!-- 热门商品, 2x7表格 -->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center">
+			<tr>
+				<!-- 竖向跨2行 合并单元格 -->
+				<td rowspan="2">
+					<img src="../img/big01.jpg" >
+				</td>
+				<!-- 横向跨3列 合并单元格 -->
+				<td colspan="3">
+					<img src="../img/middle01.jpg" >
+				</td>
+				<!-- <td></td> -->
+				<!-- <td></td> -->
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+			</tr>
+			<tr>
+				<!-- <td></td> -->
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+			</tr>
+		</table>
+		<!-- 宠粮图, 1x1表格 -->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center">
+			<tr>
+				<td>
+					<img src="../img/ad.jpg" width="1200" >
+				</td>
+			</tr>
+		</table>
+		<!-- 热门商品, 2x7表格 -->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center">
+			<tr>
+				<!-- 竖向跨2行 合并单元格 -->
+				<td rowspan="2">
+					<img src="../img/big01.jpg" >
+				</td>
+				<!-- 横向跨3列 合并单元格 -->
+				<td colspan="3">
+					<img src="../img/middle01.jpg" >
+				</td>
+				<!-- <td></td> -->
+				<!-- <td></td> -->
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+			</tr>
+			<tr>
+				<!-- <td></td> -->
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+				<td align="center">
+					<img src="../img/small03.jpg" > <br />
+					<font color="red">冬瓜</font> <br />
+					<font color="red">$299</font>
+				</td>
+			</tr>
+		</table>
+		<!-- 底部,  1x2表格-->
+		<table cellspacing="0" cellpadding="0" width="1200" align="center">
+			<tr>
+				<td>
+					<img src="../img/footer.jpg" width="1200" >
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<a href="#">关于我们</a>
+					<a href="#">联系我们</a>
+					<a href="#">招贤纳士</a>
+					<a href="#">友情链接</a>
+					<a href="#">法律声明</a>
+					<a href="#">支付方式</a>
+					<a href="#">配送方式</a>
+					<a href="#">服务声明</a>
+					<a href="#">广告声明</a>
+					<p>
+					Copyright &copy; 2005-2016传智播客版权所有
+					</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

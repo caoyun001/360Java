@@ -1,0 +1,27 @@
+其中一位同学操作如下：(初始化远程仓库)
+1、先创建远程仓库，把组成员添加到仓库成员
+2、在本地文件夹克隆远程仓库到本地目录 git clone 远程仓库地址
+3、把项目代码copy到本地仓库目录 
+4、把代码从工作区添加到暂存区  git add .
+5、提交代码到本地仓库	git commit -m '初始化项目'
+6、把代码推送到服务端  git push origin master
+
+另外一位同学操作：
+1、克隆远程仓库代码到本地  git clone 远程仓库地址
+2、使用idea打开代码，进行修改测试
+  
+常用命令如下：
+把代码从工作区添加到暂存区  git add .
+提交代码到本地仓库	git commit -m '初始化项目'
+把代码推送到服务端  git push origin master
+拉取远程代码到本地进行合并  git pull
+
+注意：
+git commit时，可能提示需要全局配置
+git config --global user.name "itcast"   
+git config --global user.email "hello@itcast.cn"
+
+重置密码：
+git config --system --unset credential.helper
+Windows系统
+  控制面板-凭据管理器 （Win7用户管理里面，win10,在控制器面板小图标显示）

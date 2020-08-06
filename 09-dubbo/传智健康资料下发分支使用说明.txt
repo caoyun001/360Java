@@ -1,0 +1,14 @@
+﻿源代码资料	
+	- git clone https://gitee.com/czbk_zhang_meng/class_360_health.git
+	- release/360_xx分支    
+		- 实现代码,每次上课前会更新
+		- release/360_01 穿健康第（1）天实现的代码
+	- practice/360_xx 分支
+		- 课堂练习代码
+		- practice/360_01 传智健康第(1)天的课上练习代码
+
+
+讲义资料		
+	- git clone https://gitee.com/czbk_zhang_meng/class_360_health_courseware.git
+	- 只有master分支，每次课后会更新当次课的内容
+	- 因此在每次使用前先执行git pull就可以了

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery的遍历each函数</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js">
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            var lis = $("li");
+            /*
+               jQuery框架中函数each
+               jQuery对象调用each函数
+               each函数(自定义的匿名函数 function(){})
+               匿名函数中,定义2个参数
+               1个是索引,
+               1个是元素
+
+               each函数负责遍历,内部循环4次
+               每一次循环,调用匿名函数
+               传递到匿名函数中,遍历的元素和索引
+             */
+            lis.each(function(index,element){
+                console.log(index+"=="+$(element).html());
+            });
+        });
+    </script>
+</head>
+<body>
+<ul id="city">
+    <li>北京</li>
+    <li>上海</li>
+    <li>天津</li>
+    <li>重庆</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS的事件</title>
+    <script type="text/javascript">
+        /**
+         * JS的事件
+         *
+         * 4个组成部分:
+         *   事件源: 发生事件的主体,HTML页面,很多元素都可以是事件源
+         *      按钮,提交,图片,超链接,浏览器,  用户能操作的
+         *
+         *
+         *   监听器: (窃听器)
+         *     是永远不停止的工具,注册在事件源上,等待事件的发生
+         *     只要事件发生,捕捉到
+         *
+         *   事件:
+         *     鼠标: 点击,双击,悬停,离开
+         *     键盘: 按下,抬起
+         *     浏览器事件: 开,关,最小化
+         *
+         *   处理函数:
+         *     监听器捕捉到事件后,调用函数进行处理
+         *
+         *   准备事件源,在事件源上注册监听器,监听鼠标点击事件
+         *   等待用户点击,用户操作了,监听器捕捉到事件,调用函数进行处理
+         */
+
+        function click1() {
+            console.log("按钮被点击");
+        }
+
+        function over() {
+            console.log("鼠标悬停");
+        }
+    </script>
+</head>
+<body>
+    <!--
+       按钮事件源,注册监听器,点击
+       按钮事件源,注册监听器,鼠标悬停
+    -->
+    <input type="button" value="按钮" onclick="click1()" onmouseover="over()">
+
+</body>
+</html>

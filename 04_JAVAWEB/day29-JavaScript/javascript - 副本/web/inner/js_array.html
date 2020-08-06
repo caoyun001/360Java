@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS内置对象数组</title>
+    <script type="text/javascript">
+        /**
+         * JS内置对象数组
+         * 是JS唯一容器
+         *
+         *  new Array();  创建空的数组 int[] arr = {}
+            new Array(size); 创建指定长度的数组 int[] arr = new int[3]
+            new Array(element0, element1, ..., elementn); 创建数组,同时存储元素  int[] arr = {1,2,3,4}
+         */
+
+      /*  var arr1 = new Array();
+        console.log(arr1);
+
+        var  arr2 = new Array(5);
+        console.log(arr2);
+
+        var arr3 = new Array(1,2,3,4,5,6);
+        console.log(arr3);*/
+
+      //JS数组可以随便存储数据 ,无限制
+        //数组可变长度数组
+        var arr4 = new Array("a",1,2,3,true);
+        arr4[5] = "qq";
+        arr4[9] = "xixi";
+        // console.log(arr4);
+
+        //数组创建,直接赋值方式
+        var arr5 = [1,2,3,4,5,1.5,true,"hehe"];
+        for(var i=0;i<arr5.length;i++){
+            console.log(arr5[i]);
+        }
+
+       /* for(var a in arr5){
+            console.log(arr5[a]);
+        }*/
+
+       //二维数组
+        //一个二维数组中,存储了多个一维数组
+       var  arr6 = [ [1,2,3],[4,5,6],[7,8,9,0] ];
+       for(var i=0;i<arr6.length;i++){
+           for(var j=0; j<arr6[i].length;j++){
+               console.log(arr6[i][j]);
+           }
+       }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

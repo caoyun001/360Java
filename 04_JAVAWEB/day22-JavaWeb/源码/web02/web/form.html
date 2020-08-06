@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+     数据准备,写表单,请求到服务器
+     request对象数据的获取
+-->
+ <form action="/web02/params2" method="get">
+      用户名:<input type="text" name="user"><br>
+      密的码:<input type="password" name="password"><br>
+      爱好: <input type="checkbox" name="hobby" value="chouyan"> 抽烟
+            <input type="checkbox" name="hobby" value="hejiu"> 喝酒
+            <input type="checkbox" name="hobby" value="tangtou"> 烫头<br>
+
+      城市选择:<select name="city">
+                 <option value="bj">beijingshi</option>
+                 <option value="tj">tianjinshi</option>
+                 <option value="wh">wuhanshi</option>
+              </select><br>
+
+     <input type="submit" value="提交数据">
+
+
+ </form>
+</body>
+</html>

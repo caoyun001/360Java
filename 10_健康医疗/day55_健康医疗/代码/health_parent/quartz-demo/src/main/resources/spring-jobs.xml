@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://code.alibabatech.com/schema/dubbo
+						http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--注册自定义job由spring负责创建对象-->
+    <bean id="jobDemo" class="com.itheima.jobs.MyJob"></bean>
+
+    <!--定义jobdetail，作用是通过反射调用自定义的job的方法-->
+    <bean id="jobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 注入目标对象 -->
+        <property name="targetObject" ref="jobDemo"/>
+        <!-- 注入目标方法 -->
+        <property name="targetMethod" value="run"/>
+    </bean>
+
+    <!--定义触发器，指定触发时间-->
+    <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- 注入JobDetail -->
+        <property name="jobDetail" ref="jobDetail"/>
+        <!-- 指定触发的时间，基于Cron表达式 -->
+        <property name="cronExpression">
+            <value>0/2 * * * * ?</value>
+        </property>
+    </bean>
+
+    <!--定义统一的调度工厂，统一调度job-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- 注入多个触发器 -->
+        <property name="triggers">
+            <list>
+                <ref bean="myTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>

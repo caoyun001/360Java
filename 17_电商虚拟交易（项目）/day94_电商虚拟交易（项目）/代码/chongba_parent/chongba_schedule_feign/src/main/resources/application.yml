@@ -1,0 +1,9 @@
+spring:   
+  application:  
+    name: fegin #指定服务名
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+       register: false #不需要注册到consul

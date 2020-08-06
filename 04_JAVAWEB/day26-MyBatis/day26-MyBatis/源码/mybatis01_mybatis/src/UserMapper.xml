@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--
+            mapper 映射的意思
+            namespace 命名空间，属性值要求唯一性
+            整个的SQL语句配置文件
+        -->
+<mapper namespace="test">
+
+    <!--
+      配置删除数据，标签delete
+    -->
+    <delete id="deleteUserById" parameterType="Integer">
+        delete from user where id = #{id}
+    </delete>
+
+
+    <!--
+      配置更新数据，标签update
+    -->
+    <update id="updateUserById" parameterType="com.itheima.pojo.User">
+        update user set username=#{username},sex=#{sex},birthday=#{birthday},address=#{address} where id=#{id}
+    </update>
+
+
+    <!--
+      配置新增数据，标签insert
+      新增数据，SQL语句中，一定会有很多参数
+      参数封装在pojo对象，配置的时候，标签属性parameterType
+      SQL语句中参数的数据类型
+      pojo对象User，封装了所有的数据
+
+      增删改，结果是行数，int类型，不要配置resultType
+
+      新增操作：insert标签中，子标签 <selectKey> 获取上一次新增主键值
+      属性：
+      order="after或者before" 获取主键，是在SQL语句之前，还是之后执行
+      resultType 获取主键的结果数据类型
+      keyProperty 属性，查询后的值放那里 pojo对象的属性中
+
+    -->
+    <insert id="saveUser" parameterType="com.itheima.pojo.User">
+       <!--
+          传递的参数是对象 pojo
+          #｛pojo对象的属性名！！｝
+       -->
+        insert into user values (null,#{username},#{sex},#{birthday},#{address})
+
+        <selectKey order="AFTER" resultType="Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID ()
+        </selectKey>
+    </insert>
+
+
+   <!--
+      select 标签，配置的是查询语句
+      id 属性，唯一性，在当前文件中唯一  ，属性值 queryList
+      框架执行SQL语句： namespace+"."+queryList  确定SQL语句
+
+      resultType: 查询的结果集，是pojo对象
+      标签体： 是SQL语句
+   -->
+   <select id="queryList" resultType="com.itheima.pojo.User">
+      select * from user
+   </select>
+
+    <!--
+       配置，数据表user模糊查询
+       用户名模糊查询
+       SQL语句参数
+       ${参数名} 写参数名字，固定写为value
+
+       #{}  ${} 获取参数的区别
+
+         select * from user where username like #{value}
+           select * from user where username like ?    '%王%'
+         参数编译为 ？   传递的实际参数 "'%王%'"   替换到？占位符
+         框架底层使用的JDBC中的接口 PreparedStatement
+
+
+        select * from user where username like ${value}
+          select * from user where username like '%王%'
+        直接拼接了字符串！！
+
+         ${}  适合于特殊场景， SQL语句中的参数是 列名或者表名的时候
+         select * from user order by
+    -->
+    <select id="queryUserByUsername" resultType="com.itheima.pojo.User" parameterType="String">
+        select * from user where username like #{value}
+    </select>
+
+    <!--
+          配置，主键查询的SQL语句 ，标签 select
+          id具有唯一性
+          查询是有结果集
+            标签中属性 resultType:配置结果集的类型
+          SQL语句有参数的
+            标签中属性 parameterType: SQL语句的参数类型
+    -->
+    <select id="queryUserById" resultType="com.itheima.pojo.User" parameterType="Integer">
+      <!--
+        SQL语句
+          MyBatis配置SQL语句，参数不能写问号
+          取参数  #{参数名}
+          参数名，如果只有一个参数，基本类型及其包装类和String，任意
+      -->
+        select * from user where id = #{id}
+    </select>
+
+
+</mapper>

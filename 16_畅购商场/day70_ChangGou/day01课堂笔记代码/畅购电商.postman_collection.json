@@ -1,0 +1,1597 @@
+{
+	"info": {
+		"_postman_id": "d2ef14d5-7a6e-4099-9b5b-109415cf4702",
+		"name": "畅购电商",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "品牌测试",
+			"item": [
+				{
+					"name": "品牌查询（全部）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/findAll",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"findAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌查询（根据ID）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/325400",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"325400"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌添加（单个）",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"AAA\",\"image\": \"http://baidu.com/AAAA.jpg\",\"letter\": \"A\",\"seq\": 1}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌更新（根据ID）",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":325414,\"name\": \"bbb\",\"image\": \"http://baidu.com/b.jpg\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌删除（根据ID）",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/325414",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"325414"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌查询（条件）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/search?name=利&letter=F",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "利"
+								},
+								{
+									"key": "letter",
+									"value": "F"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌查询（分页）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/search2/2/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"search2",
+								"2",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌查询（条件+分页）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9011/brand/pageList/1/2?name=利",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"brand",
+								"pageList",
+								"1",
+								"2"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "利"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "品牌查询（根据分类名称）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/brand/cate/手机",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"brand",
+								"cate",
+								"手机"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "规格测试",
+			"item": [
+				{
+					"name": "规格查询（根据分类名称）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spec/cate/%E6%89%8B%E6%9C%BA",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spec",
+								"cate",
+								"%E6%89%8B%E6%9C%BA"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "网关测试",
+			"item": [
+				{
+					"name": "品牌查询",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4YzY2ODQyNi0xNjY4LTRlMDktYWE3ZS02OTdjYWI5OGJiZjQiLCJzdWIiOiJ0ZXN0MSIsImlzcyI6ImFkbWluIiwiaWF0IjoxNTc2OTI0MDc0LCJleHAiOjE1NzY5Mjc2NzR9.7shzV4L5DdGF1ldKezGVIUcWw3NPZHnBBqm0eTtds28",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:9101/goods/brand?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9101",
+							"path": [
+								"goods",
+								"brand"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "管理后台（登录）",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"loginName\":\"test1\",\n\t\"password\":\"itheima\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9101/system/admin/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9101",
+							"path": [
+								"system",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "管理后台（添加用户）",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"loginName\":\"test1\",\n\t\"password\":\"itheima\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9101/system/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9101",
+							"path": [
+								"system",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "商品测试",
+			"item": [
+				{
+					"name": "分布式ID测试",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/sku/idWorker",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"sku",
+								"idWorker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品添加",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"spu\": {\r\n\t\t\"brandId\": 8557,\r\n\t\t\"caption\": \"111\",\r\n\t\t\"category1Id\": 558,\r\n\t\t\"category2Id\": 559,\r\n\t\t\"category3Id\": 560,\r\n\t\t\"commentNum\": 0,\r\n\t\t\"freightId\": 0,\r\n\t\t\"image\": \"\",\r\n\t\t\"images\": \"[{\\\"color\\\":\\\"银白色\\\",\\\"url\\\":\\\"//img11.360buyimg.com/n7/jfs/t30040/100/1290632710/208879/1f7e2225/5cdd0d92Nb78895a6.jpg\\\"}]\",\r\n\t\t\"introduction\": \"这是测试手机数据\",\r\n\t\t\"isDelete\": 0,\r\n\t\t\"isEnableSpec\": \"0\",\r\n\t\t\"isMarketable\": \"0\",\r\n\t\t\"name\": \"黑马智能手机\",\r\n\t\t\"paraItems\": \"\",\r\n\t\t\"saleNum\": 0,\r\n\t\t\"saleService\": \"\",\r\n\t\t\"sn\": \"\",\r\n\t\t\"specItems\": \"{\\\"颜色\\\":[\\\"金色\\\",\\\"黑色\\\",\\\"蓝色\\\"],\\\"版本\\\":[\\\"6GB+64GB\\\"]}\",\r\n\t\t\"status\": \"0\",\r\n\t\t\"templateId\": 42\r\n\t},\r\n\t\"skuList\": [{\r\n\t\t\"alertNum\": 100,\r\n\t\t\"commentNum\": 0,\r\n\t\t\"image\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp\",\r\n\t\t\"images\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp,\",\r\n\t\t\"num\": 100,\r\n\t\t\"price\": 90000,\r\n\t\t\"saleNum\": 0,\r\n\t\t\"sn\": \"\",\r\n\t\t\"spec\": \"{'颜色': '蓝色'}\",\r\n\t\t\"status\": \"1\",\r\n\t\t\"weight\": 10\r\n\t},{\r\n\t\t\"alertNum\": 100,\r\n\t\t\"commentNum\": 0,\r\n\t\t\"image\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp\",\r\n\t\t\"images\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp\",\r\n\t\t\"num\": 100,\r\n\t\t\"price\": 80000,\r\n\t\t\"saleNum\": 0,\r\n\t\t\"sn\": \"\",\r\n\t\t\"spec\": \"{'颜色': '黑色'}\",\r\n\t\t\"status\": \"1\",\r\n\t\t\"weight\": 10\r\n\t  }\r\n   ]\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/addGoods",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"addGoods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品查询（按spuId）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/goods/1191252291143860224",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"goods",
+								"1191252291143860224"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品更新",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"spu\": {\r\n\t\t\"brandId\": 8557,\r\n\t\t\"caption\": \"111\",\r\n\t\t\"category1Id\": 558,\r\n\t\t\"category2Id\": 559,\r\n\t\t\"category3Id\": 560,\r\n\t\t\"commentNum\": 0,\r\n\t\t\"freightId\": 0,\r\n\t\t\"id\": 1191252291143860224,\r\n\t\t\"image\": \"\",\r\n\t\t\"images\": \"[{\\\"color\\\":\\\"银白色test\\\",\\\"url\\\":\\\"//img11.360buyimg.com/n7/jfs/t30040/100/1290632710/208879/1f7e2225/5cdd0d92Nb78895a6.jpg\\\"}]\",\r\n\t\t\"introduction\": \"这是测试手机数据test\",\r\n\t\t\"isDelete\": 0,\r\n\t\t\"isEnableSpec\": \"0\",\r\n\t\t\"isMarketable\": \"0\",\r\n\t\t\"name\": \"黑马智能手机test\",\r\n\t\t\"paraItems\": \"\",\r\n\t\t\"saleNum\": 0,\r\n\t\t\"saleService\": \"\",\r\n\t\t\"sn\": \"\",\r\n\t\t\"specItems\": \"{\\\"颜色\\\":[\\\"紫色\\\",\\\"黄金色\\\",\\\"香槟色\\\"],\\\"版本\\\":[\\\"6GB+64GB\\\"]}\",\r\n\t\t\"status\": \"0\",\r\n\t\t\"templateId\": 42\r\n\t},\r\n\t\"skuList\": [{\r\n\t\t\"spuId\":1191252291143860224,\r\n\t\t\"alertNum\": 100,\r\n\t\t\"commentNum\": 0,\r\n\t\t\"image\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp\",\r\n\t\t\"images\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp,\",\r\n\t\t\"num\": 100,\r\n\t\t\"price\": 90000,\r\n\t\t\"saleNum\": 0,\r\n\t\t\"sn\": \"\",\r\n\t\t\"spec\": \"{'颜色': '黄金色'}\",\r\n\t\t\"status\": \"1\",\r\n\t\t\"weight\": 10\r\n\t},{\r\n\t\t\"spuId\":1191252291143860224,\r\n\t\t\"alertNum\": 100,\r\n\t\t\"commentNum\": 0,\r\n\t\t\"image\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp\",\r\n\t\t\"images\": \"https://m.360buyimg.com/mobilecms/s720x720_jfs/t22642/312/2563982615/103706/1398b13d/5b865bb3N0409f0d0.jpg!q70.jpg.webp\",\r\n\t\t\"num\": 100,\r\n\t\t\"price\": 80000,\r\n\t\t\"saleNum\": 0,\r\n\t\t\"sn\": \"\",\r\n\t\t\"spec\": \"{'颜色': '香槟色'}\",\r\n\t\t\"status\": \"1\",\r\n\t\t\"weight\": 10\r\n\t  }\r\n   ]\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/updateGoods",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"updateGoods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品审核（按照spuId）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/audit/1197420589686456320",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"audit",
+								"1197420589686456320"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品上架（按照spuId）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/upGoods/1191252291143860224",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"upGoods",
+								"1191252291143860224"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品下架（按照spuId）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/down/1197420589686456320",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"down",
+								"1197420589686456320"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品逻辑删除（按照spuId）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/deleteLogic/1191252291143860224",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"deleteLogic",
+								"1191252291143860224"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品恢复（按照spuId）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/restore/1191252291143860224",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"restore",
+								"1191252291143860224"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品物理删除（按照spuId）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9001/spu/deleteGoods/1208578685611802624",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"spu",
+								"deleteGoods",
+								"1208578685611802624"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "搜索测试",
+			"item": [
+				{
+					"name": "创建索引和映射",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9009/manage/createIndex",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"manage",
+								"createIndex"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "导入全部数据",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9009/manage/importAll",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"manage",
+								"importAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除doc数据",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9009/manage/deleteBySpuId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"manage",
+								"deleteBySpuId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除索引和映射",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9009/manage/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"manage",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ES接口创建映射",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n         \"properties\":{\r\n\r\n                   \"id\":{\"type\":\"long\"},\r\n\r\n                   \"name\":{\"type\":\"string\"},\r\n\r\n                   \"published\":{\"type\":\"date\"}\r\n\r\n         }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.200.128:9200/abc/type/_mapping",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"200",
+								"128"
+							],
+							"port": "9200",
+							"path": [
+								"abc",
+								"type",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ES接口创建索引",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.200.128:9200/abc",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"200",
+								"128"
+							],
+							"port": "9200",
+							"path": [
+								"abc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "简单关键字搜索",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"keywords\":\"手机\",\n\"pageNum\":15,\n\"pageSize\":5,\n\"spec_颜色\":\"黑色\",\n\"spec_版本\":\"6GB+64GB\",\n\"price\":\"3000-5000\",\n\"sortField\":\"price\",\n\"sortRule\":\"ASC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9009/search/list?keywords=%e6%89%8b%e6%9c%ba&categoryName=%e8%80%81%e8%8a%b1%e9%95%9c&spec_颜色=%e7%ba%a2%e8%89%b2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"search",
+								"list"
+							],
+							"query": [
+								{
+									"key": "keywords",
+									"value": "%e6%89%8b%e6%9c%ba"
+								},
+								{
+									"key": "brandName",
+									"value": "%e5%8d%8e%e4%b8%ba",
+									"disabled": true
+								},
+								{
+									"key": "categoryName",
+									"value": "%e8%80%81%e8%8a%b1%e9%95%9c"
+								},
+								{
+									"key": "spec_颜色",
+									"value": "%e7%ba%a2%e8%89%b2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "分类品牌精确搜索",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"keywords\":\"手机\",\n\"categoryName\":\"老花镜\",\n\"brandName\":\"古莱登\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9009/search",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "其他高级搜索",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"keywords\":\"华为手机\",\n\"spec_颜色\":\"黑色\",\n\"spec_版本\":\"4GB+128GB\",\n\"price\":\"3000-5000\",\n\"pageNum\":1,\n\"pageSize\":3,\n\"sortField\": \"price\",\n\"sortRoule\": \"DESC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9009/search/keywords",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9009",
+							"path": [
+								"search",
+								"keywords"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "生成商品详情静态页面",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9011/page/createPage/1197420589686456320",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9011",
+							"path": [
+								"page",
+								"createPage",
+								"1197420589686456320"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除商品详情静态页面",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9011/page/deletePage/1197420589686456320",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9011",
+							"path": [
+								"page",
+								"deletePage",
+								"1197420589686456320"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "基础复习",
+			"item": [
+				{
+					"name": "reqBodyGet",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 325400,\r\n        \"name\": \"阿里斯顿\",\r\n        \"image\": null,\r\n        \"letter\": \"A\",\r\n        \"seq\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9011/test/reqBodyGet",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"test",
+								"reqBodyGet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reqBodyPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 325400,\r\n        \"name\": \"阿里斯顿\",\r\n        \"image\": null,\r\n        \"letter\": \"A\",\r\n        \"seq\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9011/test/reqBodyPost",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"test",
+								"reqBodyPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reqParamGet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:9011/test/reqParamGet?id=32400&name=HTC&letter=H",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"test",
+								"reqParamGet"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "32400"
+								},
+								{
+									"key": "name",
+									"value": "HTC"
+								},
+								{
+									"key": "letter",
+									"value": "H"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reqParamPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "32400",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "HTC",
+									"type": "text"
+								},
+								{
+									"key": "letter",
+									"value": "H",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9011/test/reqParamPost",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"test",
+								"reqParamPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reqModelGet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:9011/test/reqModel?id=32400&name=HTC&letter=H",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"test",
+								"reqModel"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "32400"
+								},
+								{
+									"key": "name",
+									"value": "HTC"
+								},
+								{
+									"key": "letter",
+									"value": "H"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reqModelPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "32240",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "HTC",
+									"type": "text"
+								},
+								{
+									"key": "letter",
+									"value": "H",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:9011/test/reqModel",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9011",
+							"path": [
+								"test",
+								"reqModel"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OAuth2",
+			"item": [
+				{
+					"name": "授权码模式-申请令牌",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "itheima",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "changgou",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/oauth/token?grant_type=authorization_code&code=33HkxE&redirect_uri=http://localhost",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code"
+								},
+								{
+									"key": "code",
+									"value": "33HkxE"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "授权码模式-校验令牌",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/oauth/check_token?token=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"oauth",
+								"check_token"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "授权码模式-刷新令牌",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/oauth/token?grant_type=refresh_token&refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwiYXRpIjoiM2YxNzYyODgtMDgwYy00MjIwLTlhN2EtYTFhNmRhODQyZGIwIiwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3Njc4OTExNiwianRpIjoiMGM4ZGIwNGItMjNmZi00MDQ1LTkwOTgtZGQ0MDkwOWQ1OGE5IiwiY2xpZW50X2lkIjoiY2hhbmdnb3UiLCJ1c2VybmFtZSI6ImNoYW5nZ291In0.ZGb2NkGZG2_ksIv9nux3WCSSUjv8pgc54AvNyYz1frGrO5TbYjC9d_WlsPSF9toRMJLv4t7Xr5YHb2R5sMOHNVgzuNtzr7gnXhKcaZF_-PWZEkuuHtPn8XI6ihoBsA1M3HXGBEAR1arZ_NclnwzPnVRIbijsb-vWPm7pOE1SxDmWUv32PnusqFsGUaMHQJkGpcSXa1cH6Kg8A2wSMTZl_ccpFz4U6pliZr02bE9O9HpS61UQyitJF_uR2gSy-sw6TUihgxG59NVN_M880l018vezAfkiKkHAdpeT3p1yAij8DPVKuUP3sZiUs-NKh7UwoNHveBRsXXMduR6qVshODQ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token"
+								},
+								{
+									"key": "refresh_token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwiYXRpIjoiM2YxNzYyODgtMDgwYy00MjIwLTlhN2EtYTFhNmRhODQyZGIwIiwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3Njc4OTExNiwianRpIjoiMGM4ZGIwNGItMjNmZi00MDQ1LTkwOTgtZGQ0MDkwOWQ1OGE5IiwiY2xpZW50X2lkIjoiY2hhbmdnb3UiLCJ1c2VybmFtZSI6ImNoYW5nZ291In0.ZGb2NkGZG2_ksIv9nux3WCSSUjv8pgc54AvNyYz1frGrO5TbYjC9d_WlsPSF9toRMJLv4t7Xr5YHb2R5sMOHNVgzuNtzr7gnXhKcaZF_-PWZEkuuHtPn8XI6ihoBsA1M3HXGBEAR1arZ_NclnwzPnVRIbijsb-vWPm7pOE1SxDmWUv32PnusqFsGUaMHQJkGpcSXa1cH6Kg8A2wSMTZl_ccpFz4U6pliZr02bE9O9HpS61UQyitJF_uR2gSy-sw6TUihgxG59NVN_M880l018vezAfkiKkHAdpeT3p1yAij8DPVKuUP3sZiUs-NKh7UwoNHveBRsXXMduR6qVshODQ"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码模式-申请令牌",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "itheima",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "changgou",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/oauth/token?grant_type=password&username=heima&password=itheima",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								},
+								{
+									"key": "username",
+									"value": "heima"
+								},
+								{
+									"key": "password",
+									"value": "itheima"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码模式-校验令牌",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/oauth/check_token?token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3Njc5MzIzNCwiYXV0aG9yaXRpZXMiOlsic2Vja2lsbF9saXN0IiwiZ29vZHNfbGlzdCJdLCJqdGkiOiI0MGUwZjdjMi0zYzI0LTRjNzQtYmJhOS0xMTAzMDE3OTQxY2IiLCJjbGllbnRfaWQiOiJjaGFuZ2dvdSIsInVzZXJuYW1lIjoiY2hhbmdnb3UifQ.u5zgcJb6yGjsgc5k5pD1XOe7YuV_W2bJGxeR--b9Mz6aggxTrRQOmFcyDxsQ47QONrX3uY1zvHv5a6NAiHRaswZ4U-QmbGFLObY-XMMjg-nn2Y_DLLtwQhDyQogxtg2_pmb8fx9PSaGGzuGNVdH0mW8upeTn_PLxMgbp0b7ZyjZ_Q6f3SNveQaNw1MDsC_DfttOaupsmwXPOddmyZWkIQQtohg7lPeAowsnm3KMwTl97mSm-PlmIWBDsVyMEM0eNl7Xr6O1jGV_bHlaHS8yN62ZNHzhKt38G7vLZgKT073FRNNRqZnpB1_poKrNA6Kv4tFo-zLrzkvtUiHDFpCNNpA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"oauth",
+								"check_token"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3Njc5MzIzNCwiYXV0aG9yaXRpZXMiOlsic2Vja2lsbF9saXN0IiwiZ29vZHNfbGlzdCJdLCJqdGkiOiI0MGUwZjdjMi0zYzI0LTRjNzQtYmJhOS0xMTAzMDE3OTQxY2IiLCJjbGllbnRfaWQiOiJjaGFuZ2dvdSIsInVzZXJuYW1lIjoiY2hhbmdnb3UifQ.u5zgcJb6yGjsgc5k5pD1XOe7YuV_W2bJGxeR--b9Mz6aggxTrRQOmFcyDxsQ47QONrX3uY1zvHv5a6NAiHRaswZ4U-QmbGFLObY-XMMjg-nn2Y_DLLtwQhDyQogxtg2_pmb8fx9PSaGGzuGNVdH0mW8upeTn_PLxMgbp0b7ZyjZ_Q6f3SNveQaNw1MDsC_DfttOaupsmwXPOddmyZWkIQQtohg7lPeAowsnm3KMwTl97mSm-PlmIWBDsVyMEM0eNl7Xr6O1jGV_bHlaHS8yN62ZNHzhKt38G7vLZgKT073FRNNRqZnpB1_poKrNA6Kv4tFo-zLrzkvtUiHDFpCNNpA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码模式-刷新令牌",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/oauth/token?grant_type=refresh_token&refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwiYXRpIjoiNGIyYjcwNDgtNTBhYi00OWY5LWI4NWItNWEzM2VmMTk3ZTFhIiwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3Njc5MzQwNywiYXV0aG9yaXRpZXMiOlsic2Vja2lsbF9saXN0IiwiZ29vZHNfbGlzdCJdLCJqdGkiOiIzYmVhMTA1Mi01NmNhLTQxNmQtOGRmZS1kNmNhNTMzNDBkNzUiLCJjbGllbnRfaWQiOiJjaGFuZ2dvdSIsInVzZXJuYW1lIjoiY2hhbmdnb3UifQ.ArVjAihPZmPcw6mogzrdyDFm49xHTpi_8CWyTv2s-r4v-iHxPn7N8MHPg3gZ5i4UNItaIx-jZGHXQuXDUhy_HGA6FxqMtaYw5IPLjIsVkQIXuEFOzFoz-wA0dTp9O1ezRSWWsQeucKJeQiY93raPvmouS6u5eyhocfs_JHnJtZKg9kk9TtJj9t1JIT2ih2RkKDE2FW1KkqoSrkloYT7AvCTejIBdvDISGuHelfLV-3I90dMCA5q53wF5acb7a0q7jeTaJpWTV5UcqPpDErOwLq0OdBuK1tv6waEBp8iEiDQGDZdl196l0M9bXCrjYyz90VWT0JNFsvV-qu4ianShaw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token"
+								},
+								{
+									"key": "refresh_token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwiYXRpIjoiNGIyYjcwNDgtNTBhYi00OWY5LWI4NWItNWEzM2VmMTk3ZTFhIiwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3Njc5MzQwNywiYXV0aG9yaXRpZXMiOlsic2Vja2lsbF9saXN0IiwiZ29vZHNfbGlzdCJdLCJqdGkiOiIzYmVhMTA1Mi01NmNhLTQxNmQtOGRmZS1kNmNhNTMzNDBkNzUiLCJjbGllbnRfaWQiOiJjaGFuZ2dvdSIsInVzZXJuYW1lIjoiY2hhbmdnb3UifQ.ArVjAihPZmPcw6mogzrdyDFm49xHTpi_8CWyTv2s-r4v-iHxPn7N8MHPg3gZ5i4UNItaIx-jZGHXQuXDUhy_HGA6FxqMtaYw5IPLjIsVkQIXuEFOzFoz-wA0dTp9O1ezRSWWsQeucKJeQiY93raPvmouS6u5eyhocfs_JHnJtZKg9kk9TtJj9t1JIT2ih2RkKDE2FW1KkqoSrkloYT7AvCTejIBdvDISGuHelfLV-3I90dMCA5q53wF5acb7a0q7jeTaJpWTV5UcqPpDErOwLq0OdBuK1tv6waEBp8iEiDQGDZdl196l0M9bXCrjYyz90VWT0JNFsvV-qu4ianShaw"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询全部用户（不带令牌）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9005/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9005",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询全部用户（带令牌）",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcHAiXSwibmFtZSI6bnVsbCwiaWQiOm51bGwsImV4cCI6MTU3NzM3NDcxNywiYXV0aG9yaXRpZXMiOlsic2Vja2lsbF9saXN0IiwiZ29vZHNfbGlzdCJdLCJqdGkiOiIzM2M5OWRlOC1kNGEwLTQ5ZjYtOTRiMS1iM2E2NmE4NzlkNzUiLCJjbGllbnRfaWQiOiJjaGFuZ2dvdSIsInVzZXJuYW1lIjoiaGVpbWEifQ.E6A8xXFcKORBEJLF-AE5l_k2Ec5_morKHVMQ0opOl_3xQIB-DSz156soOv73d6BCVuiesv8-jdYjhZ_FmaSr885IJbKIeUGNkpqgtlzvbiAYbbj-BJYr8_9GXq1MJlIGF6ROEyLdYkibMdNkmbE977u3IC6G_1sIGzklG9CZvevgq7ScehuZMSCLZOfuJxEcV_GLcRns7tRtkLNkB7DpeoJM0nnj7Y38UQjC5En1CTt4GNOsMCmR5SaUr4g3xWsQkaMrDAL7Nhz_S1rmpZT3u5qWVNbSN9LPZgYbNd2QsC-VU4pGJHcPwGKgdfEFB3MPRvrtv82WZtcGyMuu1dNxMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9005/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9005",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "文件上传",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/F:/传智播客-教学/项目2-畅购/03图片资源/大广告/a9.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9008/file/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9008",
+					"path": [
+						"file",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "es测试-添加索引",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

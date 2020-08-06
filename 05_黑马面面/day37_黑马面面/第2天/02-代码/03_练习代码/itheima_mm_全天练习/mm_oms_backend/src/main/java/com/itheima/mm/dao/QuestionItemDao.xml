@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.QuestionItemDao">
+    <insert id="addQuestionItem" parameterType="QuestionItem">
+        INSERT INTO t_question_item (content, img_url, is_right, question_id)
+        VALUES (#{content},#{imgUrl},#{isRight},#{questionId})
+    </insert>
+    <update id="updateQuestionItem">
+        UPDATE t_question_item
+        SET content=#{content},img_url=#{imgUrl},is_right=#{isRight},question_id=#{questionId}
+        WHERE id = #{id}
+    </update>
+</mapper>

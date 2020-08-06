@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入ElementUI样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入ElementUI组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            form: {
+                name: '',
+                region: '',
+                date1: '',
+                date2: '',
+                delivery: false,
+                type: [],
+                resource: '',
+                desc: ''
+            },
+            //定义校验规则
+            rules: {
+                name: [
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ],
+                region: [
+                    { required: true, message: '请选择活动区域', trigger: 'change' }
+                ]
+            }
+        },
+        created(){
+            //this.$message('这是一条消息提示');
+            /*this.$message({
+                type:"warning",
+                message:"操作成功"
+
+            });*/
+            this.$message.error("操作非法");
+        },
+        methods:{
+            onSubmit(){
+                //校验表达输入合法性
+                this.$refs['form'].validate((valid) => {
+                    alert(valid);
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

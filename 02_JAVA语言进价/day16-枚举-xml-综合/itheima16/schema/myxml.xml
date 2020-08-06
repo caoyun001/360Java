@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   根据提供的 bean-schema.xsd文件,编写自己的xml
+   bean-schema.xsd 作用在我们的xml上
+
+
+   从xsd文档中,复制一段内容,这个内容,其实就是我们自己的
+   xml文档的根标签
+-->
+<beans xmlns="http://www.itcast.cn/bean"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.itcast.cn/bean bean-schema.xsd">
+
+    <!--
+        xmlns="约束文档的命名空间的名字"  W3C万维网联盟, 名字必须做到全球唯一性(互联网地址)
+        xmlns:xsi="地址"是W3C的官方约束文档
+        xsi:schemaLocation="属性值标明了约束文档的位置所在"
+        http://www.itcast.cn/bean  命令空间的名字
+        bean-schema.xsd 是约束文档的路径和文件名
+    -->
+
+
+    <bean id="a" className="aaa">
+        <property value="haha"></property>
+    </bean>
+
+
+    <import resource="kk"></import>
+</beans>

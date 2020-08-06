@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>SSM框架整合</title>
+        <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="../elementui/index.css">
+    </head>
+    <body class="hold-transition">
+        <div id="app">
+            <div class="content-header">
+                <h1><small>账户管理</small></h1>
+            </div>
+            <div class="app-container">
+                <div class="box">
+                    <div class="filter-container">
+                        <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
+                    </div>
+                    <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                        <el-table-column type="index" align="center" label="序号"></el-table-column>
+                        <el-table-column prop="name" label="账户名称" align="center"></el-table-column>
+                        <el-table-column prop="money" label="金额" align="center"></el-table-column>
+
+                        <el-table-column label="操作" align="center">
+                            <template slot-scope="scope">
+                                <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+                                <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <!-- 新增标签弹层 -->
+                    <div class="add-form">
+                        <el-dialog title="新增账户" :visible.sync="dialogFormVisible">
+                            <el-form ref="dataAddForm" :model="formData"  label-position="right" label-width="100px">
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-form-item label="id" >
+                                            <el-input v-model="formData.id"/>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-form-item label="账户名称">
+                                            <el-input v-model="formData.name" type="text"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-form-item label="金额">
+                                            <el-input v-model="formData.money" type="text"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                            </el-form>
+                            <div slot="footer" class="dialog-footer">
+                                <el-button @click="dialogFormVisible = false">取消</el-button>
+                                <el-button type="primary" @click="handleAdd()">确定</el-button>
+                            </div>
+                        </el-dialog>
+                    </div>
+
+                    <!-- 编辑标签弹层 -->
+                    <div class="add-form">
+                        <el-dialog title="编辑账户" :visible.sync="dialogFormVisible4Edit">
+                            <el-form ref="dataAddForm" :model="formData"  label-position="right" label-width="100px">
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-form-item label="id" >
+                                            <el-input v-model="formData.id"/>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-form-item label="账户名称">
+                                            <el-input v-model="formData.name" type="text"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="24">
+                                        <el-form-item label="金额">
+                                            <el-input v-model="formData.money" type="text"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                            </el-form>
+                            <div slot="footer" class="dialog-footer">
+                                <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
+                                <el-button type="primary" @click="handleEdit()">确定</el-button>
+                            </div>
+                        </el-dialog>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- 引入组件库 -->
+    <script src="../js/vue.js"></script>
+    <script src="../elementui/index.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+    <script>
+        var vue = new Vue({
+            el: '#app',
+            data:{
+				dataList: [
+                     // {id:1,name:"1234567890", money: 1000},
+                     // {id:2,name:"2345678901", money: 2000},
+                     // {id:3,name:"3456789012", money: 3000}
+                ],//当前页要展示的分页列表数据
+                formData: {
+                    // id:3,name:"3456789012", money: 3000
+                },//表单数据
+                dialogFormVisible: false,//增加表单是否可见
+                dialogFormVisible4Edit:false//编辑表单是否可见
+            },
+            //钩子函数，VUE对象初始化完成后自动执行
+            created() {
+                this.findPage();
+            },
+            methods: {
+                //编辑
+                handleEdit() {
+                    //1.发送Ajax给服务器, 实现Account对象的更新
+                    axios.post("http://localhost:8080/account/update.do", this.formData).then(
+                        response => {
+                            //2.ajax回调方法中, 关闭编辑窗口, 并重新查询最新数据
+                            this.dialogFormVisible4Edit = false;
+                            this.findPage();
+                        }
+                    ).catch(
+                        error =>{
+                            console.dir(error);
+                        }
+                    );
+                },
+                //添加
+                handleAdd (){
+                    //1.发送ajax给服务器, 实现添加账户的功能
+                    axios.post("http://localhost:8080/account/save.do", this.formData).then(
+                        response => {
+                            console.log(response.data);
+                            //2.在ajax回调方法中, 关闭新增窗口, 重新查询所有账户
+                            this.dialogFormVisible = false;
+                            this.findPage();
+                        }
+                    ).catch(
+                        error =>{
+                            console.dir(error);
+                        }
+                    );
+
+                },
+                //查询
+                findPage() {
+                    //发送Ajax给服务器, 获取所有的账户信息
+                    axios.get("http://localhost:8080/account/findAll.do").then(
+                        response => {
+                            //成功, 控制台打印
+                            //console.log(response.data);
+                            this.dataList = response.data;
+                        }
+                    ).catch(
+                        error => {
+                            //失败, 控制台打印
+                            console.dir(error);
+                        }
+                    );
+                },
+                // 新增弹窗
+                handleCreate() {
+                    this.dialogFormVisible = true;
+                    //清空FormData中已绑定的数据
+                    this.formData = {};
+                },
+                //编辑弹框
+                handleUpdate(row) {
+                    this.dialogFormVisible4Edit = true;
+
+                    //实现编辑窗口的Account对象内容的回显
+                    //方式一: this.formData = row;
+
+                    //方式二: 通过id 查询账户对象
+                    //发送ajax给服务器
+                    axios.get("http://localhost:8080/account/findById.do?id=" + row.id).then(
+                        response => {
+                            //console.log(response.data);
+                            //把服务器返回的数据 赋值给
+                            this.formData = response.data;
+                        }
+                    ).catch(
+                        error =>{
+                            console.dir(error);
+                        }
+                    );
+
+                },
+                // 删除
+                handleDelete(row) {
+                    this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功'
+                        });
+
+                        //1. 发起ajax 到服务器, 实现当前行的Account对象 删除
+                        axios.get("http://localhost:8080/account/deleteById.do?id="+row.id).then(
+                            response =>{
+                                console.log(response.data);
+                                //2. 在ajax的回调方法中, 重新查询所有账户
+                                this.findPage();
+                            }
+                        ).catch(
+                            error =>{
+                                console.dir(error);
+                            }
+                        );
+
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
+                }
+            }
+        })
+    </script>
+</html>

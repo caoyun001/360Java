@@ -1,0 +1,1 @@
+  consul agent -server -ui -bootstrap-expect 1 -data-dir D:\consul\data -node=n1 -bind=127.0.0.1

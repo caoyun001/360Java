@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!--配置自定义的监听器,ServletContext域对象监听器,监听的是ServletContext创建和销毁-->
+  <!--  <listener>
+        <listener-class>com.itheima.listener.MyServletContextListener</listener-class>
+    </listener>-->
+
+    <!-- 配置过滤器  配置方式和Servlet 90%一致 -->
+    <filter>
+        <filter-name>myFilter1</filter-name>
+        <filter-class>com.itheima.filter.MyFilter1</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>myFilter1</filter-name>
+        <!--
+           Servlet配置   <url-pattern></url-pattern> 浏览器的访问地址
+           Filter配置   <url-pattern></url-pattern> 过滤器要拦截的资源
+           /* 拦截服务器的所有资源
+             Servlet,jsp,txt,图片
+
+              Filter配置   <url-pattern></url-pattern> 过滤器要拦截的资源:详细配置
+              1: 绝对匹配, 要过滤器的资源    <url-pattern>/servlet1</url-pattern>
+                 只拦截servlet1,其他资源不拦截 ,几乎不用
+                 没有必要为一个资源,创建过滤器
+
+              2: 目录匹配  过滤器的最常见配置
+                 一次过滤一大片   <url-pattern>/jstl/*</url-pattern>
+                 拦截 jstl目录下的所有资源
+
+              3: 后缀名匹配
+                <url-pattern>*.jsp</url-pattern> 值拦截后缀名是 .jsp
+        -->
+        <url-pattern>/*</url-pattern>
+
+        <!--
+            四种拦截形式    <dispatcher></dispatcher> 默认标签体中写的是REQUEST
+            请求拦截: 默认配置,拦截从客户端发来的请求
+            转发拦截: FORWARD  Servlet1转发到Servlet2,就会拦截
+            包含拦截: INCLUDE  当一个JSP页面包含另一个JSP页面,拦截
+            错误拦截: ERROR 程序出现500错误,跳转到一个页面去,拦截
+        -->
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>myFilter2</filter-name>
+        <filter-class>com.itheima.filter.MyFilter2</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>myFilter2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>

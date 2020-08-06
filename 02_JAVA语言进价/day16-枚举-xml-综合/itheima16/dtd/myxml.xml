@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   根据提供的 bean.dtd 约束文件
+   编写出我们自己的xml 即可
+
+   dtd文件,控制我们的自己的xml
+
+   DOCTYPE 后面写了 beans 就是规定了我们文档的根标签名
+
+   beans标签: 标签中,能写哪些属性呢, IDEA提示
+
+   beans标签体: 子标签,文本
+     子标签 bean
+       还有子标签property
+     子标签 import
+
+-->
+<!DOCTYPE beans SYSTEM "bean.dtd">
+<beans>
+    <bean id="a" className="aaa" type="">
+        <property name="aaa" value="sss">
+
+        </property>
+    </bean>
+
+    <import resource="dd">
+
+    </import>
+</beans>

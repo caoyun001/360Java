@@ -1,0 +1,45 @@
+/* components/video-play/video-play.wxss */
+
+video {
+  height: 190px;
+}
+
+.dialog_mask {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  z-index: 666;
+  position: fixed;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.dialog_container {
+  width: 620rpx;
+  border-radius: 4px;
+  background: #fff;
+  background-color: #000;
+  display: flex;
+  overflow: hidden;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.dialog_container .dialog_bar {
+  width: 100%;
+  text-align: right;
+}
+
+.dialog_container .video {
+  width: 100%;
+}
+
+.btnClose {
+  color: #fff;
+  font-size: 26rpx;
+  margin-right: 10rpx;
+}

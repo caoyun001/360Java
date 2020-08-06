@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--配置AccountService-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+
+    <!--配置切面类(增强)-->
+    <bean id="logUtil" class="com.itheima.utils.LogUtil"></bean>
+
+    <!--配置AOP-->
+    <aop:config>
+        <!--配置 通用的 切入点表达式-->
+        <aop:pointcut id="pc" expression="execution(* com.itheima.service..*.*(..))"></aop:pointcut>
+        <!--配置切面(织入)-->
+        <aop:aspect id="logUtil" ref="logUtil">
+            <!--配置 前置增强: 执行时机 在切入点方法执行前执行-->
+            <aop:before method="beforePrintLog" pointcut-ref="pc"></aop:before>
+            <!--配置 后置增强: 执行时机 在切入点方法执行完毕后, 执行; 若切入点方法执行过程中产生了异常, 后置增强不执行-->
+            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pc" returning="rtValue"></aop:after-returning>
+            <!--配置 异常增强: 执行时机 在切入点方法执行过程中 抛出了异常, 执行-->
+            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pc" throwing="e"></aop:after-throwing>
+            <!--配置 最终增强: 执行时机 在切入点方法执行完毕后, 执行(无论是否有异常, 最终增强都执行)-->
+            <aop:after method="afterPrintLog" pointcut-ref="pc"></aop:after>
+
+            <!--配置 环绕通知: 包含了(前置增强, 后置增强, 异常增强, 最终增强)-->
+            <aop:around method="around" pointcut-ref="pc"></aop:around>
+        </aop:aspect>
+    </aop:config>
+</beans>

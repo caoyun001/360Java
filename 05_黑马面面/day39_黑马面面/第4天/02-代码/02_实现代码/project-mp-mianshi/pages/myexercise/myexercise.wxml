@@ -1,0 +1,22 @@
+<view class='mymodule'>
+
+  <quesiont-list
+      wx:if="{{questionList.length !== 0}}"
+      id="question"
+      icon-class="icon-rit-arrow"
+      pagetype = "{{pagetype}}"
+      questionList="{{questionList}}" 
+      scrollHeight="{{scrollHeight - 60}}"
+      bindtapswitch = "loadSwitchData"
+      bindhandleroute="handleExam"
+      >
+  </quesiont-list>
+  <view class='empty' wx:if="{{questionList.length === 0}}">
+      <view class='box'>
+        <view class='img'>
+            <image src='../../images/empty.png'></image>
+          </view>
+          <view class='text'>空空的，快点去题库做题吧 ~~</view>
+      </view>
+    </view> 
+</view>

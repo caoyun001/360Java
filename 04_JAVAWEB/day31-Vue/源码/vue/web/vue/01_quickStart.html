@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue快速入门</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+
+</head>
+<body>
+   <div id="app">
+       <!--Vue对象中的 data键中的值 ,值也是对象, 值中的键message-->
+       {{message}}   {{fun1()}}
+   </div>
+
+   <script type="text/javascript">
+       /**
+        * 使用vue框架
+        * 1: 创建对象 vue对象
+        * 2: 构造方法传递参数
+        * 3: el  data  methods
+        */
+       new Vue({
+           //传递参数, 参数是json格式  键:值
+           el:"#app",  //el 给他标签,vue对象接管此区域
+           data: {
+               message:"Hello Vue 你好"
+           } , //数据,页面中展示的数据: json格式
+            methods:{
+               fun1:function(){
+                   console.log("=====");
+               }
+            } //函数,定义方法
+       });
+   </script>
+</body>
+</html>

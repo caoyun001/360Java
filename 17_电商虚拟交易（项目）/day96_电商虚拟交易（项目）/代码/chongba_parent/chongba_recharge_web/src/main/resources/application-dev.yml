@@ -1,0 +1,21 @@
+server:
+  port: 191
+#spring:
+#    thymeleaf:
+#        cache: false
+#        check-template-location: true
+#        servlet:
+#         content-type: text/html
+#        encoding: UTF-8
+#        mode: HTML5
+#        prefix: classpath:/static/
+#        suffix: .html
+#    datasource:
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        password: 123456
+#        url: jdbc:mysql://192.168.200.129:3306/chongba_order_trade
+#        username: root
+#rocketmq:
+#    name-server: 192.168.200.129:9876
+#    producer:
+#        group: my-group

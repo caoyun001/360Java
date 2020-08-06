@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.WxMemberDao">
+    <resultMap id="baseResultMap" type="WxMember">
+        <id property="id" column="id"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="open_id" property="openId"/>
+        <result column="union_id" property="unionId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_category_kind" property="lastCategoryKind"/>
+        <result column="last_category_type" property="lastCategoryType"/>
+        <result column="last_question_id" property="lastQuestionId"/>
+    </resultMap>
+    <select id="selectByOpenId" resultMap="baseResultMap">
+        SELECT *
+        FROM t_wx_member
+        WHERE open_id = #{openId}
+    </select>
+
+    <insert id="addWxMemeber">
+        INSERT  INTO t_wx_member (nick_name, avatar_url, gender, city, province, country,language,open_id, union_id, create_time)
+        VALUES (#{nickName},#{avatarUrl},#{gender},#{city},#{province},#{country},#{language},#{openId},#{unionId},#{createTime})
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateCityAndCourse">
+        UPDATE t_wx_member
+        set city_id = #{cityID},course_id=#{subjectID}
+        where open_id=#{openId}
+    </update>
+</mapper>

@@ -1,0 +1,45 @@
+重点：
+	- 什么是zookeeper?
+		- 分布式应用程序协调服务
+	- zookeeper架构
+		- 分为Leader和Follower节点
+		- 读，直接读Follower
+		- 写，转发到Leader处理
+		- 持久化到硬盘的数据只是用于恢复
+	- 存储结构和分层命名空间（ZNode）
+		- 结构类似文件系统目录
+		- 临时节点，客户断开连接后会自动删除
+		- 有序节点，文件名后自动拼接递增的数字串
+		- 客户端可监听节点变化
+	- 三种安装模式：单机、集群、伪集群
+	
+	- zk指令:
+		- ls
+		- create [-e] [-s]
+		- get
+		- set
+		- delete
+		- rmr
+
+	-JAVA客户端
+		- 增删改查ZNode
+			- CuratorFramework
+		- 监听ZNode
+			- NodeCache		监听节点数据变化
+			- PathChildrenCache	监听子节点变化
+			- TreeCache		监听节点和子节点变化
+
+	- 使用场景
+		- 分布式锁
+		- 配置中心
+		- 注册中心
+		
+	- 掌握基于zookeeper的分布式锁使用
+		- 接口 InterProcessLock
+		- 实现类 InterProcessMutex
+
+	- 场景实战:分布式锁
+拓展：
+
+
+其他：

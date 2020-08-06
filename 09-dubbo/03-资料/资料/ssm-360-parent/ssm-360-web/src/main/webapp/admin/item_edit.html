@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>试题编辑</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body class="hold-transition skin-red sidebar-mini">
+<!-- .box-body -->
+
+
+<div class="box-body">
+
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">试题管理</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">分类</label>
+                    <select class="col-sm-6 select2 control-label">
+                        
+                        <option>Java</option>
+                        <option>JavaScript</option>
+                        <option>Python</option>
+                        <option>PHP</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">标签</label>
+                    <select class="col-sm-6 select2 control-label">
+                       
+                        <option>Java基础</option>
+                        <option>Servlet</option>
+                        <option>Spring</option>
+                        <option>Redis</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">企业</label>
+                    <select class="col-sm-6 select2 control-label">
+                        
+                        <option>阿里巴巴</option>
+                        <option>腾讯</option>
+                        <option>百度</option>
+                        <option>华为</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">题型</label>
+                    <div class="radio">
+                        <label class="col-sm-1 control-label">
+                            <input type="radio" name="type" value="option1">
+                            单选
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <input type="radio" name="type" value="option2">
+                            多选
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <input type="radio" name="type" value="option3">
+                            简答
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">难度</label>
+                    <div class="radio">
+                        <label class="col-sm-1 control-label">
+                            <input type="radio" name="difficulty" value="option1">
+                            简单
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <input type="radio" name="difficulty" value="option2">
+                            一般
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <input type="radio" name="difficulty" value="option3">
+                            困难
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">题干</label>
+                    <textarea class="col-sm-6 control-label" rows="3" placeholder="Enter ..."></textarea>
+                </div>
+
+                <!--单选题-->
+
+                <div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">单选题答案</label>
+                        <div class="radio">
+                            <label class="col-sm-1 control-label">
+                                <input type="radio" name="answer" value="option1">
+                                A
+                            </label>
+                            <label class="col-sm-1 control-label">
+                                <input type="radio" name="answer" value="option2">
+                                B
+                            </label>
+                            <label class="col-sm-1 control-label">
+                                <input type="radio" name="answer" value="option3">
+                                C
+                            </label>
+                            <label class="col-sm-1 control-label">
+                                <input type="radio" name="answer" value="option3">
+                                D
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项A</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项B</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项C</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项D</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                </div>
+
+                <!--多选题-->
+
+                <div style="display: none">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">多选题答案</label>
+                        <div class="radio">
+                            <label class="col-sm-1 control-label">
+                                <input type="checkbox" name="answer" value="option1">
+                                A
+                            </label>
+                            <label class="col-sm-1 control-label">
+                                <input type="checkbox" name="answer" value="option2">
+                                B
+                            </label>
+                            <label class="col-sm-1 control-label">
+                                <input type="checkbox" name="answer" value="option3">
+                                C
+                            </label>
+                            <label class="col-sm-1 control-label">
+                                <input type="checkbox" name="answer" value="option3">
+                                D
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项A</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项B</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项C</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选项D</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                </div>
+
+
+                <!--简答题-->
+
+                <div style="display: none">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">简答题答案</label>
+                        <textarea class="col-sm-6 control-label" rows="2" placeholder="Enter ..."></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">试题解析</label>
+                    <textarea class="col-sm-6 control-label" rows="3" placeholder="Enter ..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <textarea class="col-sm-6 control-label" rows="1" placeholder="Enter ..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-sm-3 control-label">
+                        <button type="submit" class=" btn btn-default">返回</button>
+                    </span>
+
+                    <span class="col-sm-3 control-label">
+                        <button type="submit" class="btn btn-info pull-right">保存</button>
+                    </span>
+
+                </div>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+
+
+</div>
+<!-- /.box-body -->
+
+
+</body>
+
+</html>

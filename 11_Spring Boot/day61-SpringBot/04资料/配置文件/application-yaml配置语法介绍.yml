@@ -1,0 +1,26 @@
+# 配置语法介绍
+
+# 普通数据类型
+myname: zhoukun
+myage: 18
+mysex: female
+
+# 配置对象
+person:
+  name: zhoukun
+  age: 18
+  sex: female
+  birthday: 1949/10/01
+  # 数组
+  citys:
+    - beijing
+    - xizang
+    - dongwan
+  # 集合
+  animals:
+    - name: dog
+      age: 2
+    - name: tiger
+      age: 3
+  map.k1: value1
+  map.k2: value2

@@ -1,0 +1,25 @@
+#spring:
+#  application:  
+#    name: schedule-service #服务名
+#  datasource:
+#    url: jdbc:mysql://192.168.200.129:3306/chongba_schedule?serverTimezone=Asia/Shanghai
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 123456
+#  redis:
+#    host: 192.168.200.129
+#    password: chongba
+#    port: 6379
+#  cloud:
+#    consul:
+#      host: 127.0.0.1
+#      port: 8500
+#      discovery:
+#        serviceName: ${spring.application.name}
+#chongba: 
+#  preLoad: 1 #预加载时间配置
+#  selectMasterZookeeper: 192.168.200.129:2181
+server:
+  port: 82
+  
+    

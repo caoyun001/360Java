@@ -1,0 +1,4 @@
+# 设置自定义的应用容器初始化监听器
+org.springframework.context.ApplicationContextInitializer=com.itheima.listener.My03ApplicationInitializrListener
+# 全流程的监听器
+org.springframework.boot.SpringApplicationRunListener=com.itheima.listener.My04SpringApplicationRunListener

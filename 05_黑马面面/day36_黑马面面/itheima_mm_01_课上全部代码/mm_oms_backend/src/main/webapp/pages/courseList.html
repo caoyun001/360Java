@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 页面meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>黑马面面</title>
+		<meta name="description" content="黑马面面">
+		<meta name="keywords" content="黑马面面">
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="../css/element-ui.css">
+		<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+	</head>
+
+	<body class="hold-transition">
+		<div id="app">
+			<div class="content-header common-search-border1">
+				<el-button class="butAdd" @click="handleCreate"><i class="fa fa-plus" aria-hidden="true"></i> 新增学科</el-button>
+			</div>
+			<div class="app-container">
+				<div class="box common-search-border2">
+					<div class="filter-container">
+						<!-- 搜索栏 -->
+						<el-form :inline="true" :model="requestParameters" ref="requestParameters" class="formInfo" label-width="70px">
+							<el-form-item label="学科名称" prop="name">
+								<el-input placeholder="请输入" v-model="requestParameters.name" style="width: 200px;" class="filter-item"></el-input>
+							</el-form-item>
+							<el-form-item label="是否显示" prop="status">
+								<el-select placeholder="请选择" v-model="requestParameters.status">
+									<el-option :key="item.id" :label="item.value" :value="item.id" v-for="item in baseData.isShow"></el-option>
+								</el-select>
+							</el-form-item>
+							<el-form-item>
+								<el-button @click="handleRest">清除</el-button>
+								<el-button type="primary" class="butOK" @click="handleSearch">搜索</el-button>
+							</el-form-item>
+						</el-form>
+					</div>
+				</div>
+				<div class="box common-table-border" style="margin:8px 0 0;">
+					<el-table :data="items" fit highlight-current-row style="width: 100%;">
+						<el-table-column label="序号" align="center" width="50px">
+							<template slot-scope="scope">
+								<span>{{ scope.$index+1 }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="学科名称" align="center">
+							<template slot-scope="scope">
+								<span class="link-type">{{ scope.row.name }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="创建者" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.creator }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="创建日期" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.createDate | dateTransform }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="前台是否显示" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.isShow === 0 ? '是': '否' }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="二级目录" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.catalogQty }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="标签" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.tagQty }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="题目数量" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.questionQty }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="400px">
+							<template slot-scope="scope">
+								<div class="operation">
+									<el-button type="primary" size="mini" @click="goToCatalogView(scope.row)"><i class="fa fa-superpowers"
+										 aria-hidden="true"></i> 学科目录
+									</el-button>
+									<el-button type="primary" size="mini" @click="goToTagView(scope.row)"><i class="fa fa-superpowers" aria-hidden="true"></i>
+										学科标签
+									</el-button>
+									<el-button type="primary" size="mini" @click="handleUpdate(scope.row)"><i class="fa fa-pencil-square-o"
+										 aria-hidden="true"></i> 修改
+									</el-button>
+									<el-button size="mini" type="danger" @click="handleDeleted(scope.row)"><i class="fa fa-trash-o" aria-hidden="true"></i>
+										删除
+									</el-button>
+								</div>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div class="pagination-container">
+						<el-pagination class="pagiantion" v-show="pagination.total>0" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+						 :current-page="pagination.pageNum" :page-sizes="[10, 20, 50, 100]" :page-size="pagination.pageSize" layout="total, sizes, prev, pager, next, jumper"
+						 :total="pagination.total">
+						</el-pagination>
+					</div>
+				</div>
+				<!-- 新增学科弹层 -->
+				<el-dialog title="新增学科" :visible.sync="dialogFormVisible" width="40%" top="8vh">
+					<el-form label-width="120px" :model="form" :rules="rules" ref="form">
+						<el-form-item label="学科：" prop="name">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+						<el-form-item label="是否显示：" prop="isShow">
+							<el-switch v-model="form.isShow" :active-value="0" :inactive-value="1"></el-switch>
+						</el-form-item>
+					</el-form>
+					<div slot="footer" class="dialog-footer">
+						<el-button @click="handleCancel">取 消</el-button>
+						<el-button type="primary" @click="handleConfirm">确 定</el-button>
+					</div>
+				</el-dialog>
+				<!-- end -->
+			</div>
+		</div>
+	</body>
+	<!-- 引入组件库 -->
+	<script src="../js/vue.js"></script>
+	<script src="../js/element-ui.js"></script>
+	<script src="../plugins/jquery/dist/jquery.js"></script>
+	<script src="../js/data.json"></script>
+	<script src="../js/base.js"></script>
+	<script src="../js/axios-0.18.0.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					pagination: {
+						total: 0,
+						pageNum: 1,
+						pageSize: 10
+					},
+					loading: false,
+					items: [],
+					baseData: base,
+					requestParameters: {
+						name: '',
+						status: ''
+					},
+					dialogFormVisible: false,
+					form: {
+						id: 0,
+						name: '',
+						isShow: 0
+					},
+					rules: {
+						name: [{
+							required: true,
+							message: '请填写',
+							trigger: 'blur'
+						}]
+					}
+				}
+			},
+			created() {
+				this.getList()
+			},
+			filters: {
+				dateTransform: (value) => {
+					let index = value.lastIndexOf('.');
+					return value.substr(0, index);
+				}
+			},
+			methods: {
+				// 学科分页列表
+				getList() {
+					// 必传参数
+					let params = {
+						currentPage: this.pagination.pageNum,
+						pageSize: this.pagination.pageSize,
+						queryParams:{}
+					};
+					let queryParams = {};
+					let status = this.requestParameters.status;
+					if (status !== '') {
+						queryParams.status = status;
+					}
+					let name = this.requestParameters.name;
+					if( name != ''){
+						queryParams.name = name;
+					}
+					if (Object.keys(queryParams).length) {
+						params.queryParams = queryParams;
+					}
+
+					let response = {
+						data:{
+							"flag": true,
+							"message": "获取学科列表成功",
+							"result": {
+								"rows": [
+									{
+										"catalogQty": 10,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 1,
+										"isShow": 0,
+										"name": "Java",
+										"questionQty": 1,
+										"tagQty": 5
+									},
+									{
+										"catalogQty": 10,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 2,
+										"isShow": 0,
+										"name": "Python",
+										"questionQty": 1,
+										"tagQty": 5
+									},
+									{
+										"catalogQty": 10,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 3,
+										"isShow": 0,
+										"name": "大数据",
+										"questionQty": 1,
+										"tagQty": 5
+									},
+									{
+										"catalogQty": 10,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 4,
+										"isShow": 0,
+										"name": "Php",
+										"questionQty": 1,
+										"tagQty": 5
+									},
+									{
+										"catalogQty": 10,
+										"createDate": "2019-08-14 09:01:35.0",
+										"creator": "admin",
+										"id": 8,
+										"isShow": 0,
+										"name": "888",
+										"questionQty": 1,
+										"tagQty": 5
+									},
+									{
+										"catalogQty": 10,
+										"createDate": "2019-08-14 09:01:38.0",
+										"creator": "admin",
+										"id": 9,
+										"isShow": 0,
+										"name": "2",
+										"questionQty": 1,
+										"tagQty": 5
+									}
+								],
+								"total": 15
+							}
+						}
+					};
+					console.log("学科分页列表请求参数，发送请求之前：");
+					console.log(params);
+					// 发送请求获取数据
+					axios.post(app_path+"/course/findListByPage.do",params).then((response)=>{
+						console.log("服务器返回:")
+						console.log(response.data);
+						this.pagination.total = response.data.result.total;
+						this.items = response.data.result.rows;
+					})
+
+				},
+				// 清除
+				handleRest() {
+					if (this.$refs['requestParameters']) {
+						this.$refs['requestParameters'].resetFields();
+					}
+				},
+				// 搜索
+				handleSearch() {
+					this.getList();
+				},
+				handleSizeChange(val) {
+					this.pagination.pageSize = val;
+					this.pagination.pageNum = 1;
+					this.getList();
+				},
+				handleCurrentChange(val) {
+					this.pagination.pageNum = val;
+					this.getList();
+				},
+				// 学科目录
+				goToCatalogView(row) {
+					window.location.href = "catalogList.html?courseId=" + row.id;
+				},
+				// 学科标签
+				goToTagView(row) {
+					window.location.href = "tagList.html?courseId=" + row.id;
+				},
+				// 新增学科
+				handleCreate() {
+					if (this.$refs['form']) {
+						this.$refs['form'].resetFields();
+					}
+					this.dialogFormVisible = true;
+				},
+				// 修改学科
+				handleUpdate(row) {
+					if (this.$refs['form']) {
+						this.$refs['form'].resetFields();
+					}
+					this.form.id = row.id;
+					this.form.name = row.name;
+					this.form.isShow = row.isShow;
+					console.log(this.form);
+					this.dialogFormVisible = true;
+
+				},
+				handleConfirm() {
+					if (!this.form.id) {
+						this.handleCreateConfirm();
+					} else {
+						this.handleUpdateConfirm();
+					}
+				},
+				//新增学科确定
+				handleCreateConfirm() {
+					this.$refs['form'].validate((valid) => {
+						if (valid) {
+							let params = this.form;
+							console.log("学科添加请求参数：");
+
+							// 发送请求 (模拟实现)
+
+							// 发送axios请求
+							// Vue 发请求
+							// http://localhost:8080/mm/course/add.do
+
+
+							// axios.post("/mm/course/add.do",参数).then((response)=>{
+							//
+							// });
+							// 发请求，联网把参数发给控制器
+							console.log("发送之前，打印参数：");
+							console.log(params);
+							axios.post(app_path+"/course/add.do",params).then((response)=>{
+								// 根据返回值提示 Result(flag,message,result)
+								console.log("请求之后，打印返回的数据");
+								console.log(response.data); // System.out.print()
+								if(response.data.flag){
+									//this.$message.success("添加成功");
+									// 关闭弹窗
+									this.dialogFormVisible = false;
+									// 刷新列表
+									this.getList();
+								}else{
+									this.$message.error(response.data.message);
+								}
+							})
+
+						}
+					});
+				},
+				// 修改学科确定
+				handleUpdateConfirm() {
+					this.$refs['form'].validate((valid) => {
+						if (valid) {
+							let params = this.form;
+							console.log("学科更新请求参数：");
+							console.log(params);
+
+							// 发请求，联网把参数发给控制器
+							console.log("发送之前，打印参数：");
+							console.log(params);
+							axios.post(app_path+"/course/update.do",params).then((response)=>{
+								// 根据返回值提示 Result(flag,message,result)
+								console.log("请求之后，打印返回的数据");
+								console.log(response.data); // System.out.print()
+								if(response.data.flag){
+									//this.$message.success("添加成功");
+									// 关闭弹窗
+									this.dialogFormVisible = false;
+									//this.$message.success("更新成功");
+									this.dialogFormVisible = false;
+									// 刷新列表
+									this.getList();
+								}else{
+									this.$message.error(response.data.message);
+								}
+							})
+						}
+					});
+				},
+				// 新增/修改学科取消
+				handleCancel() {
+					this.dialogFormVisible = false;
+				},
+				// 删除学科
+				handleDeleted(row) {
+					this.$confirm('此操作将永久删除学科 ' + ', 是否继续?', '提示', {
+						type: 'warning'
+					}).then(() => {
+						this.$message.success("删除成功");
+						this.getList();
+					}).catch(() => {
+						this.$message.info('已取消操作!')
+					});
+				}
+			}
+		})
+	</script>
+</html>

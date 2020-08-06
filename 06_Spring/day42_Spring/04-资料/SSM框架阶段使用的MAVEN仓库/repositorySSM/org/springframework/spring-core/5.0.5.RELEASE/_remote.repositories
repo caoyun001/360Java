@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Nov 07 00:40:23 CST 2019
+spring-core-5.0.5.RELEASE.jar>central=
+spring-core-5.0.5.RELEASE.pom>central=
+spring-core-5.0.5.RELEASE.jar>spring-libs-release=

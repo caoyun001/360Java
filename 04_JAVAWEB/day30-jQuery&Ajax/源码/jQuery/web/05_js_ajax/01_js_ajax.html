@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>原生态的AJAX程序</title>
+
+    <script type="text/javascript">
+        function fn() {
+            /**
+             * 实现 JavaScript异步请求
+             *
+             * 1）创建XMLHttpRequest对象
+
+             2）向服务器发送请求, 并绑定提交地址与参数
+
+             3）设置onreadystatechange事件, 用于为Ajax引擎对象绑定监听（监听服务器已将数据响应给ajax引擎）
+
+             4）获取服务器响应返回给引擎对象的数据
+             */
+
+                //创建ajax引擎对象, new XMLHttpRequest()
+            var xmlhttp = new XMLHttpRequest();
+                    //引擎对象.调用事件,监听ajax的引擎的状态变化
+                    //引擎状态有变,可以监听到,调用匿名函数
+                    xmlhttp.onreadystatechange=function()
+                    {
+                        //引擎状态码 4 请求完成,等待响应    状态200响应成功
+                        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                        {
+                            //获取div.设置div的标签体, xmlhttp.responseText;引擎的属性,的属性值就是服务器响应回来的数据
+                            document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+            //引擎,发生请求,方法 open
+            xmlhttp.open("GET","/ajax");
+            xmlhttp.send(null);
+        }
+    </script>
+</head>
+<body>
+  <input type="button" value="异步请求" onclick="fn()">
+
+  <div id="myDiv"></div>
+</body>
+</html>

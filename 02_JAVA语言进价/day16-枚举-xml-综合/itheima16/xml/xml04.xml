@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    转义字符
+-->
+<student>
+    1&lt;3?5:6;
+
+    &gt;
+
+</student>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>form.html</title>
+		<meta charset="UTF-8">
+
+  </head>
+
+  <body>
+  	  <div id="city">fff</div>
+			<div id="city2">ggg</div>
+  	  <input type="button" value="需求1: 将id为city标签的标签体内容设置为 识别HTML标签内容<h1>海马</h1>, 并获取设置后的内容打印" onclick="fun1()"/><br />
+			<input type="button" value="需求2: 将id为city2标签的标签体内容设置为 文本内容<h1>海马</h1>, 并获取设置后的内容打印"  onclick="fun2()"/><br />
+
+    <script type="text/javascript">
+        //需求1: 将id为city标签的标签体内容设置为 识别HTML标签内容<h1>海马</h1>, 并获取设置后的内容打印
+        function fun1() {
+            var city = document.getElementById("city");
+            //修改标签体,标签对象属性innerHTML, 标签有效!!!!!!!!
+            city.innerHTML = "<h1>海马</h1>";
+        }
+
+        function fun2() {
+            var city2 = document.getElementById("city2");
+            //修改标签体,标签对象属性innerText, 标签无效!!!!!!!! 纯文本输出
+            city2.innerText = "<h1>海马</h1>";
+        }
+    </script>
+  </body>
+
+</html>

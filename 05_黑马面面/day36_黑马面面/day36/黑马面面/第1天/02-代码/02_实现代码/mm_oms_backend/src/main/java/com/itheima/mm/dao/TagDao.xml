@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.TagDao">
+    <insert id="addTag">
+        INSERT INTO t_tag (name, create_date, status, user_id, course_id)
+        VALUES (#{name},#{createDate},#{status},#{userId},#{courseId})
+    </insert>
+
+    <sql id="select_where">
+        WHERE course_id = #{queryParams.courseId}
+        <if test="queryParams.name !=null and queryParams.name.length > 0">
+            and name like "%"#{queryParams.name}"%"
+        </if>
+        <if test="queryParams.status != null">
+            and status = #{queryParams.status}
+        </if>
+    </sql>
+    <select id="selectListByPage" resultType="com.itheima.mm.pojo.Tag">
+        SELECT tt.id,name,tt.create_date as createDate,status,course_id as courseId,
+        (select count(*) from t_question
+        WHERE id in (select question_id from tr_question_tag where tag_id = tt.id)) as questionQty ,
+        tu.username as creator
+        FROM t_tag tt JOIN t_user tu on tt.user_id = tu.id
+        <include refid="select_where"/>
+        limit #{offset},#{pageSize}
+    </select>
+    <select id="selectTotalCount" resultType="java.lang.Long">
+        SELECT count(*) FROM t_tag
+        <include refid="select_where"/>
+    </select>
+    <delete id="deleteTag">
+        DELETE  FROM t_tag
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

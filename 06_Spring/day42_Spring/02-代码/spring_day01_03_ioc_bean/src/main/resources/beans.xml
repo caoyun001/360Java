@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+">
+    <!--配置accountService对象-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+    <!--配置accountService对象-->
+    <bean id="accountService2" class="com.itheima.service.impl.AccountServiceImpl2"></bean>
+    <!--配置AccountService对象, 采用 类中静态方法的方式-->
+    <bean id="accountService3" class="com.itheima.factory.StaticFactory" factory-method="createAccountService"></bean>
+    <!--配置AccountService对象, 采用 对象调用普通方法的方式-->
+    <bean id="instanceFactory" class="com.itheima.factory.InstanceFactory"></bean>
+    <bean id="accountService4" factory-bean="instanceFactory" factory-method="createAccountService"></bean>
+
+    <!--配置AccountDao对象-->
+    <bean
+            id="accountDao"
+            class="com.itheima.dao.impl.AccountDaoImpl"
+            init-method="init"
+            destroy-method="destroy"
+
+    >
+
+    </bean>
+
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--    spring扫描器-->
+    <context:component-scan base-package="com.itheima.study.dubbo"/>
+
+    <!--    基本配置-->
+    <!--    应用名称-->
+    <dubbo:application name="dubbo-provider"/>
+    <!--    注册中心-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <!--    协议-->
+    <dubbo:protocol name="dubbo" port="8888"/>
+<!--    <dubbo:protocol name="rmi" port="1099" />-->
+    <!--    服务暴露-->
+<!--    <bean name="userService" class="com.itheima.study.dubbo.service.impl.UserServiceImpl"/>-->
+<!--    <dubbo:service interface="com.itheima.study.dubbo.service.UserService" ref="userService"/>-->
+
+    <!--    加入注解支持-->
+    <dubbo:annotation package="com.itheima.study.dubbo.service"/>
+</beans>

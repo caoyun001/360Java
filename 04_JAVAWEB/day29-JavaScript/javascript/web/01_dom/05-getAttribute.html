@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>form.html</title>
+    <meta charset="UTF-8">
+	
+  </head>
+  
+  <body>
+	   <form name="form1" action="test.html" method="post" >
+  	   	  <input type="text" name="tname" value="传智播客13周年_1"  id="tid_1"  ><br>
+				  <input type="text" name="tname" value="传智播客13周年_2"  id="tid_2"  ><br>
+				  <input type="text" name="tname" value="传智播客13周年_3"  id="tid_3"  ><br>
+  	 </form>
+	   
+	  您喜欢的城市:<br> 
+	   <ul>
+	   	 <li id="bj" value="beijing">北京</li>
+			 <li id="sh" value="shanghai">上海</li>
+			 <li id="cq" value="chongqing">重庆</li>
+	   </ul>
+	  
+	  您喜欢的游戏:<br> 
+	   <ul>
+	   	 <li id="cj" value="chiji">吃鸡</li>
+		 <li id="wzry" value="wangzherongyao">王者荣耀</li>
+		 <li id="kxxxl" value="xiaoxiaole">开心消消乐</li>
+	   </ul>   
+		 
+		 <br />
+		 <br />
+		 <input type="button" value="需求1: 输出列表项值为吃鸡 标签的value属性值" onclick="fun1()"/>
+
+  <script type="text/javascript">
+	  //需求1: 输出列表项值为吃鸡 标签的value属性值
+	  //标签对象属性value在表单中可以使用
+	  function fun1() {
+		  var cj = document.getElementById("cj");
+		  //不是表单,使用方法getAttribute()
+		  console.log(cj.getAttribute("value"));
+      }
+  </script>
+  </body>
+</html>

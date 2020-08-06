@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的指令v-for</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+                v-for指令,循环  数组
+                语法: v-for(元素,索引) in 数组键名
+                取出数组元素和索引 ,插值表达式
+        -->
+        <p v-for="(item,index) in arr"> {{item}}  === {{index}} </p>
+
+        <!--
+          v-for指令,循环 对象
+          v-for(值,键,索引) in 对象键名
+          值: 刘备
+          键 name
+        -->
+        <p v-for="(value,key,index) in person"> {{value}} === {{key}} === {{index}} </p>
+        <hr>
+
+        <!--
+          v-for指令,循环, 数组,数组的元素是对象
+          v-for(数组元素,索引) in 遍历的数组的键名
+        -->
+        <p v-for="(person,index) in personArr"> {{person.name}} ==={{person.age}} ==={{person.gender}}  === {{index}} </p>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el:"#app",
+            data:{
+                arr:["刘备", "关羽", "张飞"],
+                person : {name:"刘备", age:"25", gender:"男"},
+                personArr : [
+                    {name:"刘备", age:"25", gender:"男"},
+                    {name:"关羽", age:"28", gender:"男"},
+                    {name:"张飞", age:"29", gender:"男"},
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

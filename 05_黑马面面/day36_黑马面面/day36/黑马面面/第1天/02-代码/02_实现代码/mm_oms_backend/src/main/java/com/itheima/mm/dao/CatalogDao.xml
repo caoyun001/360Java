@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.CatalogDao">
+    <insert id="addCatalog">
+        INSERT INTO t_catalog (name, create_date, status, user_id, course_id)
+        VALUES (#{name},#{createDate},#{status},#{userId},#{courseId})
+    </insert>
+
+    <sql id="select_where">
+        WHERE course_id = #{queryParams.courseId}
+        <if test="queryParams.name !=null and queryParams.name.length > 0">
+            and name like "%"#{queryParams.name}"%"
+        </if>
+        <if test="queryParams.status !=null ">
+            and status = #{queryParams.status}
+        </if>
+    </sql>
+
+    <select id="selectTotalCount" resultType="java.lang.Long">
+        SELECT count(*) FROM t_catalog
+        <include refid="select_where"/>
+    </select>
+    <select id="selectListByPage" resultType="com.itheima.mm.pojo.Catalog">
+        SELECT tc.id,name,tc.create_date as createDate,status,
+        (select count(*) from t_question where catalog_id =  tc.id ) as questionQty ,
+        tu.username as creator
+        FROM t_catalog tc JOIN t_user tu on tc.user_id = tu.id
+        <include refid="select_where"/>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <delete id="deleteCatalog">
+        DELETE  FROM t_catalog
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

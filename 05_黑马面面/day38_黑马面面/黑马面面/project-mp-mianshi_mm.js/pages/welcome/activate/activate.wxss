@@ -1,0 +1,149 @@
+.page-activate {
+  background-color: #f7f7f7;
+}
+
+/* icon  */
+
+.icon {
+  color: #3fc7dc;
+}
+
+/*city  */
+
+.scroll {
+  margin-bottom: 94rpx;
+  color: #000;
+}
+
+.location-city {
+  border-top: 1px solid #eaeaea;
+}
+
+.location-city .current-city {
+  display: flex;
+  background-color: #fff;
+  border-bottom: 1px solid #ececec;
+  line-height: 1;
+  padding: 40rpx;
+  font-size: 36rpx;
+}
+
+.current-city .city-name {
+  flex: 1;
+}
+
+.location-city .citys {
+  position: relative;
+  padding: 40rpx 25rpx 30rpx;
+}
+
+.citys .city-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-size: 36rpx;
+}
+
+.city-list .item {
+  width: 27%;
+  line-height: 2.5;
+  margin-bottom: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  border-radius: 4rpx;
+  border: 2rpx solid #e1e1e1;
+  background-color: #fff;
+}
+
+.city-list .item.active {
+  background-image: linear-gradient(180deg, #7edcdb 0%, #93d8f2 100%);
+  color: #fff;
+}
+
+/* subject  */
+
+.q-title {
+  padding: 4rpx 30rpx;
+  line-height: 3;
+  font-size: 36rpx;
+  background-color: #fff;
+  color: #000;
+}
+
+.q-title .icon {
+  padding-right: 20rpx;
+}
+.q-type .icon {
+  font-size: 70rpx;
+}
+
+.q-type .icon-php {
+  font-size: 80rpx;
+}
+
+.q-type  {
+  padding: 4% 0 0 5%;
+  display:flex;
+  flex-wrap: wrap; 
+  width: 100%; 
+  font-size: 30rpx;
+}
+
+.q-type .item {
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  margin-bottom: 20rpx;
+  text-align: center;
+  color: #333;
+}
+
+.item.active {
+  background-image: linear-gradient(180deg, #7edcdb 0%, #93d8f2 100%);
+  color: #fff;
+}
+
+.q-type .mark span {
+  width: 36px;
+  height: 36px;
+  display: block;
+  margin: 0 auto;
+  background-blend-mode: color-dodge;
+  background-size: cover;
+}
+
+.q-type .item .mark image {
+  width: 36px;
+  height: 36px;
+}
+
+.q-type .item.active .mark image {
+  filter: brightness(1000%);
+}
+
+/* sure-btn  */
+
+.sure {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #e7e7e7;
+}
+
+.sure button {
+  border-radius: 0;
+  font-size: 40rpx;
+}
+
+button::after {
+  border: none;
+  border-radius: 0;
+}
+
+.change-btn {
+  background-color: #fff;
+}

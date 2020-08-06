@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans>
+    <!--id 接口名称字符串, class 接口实现类的 全限定类名-->
+    <bean id="AccountDao" class="com.itheima.dao.impl.AccountDaoImpl"></bean>
+    <bean id="AccountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+</beans>

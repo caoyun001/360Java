@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.AccountDao">
+    <!--保存-->
+    <insert id="save" parameterType="account">
+        insert into account values(#{id}, #{name}, #{money})
+    </insert>
+
+    <!--根据id删除-->
+    <delete id="delete" parameterType="int">
+        delete from account where id=#{id}
+    </delete>
+
+    <!--更新账户-->
+    <update id="update" parameterType="account">
+        update account set name=#{name}, money=#{money} where id=#{id}
+    </update>
+
+   <!--根据id查询-->
+    <select id="findById" parameterType="int" resultType="account">
+        select * from account where id=#{id}
+    </select>
+
+   <!--根据名称查询账户-->
+    <select id="findByName" resultType="account" parameterType="string">
+        select * from account where name=#{name}
+    </select>
+
+    <!--查询所有-->
+    <select id="findAll" resultType="account">
+        select * from account
+    </select>
+
+</mapper>

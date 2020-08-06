@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "quesiont-list": "../../components/question-list/question-list"
+  }
+}

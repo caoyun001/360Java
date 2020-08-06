@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper 标签属性 namespace 固定值和接口名一致，全名
+-->
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <!--
+       SELECT u.id uid,u.username,u.sex,u.birthday,u.address,o.id,o.user_id,o.number,o.createtime,o.note
+FROM USER u LEFT OUTER JOIN orders o ON u.id = o.user_id;
+
+
+       以用户为基准,查询订单
+       一对多查询
+       SQL语句的拆分
+       拆分为查询用户
+    -->
+    <select id="queryUserOrders" resultMap="queryUserOrdersResultMap">
+        select u.id uid,u.username,u.sex,u.birthday,u.address from user u
+    </select>
+
+    <!--一对多查询手动映射-->
+    <resultMap id="queryUserOrdersResultMap" type="user">
+        <!--配置User表-->
+        <id column="uid" property="id"/>
+        <result column="username" property="username"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="address" property="address"/>
+
+        <!--
+                配置的是User对象的属性 ,不是单一的对象,是集合容器
+                collection 配置的是一对多
+                属性property: 配置pojo对象的属性
+                属性ofType:集合泛型
+                属性column: 以上一个SQL的那个列的结果,进行第二次查询
+        -->
+        <collection property="ordersList" ofType="orders" column="uid" select="queryOrderByUserId">
+            <!--<id column="id" property="id"/>-->
+            <!--<result column="user_id" property="userId"/>-->
+            <!--<result column="number" property="number"/>-->
+            <!--<result column="createtime" property="createtime"/>-->
+            <!--<result column="note" property="note"/>-->
+        </collection>
+    </resultMap>
+
+    <!--
+      配置第二次查询语句
+      queryUserByUserId
+    -->
+    <select id="queryOrderByUserId" parameterType="Integer" resultType="orders">
+        SELECT o.id,o.user_id,o.number,o.createtime,o.note FROM orders o where user_id=#{id}
+    </select>
+
+
+</mapper>

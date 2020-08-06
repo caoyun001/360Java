@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 页面meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>黑马面面</title>
+		<meta name="description" content="黑马面面">
+		<meta name="keywords" content="黑马面面">
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="../css/element-ui.css">
+		<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+	</head>
+
+	<body class="hold-transition">
+		<div id="app">
+			<div class="content-header common-search-border1">
+				<el-button class="butAdd" @click="handleCreate"><i class="fa fa-plus" aria-hidden="true"></i> 新增试题
+				</el-button>
+			</div>
+			<div class="app-container">
+				<div class="box common-search-border2">
+					<div class="filter-container">
+						<!-- 搜索栏 -->
+						<el-form :inline="true" :model="requestParameters" ref="requestParameters" class="formInfo" label-width="70px">
+							<el-form-item label="学科" label-width="40px" prop="courseId">
+								<el-select placeholder="请选择" v-model="requestParameters.courseId">
+									<el-option :key="item.id" :label="item.name" :value="item.id" v-for="item in courses"></el-option>
+								</el-select>
+							</el-form-item>
+							<el-form-item label="难度" label-width="40px" prop="difficulty">
+								<el-select placeholder="请选择" v-model="requestParameters.difficulty">
+									<el-option :key="item.id" :label="item.value" :value="item.id" v-for="item in baseData.difficulty"></el-option>
+								</el-select>
+							</el-form-item>
+							<el-form-item label="题型" label-width="40px" prop="type">
+								<el-select placeholder="请选择" v-model="requestParameters.type">
+									<el-option :key="item.id" :label="item.value" :value="item.id" v-for="item in baseData.questionsType"></el-option>
+								</el-select>
+							</el-form-item>
+							<el-form-item label="关键字" label-width="60px" prop="keyWord">
+								<el-input placeholder="请输入" v-model="requestParameters.keyWord" style="width: 200px;" class="filter-item"></el-input>
+							</el-form-item>
+							<el-form-item>
+								<el-button @click="handleRest">清除</el-button>
+								<el-button type="primary" class="butOK" @click="handleSearch">搜索</el-button>
+							</el-form-item>
+						</el-form>
+					</div>
+				</div>
+				<div class="box common-table-border" style="margin:8px 0 0;">
+					<el-table :data="items" fit highlight-current-row style="width: 100%;">
+						<el-table-column label="序号" align="center" width="50px">
+							<template slot-scope="scope">
+								<span>{{ scope.$index+1 }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="试题编号" align="center" width="100px">
+							<template slot-scope="scope">
+								<span>{{ scope.row.number }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="学科" align="center">
+							<template slot-scope="scope">
+								<span class="link-type">{{ scope.row.courseName }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="题型" align="center" width="100px">
+							<template slot-scope="scope">
+								<span class="link-type">{{ scope.row.type | typeTransform(baseData.questionsType) }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="题干" align="center">
+							<template slot-scope="scope">
+								<span v-html="scope.row.subject"></span>
+							</template>
+						</el-table-column>
+						<el-table-column label="录入时间" align="center">
+							<template slot-scope="scope">
+								{{ scope.row.createDate | dateTransform }}
+							</template>
+						</el-table-column>
+						<el-table-column label="难度" align="center" width="100px">
+							<template slot-scope="scope">
+								<span>{{ scope.row.difficulty | difficultyTransform(baseData.difficulty) }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="使用次数" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.usedQty }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="录入人" class-name="status-col">
+							<template slot-scope="scope">
+								<span>{{ scope.row.creator }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="400px">
+							<template slot-scope="scope">
+								<div class="operation">
+									<el-button type="primary" size="mini" @click="handlePreview(scope.row)"><i class="fa fa-superpowers"
+										 aria-hidden="true"></i> 预览
+									</el-button>
+									<el-button type="primary" size="mini" @click="handleUpdate(scope.row)"><i class="fa fa-pencil-square-o"
+										 aria-hidden="true"></i> 修改
+									</el-button>
+									<el-button size="mini" type="danger" @click="handleDeleted(scope.row)"><i class="fa fa-trash-o" aria-hidden="true"></i>
+										删除
+									</el-button>
+									<el-button size="mini" type="danger" @click="handleClassic(scope.row)"><i class="fa fa-exclamation-circle"
+										 aria-hidden="true"></i> 加入精选
+									</el-button>
+								</div>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div class="pagination-container">
+						<el-pagination class="pagiantion" v-show="pagination.total>0" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+						 :current-page="pagination.pageNum" :page-sizes="[10, 20, 50, 100]" :page-size="pagination.pageSize" layout="total, sizes, prev, pager, next, jumper"
+						 :total="pagination.total">
+						</el-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!-- 引入组件库 -->
+	<script src="../js/vue.js"></script>
+	<script src="../js/element-ui.js"></script>
+	<script src="../js/base.js"></script>
+	<script src="../js/axios-0.18.0.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					pagination: {
+						total: 0,
+						pageNum: 1,
+						pageSize: 10
+					},
+					loading: false,
+					items: [],
+					baseData: base,
+					requestParameters: {
+						courseId: '',
+						difficulty: '',
+						type: '',
+						keyWord: ''
+					},
+					courses: [],
+					is_classic: 0
+				}
+			},
+			created() {
+				// 学科下拉列表
+				this.initCourses();
+				// 试题分页列表
+				this.getList();
+			},
+			filters: {
+				typeTransform: (type, types) => {
+					let item = types.find(val => {
+						return val.id === type;
+					});
+					if (!item) {
+						return '';
+					}
+					return item.value;
+				},
+				dateTransform: (value) => {
+					let index = value.lastIndexOf('.');
+					return value.substr(0, index);
+				},
+				difficultyTransform: (difficulty, difficultys) => {
+					let item = difficultys.find(val => {
+						return val.id === difficulty;
+					});
+					if (!item) {
+						return '';
+					}
+					return item.value;
+				}
+			},
+			methods: {
+				// 学科下拉列表
+				initCourses() {
+					let t = this;
+
+					// 必传参数
+					let params = {
+						status: 0
+					};
+					console.log("学科下拉列表请求参数：");
+					console.log(params);
+
+					let response = {
+						data:{
+							"flag": true,
+							"message": "获取列表成功",
+							"result": [
+								{
+									"catalogList": [
+										{
+											"id": 1,
+											"name": "Java基础"
+										},
+										{
+											"id": 2,
+											"name": "JavaWeb"
+										},
+										{
+											"id": 3,
+											"name": "Spring MVC"
+										},
+										{
+											"id": 4,
+											"name": "Spring boot"
+										},
+										{
+											"id": 8,
+											"name": "进程线程"
+										},
+										{
+											"id": 13,
+											"name": "aaaa"
+										}
+									],
+									"id": 1,
+									"name": "Java"
+								},
+								{
+									"catalogList": [
+										{
+											"id": 5,
+											"name": "Python基础"
+										},
+										{
+											"id": 6,
+											"name": "函数编程"
+										},
+										{
+											"id": 7,
+											"name": "面向对象编程"
+										}
+									],
+									"id": 2,
+									"name": "Python"
+								},
+								{
+									"catalogList": [],
+									"id": 3,
+									"name": "大数据"
+								},
+								{
+									"catalogList": [],
+									"id": 4,
+									"name": "Php"
+								},
+								{
+									"catalogList": [],
+									"id": 8,
+									"name": "888"
+								},
+								{
+									"catalogList": [],
+									"id": 9,
+									"name": "2"
+								}
+							]
+						}
+					}
+
+					t.courses =response.data.result;
+
+
+
+				},
+				// 试题分页列表
+				getList() {
+					let t = this;
+
+					// 必传参数
+					let params = {
+						currentPage: t.pagination.pageNum,
+						pageSize: t.pagination.pageSize
+					};
+					// 选传参数
+					let queryParams = {};
+					let courseId = t.requestParameters.courseId;
+					if (courseId !== '') {
+						queryParams.courseId = courseId;
+					}
+					let difficulty = t.requestParameters.difficulty;
+					if (difficulty !== '') {
+						queryParams.difficulty = difficulty;
+					}
+					let type = t.requestParameters.type;
+					if (type !== '') {
+						queryParams.type = type;
+					}
+					let keyWord = t.requestParameters.keyWord;
+					if (keyWord !== '') {
+						queryParams.keyWord = keyWord;
+					}
+					if (Object.keys(queryParams).length) {
+						params.queryParams = queryParams;
+					}
+					console.log("基础题库列表请求参数：");
+					console.log(params);
+				  let data = {
+						"flag": true,
+						"message": "获取题目列表成功",
+						"result": {
+							"rows": [
+								{
+									"courseName": "java",
+									"createDate": "2019-08-08 00:00:00.0",
+									"creator": "admin",
+									"difficulty": 4,
+									"id": 11,
+									"number": "",
+									"status": 0,
+									"subject": "<p>反爬虫措施？</p>\r\n",
+									"type": 3,
+									"usedQty": "0"
+								},
+								{
+									"courseName": "java",
+									"createDate": "2019-08-08 00:00:00.0",
+									"creator": "admin",
+									"difficulty": 5,
+									"id": 12,
+									"number": "",
+									"status": 0,
+									"subject": "<p>加入Redis里面有1亿个key，其中10w个key是以某个固定的一直的前缀开头的，如何将他们全部找出来。</p>\r\n",
+									"type": 3,
+									"usedQty": "0"
+								},
+								{
+									"courseName": "java",
+									"createDate": "2019-08-08 00:00:00.0",
+									"creator": "admin",
+									"difficulty": 3,
+									"id": 13,
+									"number": "",
+									"status": 0,
+									"subject": "<p>Redis是多进程还是多线程的，简单描述redis数据库对于线程的管理机制</p>\r\n",
+									"type": 3,
+									"usedQty": "0"
+								},
+								{
+									"courseName": "java",
+									"createDate": "2019-08-08 00:00:00.0",
+									"creator": "admin",
+									"difficulty": 3,
+									"id": 14,
+									"number": "",
+									"status": 0,
+									"subject": "<p>redis相比memcached有哪些优势</p>\r\n",
+									"type": 3,
+									"usedQty": "0"
+								},
+								{
+									"courseName": "java",
+									"createDate": "2019-08-08 00:00:00.0",
+									"creator": "admin",
+									"difficulty": 2,
+									"id": 15,
+									"number": "",
+									"status": 0,
+									"subject": "<p>谈谈对线程池的理解?</p>\r\n",
+									"type": 3,
+									"usedQty": "0"
+								}
+							],
+							"total": 20
+						}
+					}
+
+					axios.post(app_path+"/question/findListByPage.do",params).then((response)=>{
+							if(response.data.flag){
+								t.pagination.total = response.data.result.total;
+								t.items = response.data.result.rows;
+								t.loading = true;
+							}
+					})
+
+
+				},
+				//清除
+				handleRest() {
+					if (this.$refs['requestParameters']) {
+						this.$refs['requestParameters'].resetFields();
+					}
+				},
+				//搜索
+				handleSearch() {
+					this.getList();
+				},
+				handleSizeChange(val) {
+					this.pagination.pageSize = val;
+					this.pagination.pageNum = 1;
+					this.getList();
+				},
+				handleCurrentChange(val) {
+					this.pagination.pageNum = val;
+					this.getList();
+				},
+				// 新增试题
+				handleCreate() {
+					window.location.href = "questionEditor.html?questionId=0&is_classic=" + this.is_classic;
+				},
+				// 预览试题
+				handlePreview(row) {
+					window.location.href = "questionPreview.html?questionId=" + row.id + "&is_classic=" + this.is_classic +
+						"&is_examine=0";
+				},
+				// 修改试题
+				handleUpdate(row) {
+					window.location.href = "questionEditor.html?questionId=" + row.id + "&is_classic=" + this.is_classic;
+				},
+				// 删除试题
+				handleDeleted(row) {
+					this.$confirm('此操作将永久删除试题 ' + ', 是否继续?', '提示', {
+						type: 'warning'
+					}).then(() => {
+						let params = {
+							questionId: row.id
+						};
+						console.log("试题删除请求参数：");
+						console.log(params);
+
+						let response = {
+							"flag": true,
+							"message": "试题删除成功"
+						};
+						console.log("试题删除返回数据：");
+						console.log(response);
+						if (response.flag) {
+							this.$message.success(response.message);
+						}
+					}).catch(() => {
+						this.$message.info('已取消操作!');
+					});
+				},
+				// 试题加入精选
+				handleClassic(row) {
+					this.$confirm('此操作将试题加入精选 ' + ', 是否继续?', '提示', {
+						type: 'warning'
+					}).then(() => {
+						this.$message.success("加入成功");
+						this.getList();
+					}).catch(() => {
+						this.$message.info('已取消操作!');
+					});
+				}
+			}
+		})
+	</script>
+</html>

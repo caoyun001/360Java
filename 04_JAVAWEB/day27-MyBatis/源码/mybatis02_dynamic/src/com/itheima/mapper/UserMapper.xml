@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper 标签属性 namespace 固定值和接口名一致，全名
+-->
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <!--
+       以用户为基准,查询订单
+       一对多查询
+    -->
+    <select id="queryUserOrders" resultMap="queryUserOrdersResultMap">
+        SELECT u.id uid,u.username,u.sex,u.birthday,u.address,o.id,o.user_id,o.number,o.createtime,o.note
+FROM USER u LEFT OUTER JOIN orders o ON u.id = o.user_id;
+    </select>
+
+    <!--一对多查询手动映射-->
+    <resultMap id="queryUserOrdersResultMap" type="user">
+        <!--配置User表-->
+        <id column="uid" property="id"/>
+        <result column="username" property="username"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="address" property="address"/>
+
+        <!--
+                配置的是User对象的属性 ,不是单一的对象,是集合容器
+                collection 配置的是一对多
+                属性property: 配置pojo对象的属性
+                属性ofType:集合泛型
+        -->
+        <collection property="ordersList" ofType="orders">
+            <id column="id" property="id"/>
+            <result column="user_id" property="userId"/>
+            <result column="number" property="number"/>
+            <result column="createtime" property="createtime"/>
+            <result column="note" property="note"/>
+        </collection>
+    </resultMap>
+
+
+    <!--
+         批量删除,参数是pojo对象,包装集合  UserVo
+         对象中包装集合
+    -->
+    <delete id="deleteUserByUserVO" parameterType="UserVO">
+         delete from user where id in
+        <!--
+           collection="遍历容器"
+           容器是被包装在pojo对象中,写的是pojo对象中属性名
+        -->
+         <foreach collection="idsList" open="(" close=")" separator="," item="id">
+             #{id}
+         </foreach>
+    </delete>
+
+    <!--
+      批量删除，参数是数组
+    -->
+    <delete id="deleteUserByArray" parameterType="int[]">
+         delete from user where id in
+         <foreach collection="array" open="(" close=")" separator="," item="id">
+             #{id}
+         </foreach>
+    </delete>
+
+    <!--
+        批量删除，参数是集合
+        迭代标签 foreach
+        标签中的属性parameterType 参数的数据类型，写的是集合的泛型
+
+        迭代标签 foreach  遍历集合，固定的集合list
+        属性： collection 遍历容器集合
+        属性： open SQL开始的符号
+        属性： close SQL结束符号
+        属性： separator SQL语句参数分隔符
+        属性  item 遍历的容器的元素
+
+    -->
+    <delete id="deleteUserByList" parameterType="list">
+        delete from user where id in
+
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            <!-- 取出集合中的元素-->
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <!--多条件的查询
+         标签 where 标签，拼接的查询条件
+         根据pojo对象中的数据进行决定查询的条件
+         username sex
+
+         标签if 对pojo对象中的属性数据判断
+         属性 test，判断数据是否为空
+
+         SQL语句不需要where
+         MyBatis框架，SQL语句自动删除第一个and
+    -->
+    <select id="queryUserByWhere" resultType="user" parameterType="user">
+        <!-- include 标签引入列名-->
+        select  <include refid="userColumn"/>  from user
+        <where>
+          <if test="username!='' and username != null">
+              and username like #{username}
+          </if>
+
+          <if test="sex!='' and sex!=null">
+              and sex = #{sex}
+          </if>
+        </where>
+    </select>
+
+    <!--
+      查询user表全部数据
+    -->
+    <select id="queryUser" resultType="user">
+        select id,username,sex,birthday,address from user
+    </select>
+
+    <!--
+       标签SQL标签
+       配置列名
+    -->
+    <sql id="userColumn">
+        id,username,sex,birthday,address
+    </sql>
+</mapper>

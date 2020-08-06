@@ -1,0 +1,17 @@
+spring:
+  application:  
+    name: mock #供应商交互
+  profiles:
+      active: dev
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+       register: false #不需要注册到consul
+      config:
+        enabled: false
+        format: yaml         
+        prefix: config
+        defaultContext: recharge
+        data-key: data

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>企业管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--引入vue.js axous.js-->
+    <script src="../js/vuejs-2.5.16.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+
+</head>
+<body class="hold-transition skin-red sidebar-mini">
+<div id="app">
+    <!-- .box-body -->
+    <div class="box-header with-border">
+        <h3 class="box-title">企业管理</h3>
+    </div>
+
+    <div class="box-body">
+
+        <!-- 数据表格 -->
+        <div class="table-box">
+
+            <!--工具栏-->
+            <div class="pull-left">
+                <div class="form-group form-inline">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                                data-target="#editModal"><i class="fa fa-file-o"></i> 新建
+                        </button>
+                        <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <div class="has-feedback">
+
+                </div>
+            </div>
+            <!--工具栏/-->
+
+            <!--数据列表-->
+            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                <thead>
+                <tr>
+                    <th class="" style="padding-right:0px">
+                        <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                    </th>
+                    <th class="sorting_asc">编号</th>
+                    <th class="sorting">企业简称</th>
+                    <th class="sorting">是否名企</th>
+                    <th class="sorting">备注</th>
+                    <th class="sorting">状态</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="company in list">
+                    <td><input type="checkbox"></td>
+                    <td>{{company.cId}}</td>
+                    <td>{{company.shortName}}</td>
+                    <td>{{company.isFamous}}</td>
+                    <td>{{company.remark}}</td>
+                    <td>{{company.status}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">
+                            修改
+                        </button>
+                        <button type="button" class="btn bg-red btn-xs">禁用</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <!--数据列表/-->
+
+
+        </div>
+        <!-- 数据表格 /-->
+
+
+    </div>
+    <!-- .box-body -->
+
+    <!-- 编辑窗口 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">企业编辑</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped" width="800px">
+                        <tr>
+                            <td>企业简称</td>
+                            <td><input class="form-control" placeholder="企业简称" v-model="company.shortName"></td>
+                        </tr>
+                        <tr>
+                            <td>备注</td>
+                            <td><input class="form-control" placeholder="备注"  v-model="company.remark"></td>
+                        </tr>
+
+                        <tr>
+                            <td>是否名企</td>
+                            <td> <input type="checkbox"  v-model="company.isFamous" ></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" @click="save()" aria-hidden="true">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue(
+        {
+            el: "#app",
+            data: {
+                list:[],
+                company:{}
+            },
+            methods:{
+                findAll:function () {
+                    //查询数据的
+
+                    var _this = this;//vue的this
+                    //1.发送异步请求，查询数据。
+                    axios.get("http://localhost:9000/company/findAll.do").then(function (resp) {
+                        _this.list = resp.data;
+                    })
+                    //2. 将数据给list
+
+                },
+                save: function () {
+                    var _this = this;//vue的this
+                    //1.发送异步请求，添加数据。
+                    axios.post("http://localhost:9000/company/save.do",_this.company).then(function (resp) {
+                        _this.findAll();
+                    })
+                }
+            },
+            created:function () {
+                //页面加载完成后，调用findAll方法
+                this.findAll();
+            }
+        }
+    );
+
+
+</script>
+</body>
+</html>

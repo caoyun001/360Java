@@ -1,0 +1,2 @@
+<!-- 设置开启二级缓存 -->
+<setting name="cacheEnabled" value="true" />

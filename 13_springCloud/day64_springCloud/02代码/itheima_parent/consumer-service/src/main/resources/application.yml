@@ -1,0 +1,31 @@
+# 端口
+server.port: 8080
+# 当前服务的名称
+spring.application.name: consumer-service
+# 注册中心的地址
+eureka.client.service-url.defaultZone: http://127.0.0.1:10086/eureka
+
+
+# 租约续约间隔时间，默认30秒
+eureka.instance.lease-renewal-interval-in-seconds: 2
+# 每隔多久获取服务中心列表，(只读备份)
+eureka.client.registry-fetch-interval-seconds: 30
+# 租约到期，服务时效时间，默认值90秒
+eureka.instance.lease-expiration-duration-in-seconds: 3
+
+# 配置熔断策略：
+# 强制打开熔断器 默认false关闭的。测试配置是否生效
+hystrix.command.default.circuitBreaker.forceOpen: false
+# 触发熔断错误比例阈值，默认值50%
+hystrix.command.default.circuitBreaker.errorThresholdPercentage: 20
+# 熔断后休眠时长，默认值5秒
+hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds: 60000
+# 熔断触发最小请求次数，默认值是20
+hystrix.command.default.circuitBreaker.requestVolumeThreshold: 5
+# 熔断超时设置，默认为,1秒
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 6000
+
+### 服务降级的三种情况：
+## 服务彻底不可用
+## 服务访问超时了
+## 服务熔断器开启了 ，服务降级

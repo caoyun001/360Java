@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery和DOM的不通用</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+        /**
+         * DOM对象: document.getXXX()获取标签对象, DOM对象
+         * jQuery对象: jQuery框架获取到的标签,jQuery对象
+         * 两个对象不通用
+         */
+        function fn() {
+            //document对象获取文本框的值
+            var user = document.getElementById("user");
+            console.log(user.value);
+
+            //jQuery框架提供的方法,获取文本框的值
+            var userJquery = $("#user");
+            console.log(userJquery.val());
+
+         //   console.log(userJquery.value);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="user">
+   <input type="button" value="按钮" onclick="fn()" >
+</body>
+</html>

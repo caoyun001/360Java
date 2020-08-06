@@ -1,0 +1,28 @@
+# 配置注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+
+# 配置网关整合
+spring:
+  cloud:
+    config:
+      discovery:
+        # 配置中心服务的名称
+        service-id: config-server
+        # 是否开启配置中心微服务支持
+        enabled: true
+      # {application}-{proflie}.yml  == user-dev.yml
+      # 当前配置文件的名称
+      name: user
+      # 配置文件的环境(dev、test、pro)
+      profile: dev
+      # 当前配置文件的分支
+      label: master
+
+# RabbitMQ的服务host,port,用户名，和密码
+spring.rabbitmq.port: 5672
+spring.rabbitmq.host: 192.168.200.128
+spring.rabbitmq.username: guest
+spring.rabbitmq.password: guest

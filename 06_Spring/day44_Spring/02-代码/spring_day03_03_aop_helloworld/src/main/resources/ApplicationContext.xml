@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--配置service 对象-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+
+    <!--配置LogUtil 切面类(增强功能)对象-->
+    <bean id="logUtil" class="com.itheima.utils.LogUtil"></bean>
+
+    <!--配置AOP, 实现了对service 中的方法 进行增强(LogUtil)-->
+    <aop:config>
+        <!--配置切面-->
+        <aop:aspect id="logUtil" ref="logUtil">
+            <!--配置切入点表达式-->
+            <aop:before method="printLog" pointcut="execution(public void com.itheima.service.impl.AccountServiceImpl.save())"></aop:before>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

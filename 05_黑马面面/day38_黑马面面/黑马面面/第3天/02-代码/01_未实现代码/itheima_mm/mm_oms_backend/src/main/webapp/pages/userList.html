@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>黑马面面</title>
+    <meta name="description" content="黑马面面">
+    <meta name="keywords" content="黑马面面">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../css/element-ui.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="hold-transition">
+
+<div id="app">
+    <div class="content-header common-search-border1">
+        <el-button class="butAdd" @click="handleCreate"><i
+                class="fa fa-plus" aria-hidden="true"></i> 新增用户
+        </el-button>
+    </div>
+    <div class="app-container">
+        <div class="box common-search-border2">
+            <div class="filter-container">
+                <!-- 搜索栏 -->
+                <el-form :inline="true" :model="requestParameters" ref="requestParameters"
+                         class="formInfo">
+                    <el-form-item label="用户名称" label-width="80px">
+                        <el-input placeholder="请输入" v-model="requestParameters.userName"
+                                  style="width: 200px;" class="filter-item"
+                                  @keyup.enter.native="handleFilter"></el-input>
+                    </el-form-item>
+                    <el-form-item label="状态" label-width="40px">
+                        <el-select placeholder="请选择" v-model="requestParameters.isDis">
+                            <el-option :key="item.id" :label="item.value" :value="item.id"
+                                       v-for="item in baseData.isDis"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button @click="handleRest">清除</el-button>
+                        <el-button type="primary" class="butOK" @click="handleSearch">搜索</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </div>
+        <div class="box common-table-border" style="margin:8px 0 0;">
+            <el-table
+                    :key="tableKey"
+                    :data="items"
+                    fit
+                    highlight-current-row
+                    style="width: 100%;">
+                <el-table-column label="序号" width="50px" align="center">
+                    <template slot-scope="scope">
+                        <span>{{ scope.$index+1 }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="用户名称" align="center">
+                    <template slot-scope="scope">
+                        <span class="link-type">{{ scope.row.userName }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="邮箱" align="center">
+                    <template slot-scope="scope">
+                        <span class="link-type">{{ scope.row.mail }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="创建日期" align="center">
+                    <template slot-scope="scope">
+                        {{ scope.row.createDate }}
+                    </template>
+                </el-table-column>
+                <el-table-column label="备注" align="center">
+                    <template slot-scope="scope">
+                        <span>{{ scope.row.remark }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态" align="center">
+                    <template slot-scope="scope">
+                        <span>{{ scope.row.isDis == 0 ? '启用' : '禁用' }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180px">
+                    <template slot-scope="scope">
+                        <div class="operation" v-if="scope.row.userName != 'admin'">
+                            <el-button type="primary" size="mini" @click="handleUpdate(scope.row)"><i
+                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> 修改
+                            </el-button>
+                            <!--<el-button type="primary" size="mini" @click="handleDisable(scope.row)"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ scope.row.isDis == 0 ? '禁用' : '启用' }}</el-button>-->
+                            <el-button size="mini" type="danger" @click="handleDeleted(scope.row)"><i
+                                    class="fa fa-trash-o" aria-hidden="true"></i> 删除
+                            </el-button>
+                        </div>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="pagination-container">
+                <el-pagination
+                        class="pagiantion"
+                        v-show="pagination.total>0"
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="pagination.pageNum"
+                        :page-sizes="[10, 20, 50, 100]"
+                        :page-size="pagination.pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="pagination.total">
+                </el-pagination>
+            </div>
+        </div>
+        <!-- 新增用户弹层 -->
+        <el-dialog title="新增用户" align="center" :visible.sync="dialogFormVisible" width="40%" top="8vh">
+            <el-form label-width="120px" :model="form" :rules="rules" ref="form">
+                <el-form-item label="用户名称：" prop="userName">
+                    <el-input v-model="form.userName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱：" prop="mail">
+                    <el-input v-model="form.mail" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="密码：" prop="pwd">
+                    <el-input type="password" v-model="form.pwd" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="重复密码：" prop="rePwd">
+                    <el-input type="password" v-model="form.rePwd" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="备注：" prop="remark">
+                    <el-input v-model="form.remark" autocomplete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="handleCreateCancel">取 消</el-button>
+                <el-button type="primary" @click="handleCreateConfirm">确 定</el-button>
+            </div>
+        </el-dialog>
+        <!-- end -->
+        <!-- 修改用户弹层 -->
+        <el-dialog title="修改用户" align="center" :visible.sync="dialogUptFormVisible" width="40%" top="8vh">
+            <el-form label-width="120px" :model="uptForm" :rules="uptRules" ref="uptForm">
+                <el-form-item label="用户名称：" prop="userName">
+                    <el-input v-model="uptForm.userName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱：" prop="mail">
+                    <el-input v-model="uptForm.mail" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="密码：" prop="pwd">
+                    <el-input type="password" v-model="uptForm.pwd" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="重复密码：" prop="rePwd">
+                    <el-input type="password" v-model="uptForm.rePwd" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="备注：" prop="remark">
+                    <el-input v-model="uptForm.remark" autocomplete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="handleUpdateCancel">取 消</el-button>
+                <el-button type="primary" @click="handleUpdateConfirm">确 定</el-button>
+            </div>
+        </el-dialog>
+        <!-- end -->
+    </div>
+
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="../js/vue.js"></script>
+<script src="../js/element-ui.js"></script>
+<script src="../plugins/jquery/dist/jquery.js"></script>
+<script src="../js/data.json"></script>
+<script src="../js/base.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            //密码校验规则
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.form.pwd !== '') {
+                        this.$refs.form.validateField('rePwd');
+                    }
+                    callback();
+                }
+            };
+            //重复密码校验规则
+            var validateCheckPass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.form.pwd) {
+                    callback(new Error('两次输入密码不一致!'));
+                } else {
+                    callback();
+                }
+            };
+            //密码校验规则
+            var uptValidatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.uptForm.pwd !== '') {
+                        this.$refs.uptForm.validateField('rePwd');
+                    }
+                    callback();
+                }
+            };
+            //重复密码校验规则
+            var uptValidateCheckPass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.uptForm.pwd) {
+                    callback(new Error('两次输入密码不一致!'));
+                } else {
+                    callback();
+                }
+            };
+            return {
+                tableKey: 0,
+                pagination: {
+                    total: 0,
+                    pageNum: 1,
+                    pageSize: 10
+                },
+                loading: false,
+                items: [],
+                baseData: base,
+                requestParameters: {
+                    userName: '',
+                    isDis: ''
+                },
+                dialogFormVisible: false,
+                dialogUptFormVisible: false,
+                form: {
+                    userName: '',
+                    mail: '',
+                    pwd: '',
+                    rePwd: '',
+                    remark: ''
+                },
+                uptForm: {
+                    userId: '',
+                    userName: '',
+                    mail: '',
+                    pwd: '',
+                    rePwd: '',
+                    remark: ''
+                },
+                rules: {
+                    userName: [
+                        {required: true, message: '请填写', trigger: 'blur'}
+                    ],
+                    mail: [
+                        {required: true, message: '请填写', trigger: 'blur'},
+                        {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+                    ],
+                    pwd: [
+                        {validator: validatePass, trigger: 'blur'}
+                    ],
+                    rePwd: [
+                        {validator: validateCheckPass, trigger: 'blur'}
+                    ]
+                },
+                uptRules: {
+                    userName: [
+                        {required: true, message: '请填写', trigger: 'blur'}
+                    ],
+                    mail: [
+                        {required: true, message: '请填写', trigger: 'blur'},
+                        {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+                    ],
+                    pwd: [
+                        {validator: uptValidatePass, trigger: 'blur'}
+                    ],
+                    rePwd: [
+                        {validator: uptValidateCheckPass, trigger: 'blur'}
+                    ]
+                }
+            }
+        },
+        created() {
+            //this.getList()
+        },
+        methods: {
+            getList() {
+                var t = this;
+                $.post(
+                    "/tk/pc/user/page",
+                    {
+                        pageNum: t.pagination.pageNum,
+                        pageSize: t.pagination.pageSize,
+                        userName: t.requestParameters.userName,
+                        isDis: t.requestParameters.isDis
+                    },
+                    function (data) {
+                        console.log(data)
+                        if (data.code == 0) {
+                            t.pagination.pageNum = data.data.pageNum;
+                            t.pagination.pageSize = data.data.pageSize;
+                            t.pagination.total = data.data.total;
+                            t.items = data.data.list;
+                            t.loading = true;
+                        }
+                    },
+                    "json"
+                );
+            },
+            //Enter键查询
+            handleFilter() {
+                this.getList()
+            },
+            //清除
+            handleRest() {
+                this.requestParameters = {
+                    userName: '',
+                    isDis: ''
+                }
+            },
+            //搜索
+            handleSearch() {
+                this.getList();
+            },
+            handleSizeChange(val) {
+                this.pagination.pageSize = val;
+                this.pagination.pageNum = 1;
+                this.getList();
+            },
+            handleCurrentChange(val) {
+                this.pagination.pageNum = val;
+                this.getList();
+            },
+            // 新增用户
+            handleCreate() {
+                if (this.$refs['form']) {
+                    this.$refs['form'].resetFields();
+                }
+                this.dialogFormVisible = true;
+            },
+            //新增用户确定
+            handleCreateConfirm() {
+                var t = this;
+                this.$refs['form'].validate((valid) => {
+                    if (valid) {
+
+                    }
+                });
+            },
+            //新增用户取消
+            handleCreateCancel() {
+                this.dialogFormVisible = false;
+            },
+            // 禁用
+            handleDisable(row) {
+                console.log(row);
+                var t = this;
+
+            },
+            // 修改用户
+            handleUpdate(row) {
+                var t = this;
+                if (t.$refs['uptForm']) {
+                    t.$refs['uptForm'].resetFields();
+                }
+                t.dialogUptFormVisible = true;
+
+            },
+            //修改用户确定
+            handleUpdateConfirm() {
+                var t = this;
+                this.$refs['uptForm'].validate((valid) => {
+                    if (valid) {
+                    }
+                });
+            },
+            //修改用户取消
+            handleUpdateCancel() {
+                this.dialogUptFormVisible = false;
+            },
+            // 删除
+            handleDeleted(row) {
+                this.$confirm('此操作将永久删除用户 ' + ', 是否继续?', '提示', {
+                    type: 'warning'
+                }).then(() => {
+                    var t = this;
+                }).catch(() => {
+                    this.$message.info('已取消操作!')
+                });
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,14 @@
+server:
+  port: 8090
+#spring:
+#    datasource:
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        password: 123456
+#        url: jdbc:mysql://192.168.200.129:3306/chongba_order_trade
+#        username: root
+#    redis:
+#        host: 192.168.200.129
+#        password: chongba
+#        port: 6379
+#notify-url: http://127.0.0.1:99/order/notify
+#openProxy: 0

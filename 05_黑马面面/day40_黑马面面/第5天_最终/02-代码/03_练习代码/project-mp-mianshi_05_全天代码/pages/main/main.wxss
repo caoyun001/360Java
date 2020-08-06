@@ -1,0 +1,86 @@
+@import "../interview/interview.wxss";
+@import "../myhome/myhome.wxss";
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #f7f7f7;
+}
+.main-page .page-content {
+  flex: 1;
+}
+
+.page-content .tab-content {
+  display: none;
+}
+
+.page-content .tab-content.on {
+  display: block;
+}
+
+/* bottomtab */
+.type-tab {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  justify-content: space-around;
+  border-top: 1px solid #eaeaea;
+  background-color: #fff;
+}
+
+.type-tab .type-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8rpx 0;
+  text-align: center;
+}
+
+.type-tab .type-item .location {
+  margin-left: 10px;
+}
+
+.type-tab .type-item .git {
+  margin-bottom: -4px;
+}
+
+.type-tab .type-item .icon-git {
+  font-size: 60rpx;
+  line-height: 1;
+}
+
+.type-tab .type-item .myhome {
+  padding-top: 4px;
+}
+
+.type-tab .type-item .icon-myhome {
+  font-size: 40rpx;
+}
+
+.type-tab .type-item .title {
+  font-size: 30rpx;
+}
+
+.type-tab .type-item.on .ico, 
+.type-tab .type-item.on .title {
+  background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(81, 196, 239)), to(rgb(44, 202, 199)));
+  /* 增加webkit文字渐变才有效果 */
+  -webkit-background-clip: text;     
+  -webkit-text-fill-color: transparent;
+}
+
+
+.home {
+  position: relative;
+  padding-bottom: 50px;
+}
+.home .bg-image {
+  position: relative;
+  width: 100%;
+  /* height: 1780px; */
+}
+

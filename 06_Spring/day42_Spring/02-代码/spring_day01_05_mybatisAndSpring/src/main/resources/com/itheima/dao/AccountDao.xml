@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.AccountDao">
+
+    <!--更新账户-->
+    <update id="update" parameterType="account">
+        update account set name=#{name}, money=#{money} where id=#{id}
+    </update>
+
+    <!--根据name 查询 账户-->
+    <select id="findByName" parameterType="String" resultType="Account">
+        select * from account where name=#{name}
+    </select>
+</mapper>

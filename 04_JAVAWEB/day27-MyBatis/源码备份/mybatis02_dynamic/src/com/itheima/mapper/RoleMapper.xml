@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper 标签属性 namespace 固定值和接口名一致，全名
+-->
+<mapper namespace="com.itheima.mapper.RoleMapper">
+
+    <!--角色和用户的多对多查询-->
+    <select id="queryRoleUser" resultMap="queryRoleUserResultMap">
+        select r.rid,r.rname,r.rdesc,u.id,u.username,u.sex,u.birthday,u.address
+        from role r left outer join user_role ur
+        on r.rid = ur.rid left outer join user u on u.id=ur.uid;
+    </select>
+
+    <!--手动配置,多对多映射-->
+    <resultMap id="queryRoleUserResultMap" type="role">
+        <!--配置角色表-->
+        <id column="rid" property="rid"></id>
+        <result column="rname" property="rname"/>
+        <result column="rdesc" property="rdesc"/>
+
+        <!--配置用户表-->
+        <collection property="userList" ofType="user">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="sex" property="sex"/>
+            <result column="birthday" property="birthday"/>
+            <result column="address" property="address"/>
+        </collection>
+    </resultMap>
+</mapper>

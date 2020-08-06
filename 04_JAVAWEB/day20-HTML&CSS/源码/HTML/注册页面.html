@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			/*页面背景图*/
+			body{
+				background: url(img/bg.jpg);
+				font-family: "宋体";
+			}
+			/*中间div样式,背景色白色,边框灰色*/
+			.center{
+				width: 600px;
+				height: 400px;
+				background: #ffffff;
+				border: 1px solid gray;
+				/*不指定边距 230上下  auto左右自动适应*/
+				margin: 230px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 
+				注册页面中间的div
+		 -->
+		<div class="center">
+			<center>
+			<!-- 6*3的表格
+			     加大表格的外边距
+			 -->
+			<table style="margin-top: 100px;">
+				<tr>
+					<!-- 合并单元格,跨3个 -->
+					<td colspan="3">
+						<span style="color: blue; font-size: 20px;">用户注册</span>   
+						<span style="font-weight: bold;">userregister</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<!-- 表单区域 -->
+					<td>用户名</td>
+					<td><input type="text"></td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>密码</td>
+					<td><input type="password"></td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>性别</td>
+					<td><input type="radio" name="gender">男 <input type="radio" name="gender">女</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>验证码</td>
+					<td><input type="text"/></td>
+					<!-- 验证码图片 -->
+					<td><img src="img/checkcode.jpg"/></td>
+				</tr>
+				
+				<tr>
+					<!-- 按钮,在单元格中央,对齐属性 align -->
+					<td colspan="3" align="center">
+						<input type="image" src="img/btn.jpg" />
+					</td>
+					
+				</tr>
+			</table>
+			</center>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        function checkUserName() {
+            /**
+             * 获取用户名文本框的值
+             * 异步请求,提交到服务器
+             * 获取服务器的响应
+             * 判断响应的结果,进行提示
+             */
+           var username =  $("#username").val();
+           //判断用户名是否填写
+            if(username.trim() == ""){
+                //没有填写,不需要发生请求,提示必须填写用户名
+                $("#usernameMsg").html("请输入用户名").css("color","red");
+                return;
+            }
+
+            //发请求,提交用户名
+            $.get(
+                "/checkUserName",
+                "username="+username,
+                function(data){
+                   //判断服务器响应回来数据
+                    if(data =="true"){
+                        //可以使用,span标签上提示
+                        $("#usernameMsg").html("恭喜!用户名可以使用").css("color","green");
+                    }else{
+                        //不能使用
+                        $("#usernameMsg").html("抱歉!用户名被占用,尝试"+username+"_123").css("color","red");
+                    }
+                },
+                "text"
+            );
+        }
+    </script>
+</head>
+<body>
+<form action="01.html" method="get">
+    <table border="1" width="500" align="center" >
+        <tr>
+            <td>用户名</td>
+            <!--注册事件,失去焦点-->
+            <td><input type="text" name="username" id="username" onblur="checkUserName()"/></td>
+            <td><span id="usernameMsg"></span></td>
+        </tr>
+
+        <tr>
+            <td>密码</td>
+            <td><input type="password" name="password"/></td>
+            <td><span id="passwordMsg"></span></td>
+        </tr>
+
+        <tr>
+            <td>昵称</td>
+            <td><input type="text" name="nickname"/></td>
+            <td><span id="nicknameMsg"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="注册"/></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

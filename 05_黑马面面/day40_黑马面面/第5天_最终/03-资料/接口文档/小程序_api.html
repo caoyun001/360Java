@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+      <html>
+      <head>
+      <title>小程序面试宝典v1</title>
+      <meta charset="utf-8" />
+      <style>@charset "UTF-8";
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(255, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  color: #393838;
+  position: relative;
+}
+
+table {
+  margin: 10px 0 15px 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+}
+
+th {
+  padding: 5px 10px;
+}
+
+a, a:link, a:visited {
+  color: #34495e;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #59d69d;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+p {
+  padding-left: 10px;
+  margin-bottom: 9px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #404040;
+  line-height: 36px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  line-height: 50px;
+}
+
+h2 {
+  font-size: 28px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h3 {
+  clear: both;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-left: 3px solid #59d69d;
+  padding-left: 8px;
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+hr {
+  margin: 0 0 19px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+blockquote {
+  padding: 13px 13px 21px 15px;
+  margin-bottom: 18px;
+  font-family: georgia, serif;
+  font-style: italic;
+}
+
+blockquote:before {
+  font-size: 40px;
+  margin-left: -10px;
+  font-family: georgia, serif;
+  color: #eee;
+}
+
+blockquote p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+code,
+pre {
+  font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+
+code {
+  background-color: #fee9cc;
+  color: rgba(0, 0, 0, 0.75);
+  padding: 1px 3px;
+  font-size: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+pre {
+  display: block;
+  padding: 14px;
+  margin: 0 0 18px;
+  line-height: 16px;
+  font-size: 11px;
+  border: 1px solid #d9d9d9;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #f6f6f6;
+}
+
+pre code {
+  background-color: #f6f6f6;
+  color: #737373;
+  font-size: 11px;
+  padding: 0;
+}
+
+sup {
+  font-size: 0.83em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+* {
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  body,
+  code,
+  pre code,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black;
+  }
+
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+}
+html,
+body {
+  height: 100%;
+}
+
+.table-of-contents {
+  position: fixed;
+  top: 61px;
+  left: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 260px;
+}
+
+.table-of-contents > ul > li > a {
+  font-size: 20px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.table-of-contents ul {
+  overflow: auto;
+  margin: 0px;
+  height: 100%;
+  padding: 0px 0px;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.table-of-contents ul li {
+  padding-left: 20px;
+}
+
+.table-of-contents a {
+  padding: 2px 0px;
+  display: block;
+  text-decoration: none;
+}
+
+.content-right {
+  max-width: 700px;
+  margin-left: 290px;
+  padding-left: 70px;
+  flex-grow: 1;
+}
+.content-right h2:target {
+  padding-top: 80px;
+}
+
+body > p {
+  margin-left: 30px;
+}
+
+body > table {
+  margin-left: 30px;
+}
+
+body > pre {
+  margin-left: 30px;
+}
+
+.curProject {
+  position: fixed;
+  top: 20px;
+  font-size: 25px;
+  color: black;
+  margin-left: -240px;
+  width: 240px;
+  padding: 5px;
+  line-height: 25px;
+  box-sizing: border-box;
+}
+
+.g-doc {
+  margin-top: 56px;
+  padding-top: 24px;
+  display: flex;
+}
+
+.curproject-name {
+  font-size: 42px;
+}
+
+.m-header {
+  background: #32363a;
+  height: 56px;
+  line-height: 56px;
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.m-header .title {
+  font-size: 22px;
+  color: #fff;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+  line-height: 56px;
+  border: none;
+}
+.m-header .nav {
+  color: #fff;
+  font-size: 16px;
+  position: absolute;
+  right: 32px;
+  top: 0;
+}
+.m-header .nav a {
+  color: #fff;
+  margin-left: 16px;
+  padding: 8px;
+  transition: color .2s;
+}
+.m-header .nav a:hover {
+  color: #59d69d;
+}
+
+.m-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/*# sourceMappingURL=defaultTheme.css.map */
+</style>
+      </head>
+      <body>
+        <div class="m-header">
+          <a href="#" style="display: inherit;"><svg class="svg" width="32px" height="32px" viewBox="0 0 64 64" version="1.1"><title>Icon</title><desc>Created with Sketch.</desc><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1"><stop stop-color="#FFFFFF" offset="0%"></stop><stop stop-color="#F2F2F2" offset="100%"></stop></linearGradient><circle id="path-2" cx="31.9988602" cy="31.9988602" r="2.92886048"></circle><filter x="-85.4%" y="-68.3%" width="270.7%" height="270.7%" filterUnits="objectBoundingBox" id="filter-3"><feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset><feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur><feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.159703351 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix></filter></defs><g id="首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="大屏幕"><g id="Icon"><circle id="Oval-1" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle><path d="M36.7078009,31.8054514 L36.7078009,51.7110548 C36.7078009,54.2844537 34.6258634,56.3695395 32.0579205,56.3695395 C29.4899777,56.3695395 27.4099998,54.0704461 27.4099998,51.7941246 L27.4099998,31.8061972 C27.4099998,29.528395 29.4909575,27.218453 32.0589004,27.230043 C34.6268432,27.241633 36.7078009,29.528395 36.7078009,31.8054514 Z" id="blue" fill="#2359F1" fill-rule="nonzero"></path><path d="M45.2586091,17.1026914 C45.2586091,17.1026914 45.5657231,34.0524383 45.2345291,37.01141 C44.9033351,39.9703817 43.1767091,41.6667796 40.6088126,41.6667796 C38.040916,41.6667796 35.9609757,39.3676862 35.9609757,37.0913646 L35.9609757,17.1034372 C35.9609757,14.825635 38.0418959,12.515693 40.6097924,12.527283 C43.177689,12.538873 45.2586091,14.825635 45.2586091,17.1026914 Z" id="green" fill="#57CF27" fill-rule="nonzero" transform="translate(40.674608, 27.097010) rotate(60.000000) translate(-40.674608, -27.097010) "></path><path d="M28.0410158,17.0465598 L28.0410158,36.9521632 C28.0410158,39.525562 25.9591158,41.6106479 23.3912193,41.6106479 C20.8233227,41.6106479 18.7433824,39.3115545 18.7433824,37.035233 L18.7433824,17.0473055 C18.7433824,14.7695034 20.8243026,12.4595614 23.3921991,12.4711513 C25.9600956,12.4827413 28.0410158,14.7695034 28.0410158,17.0465598 Z" id="red" fill="#FF561B" fill-rule="nonzero" transform="translate(23.392199, 27.040878) rotate(-60.000000) translate(-23.392199, -27.040878) "></path><g id="inner-round"><use fill="black" fill-opacity="1" filter="url(#filter-3)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use><use fill="#F7F7F7" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use></g></g></g></g></svg></a>
+          <a href="#"><h1 class="title">YAPI 接口文档</h1></a>
+          <div class="nav">
+            <a href="https://yapi.ymfe.org/">YApi</a>
+          </div>
+        </div>
+        <div class="g-doc">
+          <div class="table-of-contents"><ul><li><a href="#api-11">API_1.1</a><ul><li><a href="#u83b7u53d6u57ceu5e02u5217u88680a3ca20id3du83b7u53d6u57ceu5e02u5217u88683e203ca3e">获取城市列表
+<a id=获取城市列表> </a></a></li><li><a href="#u83b7u53d6u5b66u79d1u5217u88680a3ca20id3du83b7u53d6u5b66u79d1u5217u88683e203ca3e">获取学科列表
+<a id=获取学科列表> </a></a></li><li><a href="#u8bbeu7f6eu4f1au5458u9898u5e93u57ceu5e02u65b9u54110a3ca20id3du8bbeu7f6eu4f1au5458u9898u5e93u57ceu5e02u65b9u54113e203ca3e">设置会员题库城市方向
+<a id=设置会员题库城市方向> </a></a></li><li><a href="#u83b7u53d6u9898u5e93u5206u7c7bu5217u88680a3ca20id3du83b7u53d6u9898u5e93u5206u7c7bu5217u88683e203ca3e">获取题库分类列表
+<a id=获取题库分类列表> </a></a></li><li><a href="#u83b7u53d6u9898u5e93u5206u7c7bu9898u76eeu5217u88680a3ca20id3du83b7u53d6u9898u5e93u5206u7c7bu9898u76eeu5217u88683e203ca3e">获取题库分类题目列表
+<a id=获取题库分类题目列表> </a></a></li><li><a href="#u63d0u4ea4u7b54u98980a3ca20id3du63d0u4ea4u7b54u98983e203ca3e">提交答题
+<a id=提交答题> </a></a></li><li><a href="#u6536u85cfu9898u76ee0a3ca20id3du6536u85cfu9898u76ee3e203ca3e">收藏题目
+<a id=收藏题目> </a></a></li><li><a href="#u4f1au5458u767bu5f550a3ca20id3du4f1au5458u767bu5f553e203ca3e">会员登录
+<a id=会员登录> </a></a></li><li><a href="#u4f1au5458u4e2du5fc30a3ca20id3du4f1au5458u4e2du5fc33e203ca3e">会员中心
+<a id=会员中心> </a></a></li></ul></li><li><a href="#u57fau7840u6570u636e">基础数据</a><ul><li><a href="#u57ceu5e02u5217u88680a3ca20id3du57ceu5e02u5217u88683e203ca3e">城市列表
+<a id=城市列表> </a></a></li><li><a href="#u5b66u79d1u5217u88680a3ca20id3du5b66u79d1u5217u88683e203ca3e">学科列表
+<a id=学科列表> </a></a></li></ul></li><li><a href="#u7528u6237u6570u636e">用户数据</a><ul><li><a href="#u4e2au4ebau4e2du5fc30a3ca20id3du4e2au4ebau4e2du5fc33e203ca3e">个人中心
+<a id=个人中心> </a></a></li><li><a href="#u7528u6237u767bu5f550a3ca20id3du7528u6237u767bu5f553e203ca3e">用户登录
+<a id=用户登录> </a></a></li><li><a href="#u4e2au4ebau4e2du5fc328u6682u65f6u505cu7528290a3ca20id3du4e2au4ebau4e2du5fc328u6682u65f6u505cu7528293e203ca3e">个人中心(暂时停用)
+<a id=个人中心(暂时停用)> </a></a></li></ul></li><li><a href="#u9762u8bd5u9898u6570u636e">面试题数据</a><ul><li><a href="#u6536u85cfu9898u76ee0a3ca20id3du6536u85cfu9898u76ee3e203ca3e">收藏题目
+<a id=收藏题目> </a></a></li><li><a href="#u786eu8ba4u9898u5e93u65b9u54110a3ca20id3du786eu8ba4u9898u5e93u65b9u54113e203ca3e">确认题库方向
+<a id=确认题库方向> </a></a></li><li><a href="#u9898u76eeu5206u7c7b0a3ca20id3du9898u76eeu5206u7c7b3e203ca3e">题目分类
+<a id=题目分类> </a></a></li><li><a href="#u9898u76eeu5217u88680a3ca20id3du9898u76eeu5217u88683e203ca3e">题目列表
+<a id=题目列表> </a></a></li><li><a href="#u63d0u4ea4u7b54u9898u3010u5355u9898u30110a3ca20id3du63d0u4ea4u7b54u9898u3010u5355u9898u30113e203ca3e">提交答题【单题】
+<a id=提交答题【单题】> </a></a></li><li><a href="#u63d0u4ea4u7b54u9898u3010u6279u91cfu30110a3ca20id3du63d0u4ea4u7b54u9898u3010u6279u91cfu30113e203ca3e">提交答题【批量】
+<a id=提交答题【批量】> </a></a></li><li><a href="#u6e05u7a7au7b54u9898u3010u6279u91cfu30110a3ca20id3du6e05u7a7au7b54u9898u3010u6279u91cfu30113e203ca3e">清空答题【批量】
+<a id=清空答题【批量】> </a></a></li></ul></li><li><a href="#u6a21u62dfu9762u8bd5">模拟面试</a><ul><li><a href="#u6a21u62dfu51fau9898u5217u88680a3ca20id3du6a21u62dfu51fau9898u5217u88683e203ca3e">模拟出题列表
+<a id=模拟出题列表> </a></a></li></ul></li></ul></div>
+          <div id="right" class="content-right">
+           <h1 class="curproject-name"> 小程序面试宝典v1 </h1> 
+<h1 id="api-11">API_1.1</h1>
+<p></p>
+<h2 id="u83b7u53d6u57ceu5e02u5217u88680a3ca20id3du83b7u53d6u57ceu5e02u5217u88683e203ca3e">获取城市列表
+<a id=获取城市列表> </a></h2>
+<p></p>
+<h3 id="">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/common/citys.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>{<br>
+&nbsp; "flag": true,<br>
+&nbsp; "message": "获取成功",<br>
+&nbsp; "result": {<br>
+&nbsp;&nbsp;&nbsp; "location": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "北京"<br>
+&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp; "citys": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 9,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "北京"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 10,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "上海"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 11,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "天津"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 12,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "广州"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 13,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "深圳"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 17,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "西安"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; ]<br>
+&nbsp; }<br>
+}</p>
+<h3 id="-2">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> fs</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0 全部 1 首屏推荐</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> location</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">经纬度 lat<纬度>,lng<经度></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-3">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> location</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> citys</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-1-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u5b66u79d1u5217u88680a3ca20id3du83b7u53d6u5b66u79d1u5217u88683e203ca3e">获取学科列表
+<a id=获取学科列表> </a></h2>
+<p></p>
+<h3 id="-4">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/common/courseList.do</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p>{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "获取成功",<br>
+&nbsp;&nbsp;&nbsp; "result": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "icon": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "Java"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "icon": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "Python"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "icon": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "大数据"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "icon": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 4,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "Php"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; ]<br>
+}</p>
+<h3 id="-5">请求参数</h3>
+<h3 id="-6">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> icon</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu4f1au5458u9898u5e93u57ceu5e02u65b9u54110a3ca20id3du8bbeu7f6eu4f1au5458u9898u5e93u57ceu5e02u65b9u54113e203ca3e">设置会员题库城市方向
+<a id=设置会员题库城市方向> </a></h2>
+<p></p>
+<h3 id="-7">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/member/setCityCourse.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>需要 Token 验证，Token 写在请求头&nbsp;Authorization<br>
+{<br>
+&nbsp; "flag": true,<br>
+&nbsp; "message": "更新成功"<br>
+}</p>
+<h3 id="-8">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> cityID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">城市</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> subjectID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">学科</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-9">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u9898u5e93u5206u7c7bu5217u88680a3ca20id3du83b7u53d6u9898u5e93u5206u7c7bu5217u88683e203ca3e">获取题库分类列表
+<a id=获取题库分类列表> </a></h2>
+<p></p>
+<h3 id="-10">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/home/category/list.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><span class="colour" style="color: rgb(85, 85, 85);">需要 Token 验证，Token 写在请求头&nbsp;Authorization</span><br>
+categoryKind<br>
+&nbsp; &nbsp;1-按学科目录&nbsp; 2- 按企业&nbsp; 3-按行业方向<br>
+categoryType<br>
+&nbsp; 101-刷题,、201-错题本、202-我的练习、203-收藏题目<br>
+{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "获取成功",<br>
+&nbsp;&nbsp;&nbsp; "result": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "finishedCount": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "Java基础",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "allCount": 137<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "finishedCount": 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "JavaWeb",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "allCount": 221<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "finishedCount": 9,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "Spring MVC",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "allCount": 113<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "finishedCount": 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 4,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "Spring boot",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "allCount": 104<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; ]<br>
+}</p>
+<h3 id="-11">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,
+   &quot;type&quot;: &quot;object&quot;,
+   &quot;properties&quot;: {
+      &quot;categoryKind&quot;: {
+         &quot;type&quot;: &quot;number&quot;
+      },
+      &quot;categoryType&quot;: {
+         &quot;type&quot;: &quot;number&quot;
+      }
+   }
+}
+</code></pre>
+<h3 id="-12">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> finishedCount</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> allCount</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u9898u5e93u5206u7c7bu9898u76eeu5217u88680a3ca20id3du83b7u53d6u9898u5e93u5206u7c7bu9898u76eeu5217u88683e203ca3e">获取题库分类题目列表
+<a id=获取题库分类题目列表> </a></h2>
+<p></p>
+<h3 id="-13">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/home/category/question/list.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization<br>
+<strong>&gt; 参考</strong><br>
+categoryID<br>
+&nbsp; 列表分类ID， kind是1，分类ID就是学科目录ID；kind是2，分类ID就是企业ID，kind是3，分类ID就是行业ID，<br>
+categoryKind<br>
+&nbsp; &nbsp;1-按学科目录&nbsp; 2- 按企业&nbsp; 3-按行业方向<br>
+categoryType<br>
+&nbsp; 101-刷题,、201-错题本、202-我的练习、203-收藏题目<br>
+{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "获取成功",<br>
+&nbsp;&nbsp;&nbsp; "result": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "finishedCount": 4,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "北京淘宝网",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "allCount": 36,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "items": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "content": "&lt;p&gt;springmvc执行流程：1.spring mvc将所有的请求都提交给DispatcherServlet,它会委托应用系统的其他模块负责对请求 进行真正的处理工作。&lt;br /&gt;\r\n2.DispatcherServlet查询一个或多个HandlerMapping,找到处理请求的Controller.&lt;br /&gt;\r\n3.DispatcherServlet请请求提交到目标Controller&lt;br /&gt;\r\n4.Controller进行业务逻辑处理后，会返回一个ModelAndView&lt;br /&gt;\r\n5.Dispathcher查询一个或多个ViewResolver视图解析器,找到ModelAndView对象指定的视图对象&lt;br /&gt;\r\n6.视图对象负责渲染返回给客户端。&lt;br /&gt;\r\n二：mybatis执行流程&lt;br /&gt;\r\n1加载配置并初始化&lt;br /&gt;\r\n2接收调用请求&lt;br /&gt;\r\n3处理操作请求 触发条件：API接口层传递请求过来&lt;br /&gt;\r\n(A)根据SQL的ID查找对应的MappedStatement对象。&lt;br /&gt;\r\n&lt;br /&gt;\r\n(B)根据传入参数对象解析Mapp",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "grade": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "isFavorite": 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "isFinished": 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "&lt;p&gt;springmvc，mybatis的执行流程，spring中事物的管理&lt;/p&gt;\r\n",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "type": 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "video": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "videoPoster": ""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "content": "&lt;p&gt;1、使用volatile进行线程之间的通信&lt;br /&gt;\r\n2、wait/notify的方法&lt;br /&gt;\r\n3、CountDownLatch实现线程间通信&lt;/p&gt;\r\n",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "grade": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "isFavorite": 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "isFinished": 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "&lt;p&gt;多线程通信&lt;/p&gt;\r\n",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "type": 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "video": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "videoPoster": ""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "content": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "grade": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": 3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "isFavorite": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "isFinished": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "title": "下面关于线程创建的定义不正确的有（）&lt;/p&gt;\r\n",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "type": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "video": "",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "videoPoster": ""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</p>
+<h3 id="-14">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> finishedCount</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> allCount</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> items</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-4-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> answerTag</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> content</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> grade</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isAnswerRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isFamous</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isFinished</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-8><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> selection</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-4-8-0><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> code</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-8-1><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-8-2><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> isRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-8-3><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-9><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> tags</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-4-9-0><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-9-1><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-9-2><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> $ref</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-10><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-11><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-12><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> video</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-13><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> videoPoster</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-15">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> finishedCount</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> allCount</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> items</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-4-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> content</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> grade</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isFavorite</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isFinished</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> video</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4-8><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> videoPoster</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u63d0u4ea4u7b54u98980a3ca20id3du63d0u4ea4u7b54u98983e203ca3e">提交答题
+<a id=提交答题> </a></h2>
+<p></p>
+<h3 id="-16">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/category/question/submit.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT<br>
+{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "提交成功"<br>
+}</p>
+<h3 id="-17">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> categoryID</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> categoryKind</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> categoryType</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> answerIsRight</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> answerResult</span></td><td key=1><span>null</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-18">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u6536u85cfu9898u76ee0a3ca20id3du6536u85cfu9898u76ee3e203ca3e">收藏题目
+<a id=收藏题目> </a></h2>
+<p></p>
+<h3 id="-19">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/category/question/favorite.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization</p>
+<p>{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "提交成功"<br>
+}<span class="colour" style="color:rgba(13, 27, 62, 0.65)"></span></p>
+<h3 id="-20">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-21">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u4f1au5458u767bu5f550a3ca20id3du4f1au5458u767bu5f553e203ca3e">会员登录
+<a id=会员登录> </a></h2>
+<p></p>
+<h3 id="-22">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/member/login.do</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-23">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> encryptedData</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">用户加密串</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> iv</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">iv</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> code</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">code</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> token</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">用户离线 token</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-24">返回数据</h3>
+<pre><code class="language-javascript">{
+  /*
+  *  token
+  */
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ&quot;,
+  
+  /*
+  * 用户信息
+  */
+  &quot;userInfo&quot;: {
+    &quot;nickName&quot;: &quot;hans&quot;, // 昵称
+    &quot;gender&quot;: 1, // 1 男 0 女
+    &quot;language&quot;: &quot;zh_CN&quot;, // 语言
+    &quot;city&quot;: &quot;West&quot;, // 城市
+    &quot;province&quot;: &quot;Beijing&quot;, // 省
+    &quot;country&quot;: &quot;China&quot;, // 国
+    // 头像
+    &quot;avatarUrl&quot;: &quot;https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZ66KpnQNReXSEWpS47dUaiaAZGQz0BDj1zjef6ysibjK69VhqrkZbvDdvkhpPV0j7EJ1Th1ZsKKbQ/132&quot;
+  }
+}
+</code></pre>
+<h2 id="u4f1au5458u4e2du5fc30a3ca20id3du4f1au5458u4e2du5fc33e203ca3e">会员中心
+<a id=会员中心> </a></h2>
+<p></p>
+<h3 id="-25">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/member/center.do</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization<br>
+{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "获取成功",<br>
+&nbsp;&nbsp;&nbsp; "result": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "categoryType": 101,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "categoryKind": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "answerCount": 13,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "cityName": "北京",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "categoryTitle": "Java基础",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "cityID": 9,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "categoryId": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "categoryID": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "lastQuestionId": 8,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "subjectID": 1<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</p>
+<h3 id="-26">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;type&quot;: 0
+}
+</code></pre>
+<h3 id="-27">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryType</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryKind</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerCount</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cityName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryTitle</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cityID</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryId</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryID</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lastQuestionId</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> subjectID</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h1 id="u57fau7840u6570u636e">基础数据</h1>
+<p></p>
+<h2 id="u57ceu5e02u5217u88680a3ca20id3du57ceu5e02u5217u88683e203ca3e">城市列表
+<a id=城市列表> </a></h2>
+<p></p>
+<h3 id="-28">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/base/citys/</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 返回值</strong><br>
+Http 状态码<br>
+200&nbsp;<span class="colour" style="color:rgb(68, 68, 68)">OK(成功)&nbsp;请求成功.</span><br>
+<span class="colour" style="color:rgb(68, 68, 68)">500&nbsp;Internal Server Error(内部服务器错误) 服务器遇到未知的无法解决的问题.</span></p>
+<h3 id="-29">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> fs</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0 全部 1 首屏推荐</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> location</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">经纬度 lat<纬度>,lng<经度></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-30">返回数据</h3>
+<pre><code class="language-javascript">{
+  // 当前城市
+  &quot;location&quot;: {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;北京&quot;
+  },
+  // 城市列表
+  &quot;citys&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;title&quot;: &quot;北京&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;title&quot;: &quot;上海&quot;
+    },
+    {
+      &quot;id&quot;: 3,
+      &quot;title&quot;: &quot;广州&quot;
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;title&quot;: &quot;天津&quot;
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;title&quot;: &quot;深圳&quot;
+    },
+    {
+      &quot;id&quot;: 6,
+      &quot;title&quot;: &quot;西安&quot;
+    }
+  ]
+}
+</code></pre>
+<h2 id="u5b66u79d1u5217u88680a3ca20id3du5b66u79d1u5217u88683e203ca3e">学科列表
+<a id=学科列表> </a></h2>
+<p></p>
+<h3 id="-31">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/base/sujects/:cityid</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 返回值</strong><br>
+Http 状态码<br>
+200&nbsp;<span class="colour" style="color:rgb(68, 68, 68)">OK(成功)&nbsp;请求成功.</span><br>
+<span class="colour" style="color:rgb(68, 68, 68)">500&nbsp;Internal Server Error(内部服务器错误) 服务器遇到未知的无法解决的问题.</span></p>
+<h3 id="-32">请求参数</h3>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cityid</td>
+<td>/base/sujects/1</td>
+<td>城市id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-33">返回数据</h3>
+<pre><code class="language-javascript">[
+   {
+      &quot;id&quot;: 1,
+      &quot;title&quot;: &quot;JAVA&quot;,
+      &quot;icon&quot;: &quot;java&quot;
+   },
+   {
+      &quot;id&quot;: 2,
+      &quot;title&quot;: &quot;Python&quot;,
+      &quot;icon&quot;: &quot;python&quot;
+   },
+   {
+      &quot;id&quot;: 3,
+      &quot;title&quot;: &quot;PHP&quot;,
+      &quot;icon&quot;: &quot;php&quot;
+   },
+   {
+      &quot;id&quot;: 4,
+      &quot;title&quot;: &quot;前端&quot;,
+      &quot;icon&quot;: &quot;frontend&quot;
+   }
+]
+</code></pre>
+<h1 id="u7528u6237u6570u636e">用户数据</h1>
+<p></p>
+<h2 id="u4e2au4ebau4e2du5fc30a3ca20id3du4e2au4ebau4e2du5fc33e203ca3e">个人中心
+<a id=个人中心> </a></h2>
+<p></p>
+<h3 id="-34">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/user/center</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 状态码参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a></p>
+<h3 id="-35">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;type&quot;: 0
+}
+</code></pre>
+<h3 id="-36">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> answerCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">累计答题数</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lastAnswer</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">最后答题信息</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分类的id</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>1000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryTitle</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分类的标题</span></td><td key=5></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryKind</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">1 = TAG 2 = 企业 3 = 方向</span></td><td key=5></td></tr><tr key=0-1-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> categoryType</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">101 = 刷题 201 = 错题本 202 = 我的练习 203 = 收藏题库</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> category</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">城市学科</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cityID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">城市id</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cityName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">城市名称</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> subjectID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">学科id</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u7528u6237u767bu5f550a3ca20id3du7528u6237u767bu5f553e203ca3e">用户登录
+<a id=用户登录> </a></h2>
+<p></p>
+<h3 id="-37">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/user/login</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><span class="colour" style="color:rgb(128, 0, 0)"><strong>登录验证参考</strong></span><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/å°ç¨åºå¯ä¸æ è¯">http://research.itcast.cn/mianshi-mp-api-doc/#/小程序唯一标识</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""><br>
+如果登录失败请返回空<br>
+<code data-backticks="1">{}</code></p>
+<h3 id="-38">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> encryptedData</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">用户加密串</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> iv</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">iv</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> code</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">code</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> token</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">用户离线 token</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-39">返回数据</h3>
+<pre><code class="language-javascript">{
+  /*
+  * jwt token
+  */
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ&quot;,
+  
+  /*
+  * 用户信息
+  */
+  &quot;userInfo&quot;: {
+    &quot;nickName&quot;: &quot;hans&quot;, // 昵称
+    &quot;gender&quot;: 1, // 1 男 0 女
+    &quot;language&quot;: &quot;zh_CN&quot;, // 语言
+    &quot;city&quot;: &quot;West&quot;, // 城市
+    &quot;province&quot;: &quot;Beijing&quot;, // 省
+    &quot;country&quot;: &quot;China&quot;, // 国
+    // 头像
+    &quot;avatarUrl&quot;: &quot;https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZ66KpnQNReXSEWpS47dUaiaAZGQz0BDj1zjef6ysibjK69VhqrkZbvDdvkhpPV0j7EJ1Th1ZsKKbQ/132&quot;
+  }
+}
+</code></pre>
+<h2 id="u4e2au4ebau4e2du5fc328u6682u65f6u505cu7528290a3ca20id3du4e2au4ebau4e2du5fc328u6682u65f6u505cu7528293e203ca3e">个人中心(暂时停用)
+<a id=个人中心(暂时停用)> </a></h2>
+<p></p>
+<h3 id="-40">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/member/center</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 状态码参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a></p>
+<p>{<br>
+&nbsp;&nbsp;&nbsp; "flag": true,<br>
+&nbsp;&nbsp;&nbsp; "message": "获取成功",<br>
+&nbsp;&nbsp;&nbsp; "result": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "answerCount": 15,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "lastCategoryKind": 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "cityName": "上海",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "cityId": 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "courseId": 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "lastCategoryType": 101,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "lastQuestionId": 60<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</p>
+<h3 id="-41">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>oiu565SzoTCXctUD0y6Ll-RQOkFg</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;type&quot;: 0
+}
+</code></pre>
+<h3 id="-42">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> flag</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerCount</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lastCategoryKind</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cityName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cityId</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> courseId</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lastCategoryType</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lastQuestionId</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h1 id="u9762u8bd5u9898u6570u636e">面试题数据</h1>
+<p></p>
+<h2 id="u6536u85cfu9898u76ee0a3ca20id3du6536u85cfu9898u76ee3e203ca3e-2">收藏题目
+<a id=收藏题目> </a></h2>
+<p></p>
+<h3 id="-43">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/favorite/:id</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-44">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>/questions/favorite/1</td>
+<td>题目id</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否收藏</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-45">返回数据</h3>
+<pre><code class="language-javascript">{}
+</code></pre>
+<h2 id="u786eu8ba4u9898u5e93u65b9u54110a3ca20id3du786eu8ba4u9898u5e93u65b9u54113e203ca3e">确认题库方向
+<a id=确认题库方向> </a></h2>
+<p></p>
+<h3 id="-46">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/confirm</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-47">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> cityID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">城市</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> subjectID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">学科</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-48">返回数据</h3>
+<pre><code class="language-javascript">{}
+</code></pre>
+<h2 id="u9898u76eeu5206u7c7b0a3ca20id3du9898u76eeu5206u7c7b3e203ca3e">题目分类
+<a id=题目分类> </a></h2>
+<p></p>
+<h3 id="-49">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/categorys/:categoryKind/:categoryType</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-50">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>categoryKind</td>
+<td>/questions/categorys/1/101</td>
+<td>1 = TAG<br/>2 = 企业<br/>3 = 方向</td>
+</tr>
+<tr>
+<td>categoryType</td>
+<td>/questions/categorys/1/101</td>
+<td>101 = 刷题<br/>201 = 错题本<br/>202 = 我的练习<br/>203 = 收藏题库</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;type&quot;: 0
+}
+</code></pre>
+<h3 id="-51">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> items</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分类列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>20</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>100</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>20</td><td key=4><span style="white-space: pre-wrap">代码</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>2000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>20</span></p></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标题</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>HTML/CSS,Mysql,Redis,Sprint,Vue2,前端,设计,架构,算法,程序员,CSS,产品,Node.js,开源,数据库,Unity3D,Firefox,TypeScript,Express,Webkit,支付宝,机器人,嵌入式</span></p></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> allCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1000</td><td key=4><span style="white-space: pre-wrap">题目总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>3000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1000</span></p></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> finishedCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>200</td><td key=4><span style="white-space: pre-wrap">已完成总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>500</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>20</span></p></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFamous</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true 大公司</span></td><td key=5></td></tr><tr key=0-0-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> grade</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">等级</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>简单,普通,困难</span></p></td></tr><tr key=0-0-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> tags</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标签</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>0</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>3</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-6-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标签</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>npm,vim,dom,seo,svg,https,gulp,sqlite</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u9898u76eeu5217u88680a3ca20id3du9898u76eeu5217u88683e203ca3e">题目列表
+<a id=题目列表> </a></h2>
+<p></p>
+<h3 id="-52">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/:categoryID/:categoryKind/:categoryType</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-53">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>categoryID</td>
+<td>/questions/1/1/101</td>
+<td>分类的id</td>
+</tr>
+<tr>
+<td>categoryKind</td>
+<td>/questions/1/1/101</td>
+<td>1 = TAG<br/>2 = 企业<br/>3 = 方向</td>
+</tr>
+<tr>
+<td>categoryType</td>
+<td>/questions/1/1/101</td>
+<td>101 = 刷题<br/>201 = 错题本<br/>202 = 我的练习<br/>203 = 收藏题库</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;type&quot;: 0
+}
+</code></pre>
+<h3 id="-54">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> allCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1000</td><td key=4><span style="white-space: pre-wrap">题目总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>3000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1000</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> finishedCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>500</td><td key=4><span style="white-space: pre-wrap">完成总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>1000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> favorCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>200</td><td key=4><span style="white-space: pre-wrap">收藏总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>500</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rightCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">正确总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>1000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> errCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">错误总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>500</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>10</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lastID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>10000</td><td key=4><span style="white-space: pre-wrap">最后一题id</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>30000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>10000</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> items</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">题目列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>500</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>500</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-6-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">序号</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>10000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1000</span></p></td></tr><tr key=0-6-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标题</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>50</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>20</span></p><p key=4><span style="font-weight: '700'">format: </span><span>ctitle</span></p></td></tr><tr key=0-6-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFamous</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true 大公司</span></td><td key=5></td></tr><tr key=0-6-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> grade</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">简单/普通/困难</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>5</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-6-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> tags</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标签</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>3</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-6-4-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标签</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>word</span></p></td></tr><tr key=0-6-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> content</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">文字解释</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>cparagraph</span></p></td></tr><tr key=0-6-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> video</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">视频解释</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400</span></p></td></tr><tr key=0-6-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> videoPoster</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">视频封面</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/56a9e86302b846418955b4f72695569f.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/3c432c29d3bb4d7c8e582075286f2fcd.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/49ed6daaa55f40aca0917f5cc943d586.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/51ac981e2fe84f45b4f1c6d107ea227f.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/e4d18f694fc4427dbb5264ec14624788.jpg</span></p></td></tr><tr key=0-6-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerIsRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">回答是否正确</span></td><td key=5></td></tr><tr key=0-6-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerResult</span></td><td key=1><span>string []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">回答返回</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>0</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>4</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>string</span></p></td></tr><tr key=array-45><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">答案代码</span></td><td key=5></td></tr><tr key=0-6-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFinished</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否完成</span></td><td key=5></td></tr><tr key=0-6-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否收藏</span></td><td key=5></td></tr><tr key=0-6-12><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">5 主观题 1 单选题 2 多选题</span></td><td key=5><p key=3><span style="font-weight: '700'">枚举: </span><span>1,2,5</span></p></td></tr><tr key=0-6-13><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> selection</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">选题列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>0</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>5</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-6-13-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> code</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">代码</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>A,B,C,D,E,F,G,H,I,J,K</span></p></td></tr><tr key=0-6-13-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标题</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>50</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>10</span></p><p key=4><span style="font-weight: '700'">format: </span><span>csentence</span></p></td></tr><tr key=0-6-13-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否正确项</span></td><td key=5></td></tr><tr key=0-6-13-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> img</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">图片答案</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>,,,,,,,,,,,,,https://camo.githubusercontent.com/1b15f3d1dcabf035ff11af7d6153913d7e13c356/687474703a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f313139343031322d326465336464393933363662323064382e6a7065673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430,,,,,,https://render.githubusercontent.com/render/math?math=X = \begin{bmatrix} (\vec{x^{(1)}})^{T}\\  \vdots \\  (\vec{x^{(m)}})^{T} \end{bmatrix} \;\;\;\;
+\Theta = \begin{bmatrix} \theta_{0}\\ \theta_{1}\\ \vdots \\ \theta_{n}\\ \end{bmatrix} \;\;\;\;
+Y = \begin{bmatrix} y^{(1)}\\ y^{(2)}\\ \vdots \\ y^{(m)}\\ \end{bmatrix}&mode=display,,,</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u63d0u4ea4u7b54u9898u3010u5355u9898u30110a3ca20id3du63d0u4ea4u7b54u9898u3010u5355u9898u30113e203ca3e">提交答题【单题】
+<a id=提交答题【单题】> </a></h2>
+<p></p>
+<h3 id="-55">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/:id/:categoryID/:categoryKind/:categoryType</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""><br>
+<strong>&gt; 标记数据</strong><br>
+<strong>需要标记当前题目，</strong><span class="colour" style="color:rgba(13, 27, 62, 0.65)"><strong>isFinished = true</strong></span></p>
+<h3 id="-56">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>/questions/22/1/1/101</td>
+<td>题目id</td>
+</tr>
+<tr>
+<td>categoryID</td>
+<td>/questions/22/1/1/101</td>
+<td>分类的id</td>
+</tr>
+<tr>
+<td>categoryKind</td>
+<td>/questions/22/1/1/101</td>
+<td>1 = TAG<br/>2 = 企业<br/>3 = 方向</td>
+</tr>
+<tr>
+<td>categoryType</td>
+<td>/questions/22/1/1/101</td>
+<td>101 = 刷题<br/>201 = 错题本<br/>202 = 我的练习<br/>203 = 收藏题库</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">编号</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> answerIsRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ture 正确</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> answerResult</span></td><td key=1><span>string []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">["a","b"] 答案</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>string</span></p></td></tr><tr key=array-46><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">答案代码</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true 收藏</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-57">返回数据</h3>
+<pre><code class="language-javascript">{}
+</code></pre>
+<h2 id="u63d0u4ea4u7b54u9898u3010u6279u91cfu30110a3ca20id3du63d0u4ea4u7b54u9898u3010u6279u91cfu30113e203ca3e">提交答题【批量】
+<a id=提交答题【批量】> </a></h2>
+<p></p>
+<h3 id="-58">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/category/:categoryID/:categoryKind/:categoryType</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-59">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>categoryID</td>
+<td>/questions/category/1/1/101</td>
+<td>分类的id</td>
+</tr>
+<tr>
+<td>categoryKind</td>
+<td>/questions/category/1/1/101</td>
+<td>1 = TAG<br/>2 = 企业<br/>3 = 方向</td>
+</tr>
+<tr>
+<td>categoryType</td>
+<td>/questions/category/1/1/101</td>
+<td>101 = 刷题<br/>201 = 错题本<br/>202 = 我的练习<br/>203 = 收藏题库</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">编号</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> allCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">问题总数</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> finishedCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">完成总数</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> favorCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">收藏总数</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rightCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">正确总数</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> errCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">错误总数</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lastID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">最后题目id</span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> items</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">回答问题列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-7-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">编号</span></td><td key=5></td></tr><tr key=0-7-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerIsRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ture 正确</span></td><td key=5></td></tr><tr key=0-7-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerResult</span></td><td key=1><span>string []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">["a","b"] 答案</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>string</span></p></td></tr><tr key=array-47><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">答案代码</span></td><td key=5></td></tr><tr key=0-7-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFinished</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true 完成</span></td><td key=5></td></tr><tr key=0-7-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true 收藏</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-60">返回数据</h3>
+<pre><code class="language-javascript">{}
+</code></pre>
+<h2 id="u6e05u7a7au7b54u9898u3010u6279u91cfu30110a3ca20id3du6e05u7a7au7b54u9898u3010u6279u91cfu30113e203ca3e">清空答题【批量】
+<a id=清空答题【批量】> </a></h2>
+<p></p>
+<h3 id="-61">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/questions/empty/:categoryID/:categoryKind/:categoryType</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-62">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>categoryID</td>
+<td>/questions/empty/1/1/101</td>
+<td>分类的id</td>
+</tr>
+<tr>
+<td>categoryKind</td>
+<td>/questions/empty/1/1/101</td>
+<td>1 = TAG<br/>2 = 企业<br/>3 = 方向</td>
+</tr>
+<tr>
+<td>categoryType</td>
+<td>/questions/empty/1/1/101</td>
+<td>101 = 刷题<br/>201 = 错题本<br/>202 = 我的练习<br/>203 = 收藏题库</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{}
+</code></pre>
+<h3 id="-63">返回数据</h3>
+<pre><code class="language-javascript">{}
+</code></pre>
+<h1 id="u6a21u62dfu9762u8bd5">模拟面试</h1>
+<p></p>
+<h2 id="u6a21u62dfu51fau9898u5217u88680a3ca20id3du6a21u62dfu51fau9898u5217u88683e203ca3e">模拟出题列表
+<a id=模拟出题列表> </a></h2>
+<p></p>
+<h3 id="-64">基本信息</h3>
+<p><strong>Path：</strong> /mp-mianshi/simulateQuestions</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>&gt; 验证</strong><br>
+需要 Token 验证，Token 写在请求头&nbsp;Authorization，格式 JWT</p>
+<p><strong>&gt; 参考</strong><br>
+<a href="http://research.itcast.cn/mianshi-mp-api-doc/#/éè¯¯ååº">http://research.itcast.cn/mianshi-mp-api-doc/#/错误响应</a><br data-tomark-pass=""><br>
+<br data-tomark-pass=""></p>
+<h3 id="-65">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJhZG1pbiI6dHJ1ZX0.OLvs36KmqB9cmsUrMpUutfhV52_iSz4bQMYJjkI_TLQ</td>
+<td>是</td>
+<td></td>
+<td>JWT Token</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<pre><code class="language-javascript">{
+   &quot;type&quot;: 0
+}
+</code></pre>
+<h3 id="-66">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> allCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1000</td><td key=4><span style="white-space: pre-wrap">题目总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>3000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1000</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> finishedCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>500</td><td key=4><span style="white-space: pre-wrap">完成总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>1000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> favorCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>200</td><td key=4><span style="white-space: pre-wrap">收藏总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>500</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rightCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">正确总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>1000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> errCount</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">错误总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>500</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>10</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lastID</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>10000</td><td key=4><span style="white-space: pre-wrap">最后一题id</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>30000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>10000</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> items</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">题目列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>500</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>500</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-6-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">序号</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>10000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1000</span></p></td></tr><tr key=0-6-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标题</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>50</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>20</span></p><p key=4><span style="font-weight: '700'">format: </span><span>ctitle</span></p></td></tr><tr key=0-6-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFamous</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true 大公司</span></td><td key=5></td></tr><tr key=0-6-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> grade</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">简单/普通/困难</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>5</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-6-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> tags</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标签</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>3</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-6-4-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标签</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>word</span></p></td></tr><tr key=0-6-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> content</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">文字解释</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>cparagraph</span></p></td></tr><tr key=0-6-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> video</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">视频解释</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400</span></p></td></tr><tr key=0-6-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> videoPoster</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">视频封面</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/56a9e86302b846418955b4f72695569f.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/3c432c29d3bb4d7c8e582075286f2fcd.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/49ed6daaa55f40aca0917f5cc943d586.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/51ac981e2fe84f45b4f1c6d107ea227f.jpg,https://attachment-center.boxuegu.com/data/picture/online/2018/05/31/17/e4d18f694fc4427dbb5264ec14624788.jpg</span></p></td></tr><tr key=0-6-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerIsRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">回答是否正确</span></td><td key=5></td></tr><tr key=0-6-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> answerResult</span></td><td key=1><span>string []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">回答返回</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>0</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>4</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>string</span></p></td></tr><tr key=array-48><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">答案代码</span></td><td key=5></td></tr><tr key=0-6-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFinished</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否完成</span></td><td key=5></td></tr><tr key=0-6-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> isFavorite</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否收藏</span></td><td key=5></td></tr><tr key=0-6-12><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">5 主观题 1 单选题 2 多选题</span></td><td key=5><p key=3><span style="font-weight: '700'">枚举: </span><span>1,2,5</span></p></td></tr><tr key=0-6-13><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> selection</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">选题列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>0</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>5</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-6-13-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> code</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">代码</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>A,B,C,D,E,F,G,H,I,J,K</span></p></td></tr><tr key=0-6-13-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> title</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">标题</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>50</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>10</span></p><p key=4><span style="font-weight: '700'">format: </span><span>csentence</span></p></td></tr><tr key=0-6-13-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isRight</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否正确项</span></td><td key=5></td></tr><tr key=0-6-13-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> img</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">图片答案</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>,,,,,,,,,,,,,https://camo.githubusercontent.com/1b15f3d1dcabf035ff11af7d6153913d7e13c356/687474703a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f313139343031322d326465336464393933363662323064382e6a7065673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430,,,,,,https://render.githubusercontent.com/render/math?math=X = \begin{bmatrix} (\vec{x^{(1)}})^{T}\\  \vdots \\  (\vec{x^{(m)}})^{T} \end{bmatrix} \;\;\;\;
+\Theta = \begin{bmatrix} \theta_{0}\\ \theta_{1}\\ \vdots \\ \theta_{n}\\ \end{bmatrix} \;\;\;\;
+Y = \begin{bmatrix} y^{(1)}\\ y^{(2)}\\ \vdots \\ y^{(m)}\\ \end{bmatrix}&mode=display,,,</span></p></td></tr>
+               </tbody>
+              </table>
+
+            <footer class="m-footer">
+              <p>Build by <a href="https://ymfe.org/">YMFE</a>.</p>
+            </footer>
+          </div>
+        </div>
+      </body>
+      </html>
+      

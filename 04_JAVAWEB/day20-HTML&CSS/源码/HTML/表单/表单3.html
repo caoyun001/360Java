@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<!-- 
+	    表单提交方式: get,post形式
+		提交数据方式的区别:
+		  get:
+		    表单的数据,放在浏览器的地址栏上进行的发送
+			数据格式是键值对格式 ?k=v&k=v
+			k键: 是表单中name的属性值
+			v值: 用户实际填写值,或者value属性值
+			
+			数据在地址栏上显示了,敏感信息,不安全
+			地址栏的容量有限的,不适合提交大数据
+			
+			
+		  post:
+		    表单数据,不会出现在地址栏上
+			数据格式键值对 k=v&k=v
+			不会暴露数据,安全
+			post不会用地址栏,没有容量限制,可以提交大数据
+	 -->
+	<body>
+		<form action="#" method="post">	 
+				用户名: <input type="text" placeholder="请输入用户名" name="user" /> <br />
+				密码 : <input type="password" placeholder="请输入密码"  name="pass"/><br />
+				男<input type="radio" name="gender"  checked="checked" value="男"/>   女<input type="radio" name="gender"  value="女"/><br />
+				爱好: <input type="checkbox" value="抽烟" name="hobby"/> 
+				抽烟 <input type="checkbox"  value="喝酒" name="hobby"/>
+				喝酒 <input type="checkbox" value="烫头" name="hobby"/> 烫头<br />
+				
+				<input type="submit" value="注册" />
+			
+		</form>
+	</body>
+</html>
+
+
+
+
+

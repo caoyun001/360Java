@@ -1,0 +1,61 @@
+/* pages/main/questiongit/questiongit.wxss */
+/* @import '../../../template/question-list/question-list.wxss'; */
+.questiongit {
+  height: 100%;
+}
+.questiongit .swiper-tab {
+  display: flex;
+  border-top: 2rpx solid #eaeaea;
+  background-color: #fff;
+}
+
+.questiongit .swiper-tab .tab-item {
+  flex: 1;
+  line-height: 2.6;
+  border-right: 2rpx solid #eaeaea;
+  text-align: center;
+}
+
+.questiongit .swiper-tab .tab-item:last-child {
+  border-right: none;
+}
+
+.questiongit .swiper-tab .tab-item.on {
+  border-bottom: 4rpx solid #2ccac7;
+  background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(81, 196, 239)), to(rgb(44, 202, 199)));
+  -webkit-text-fill-color: transparent;
+}
+
+.questiongit .swiper-box {
+  margin-top: 14rpx;
+  position: relative;
+}
+
+.questiongit swiper {
+  display: block;
+}
+
+.questiongit swipter-item {
+  height: 100%;
+}
+
+.question-box .tag-item {
+  display: flex;
+  margin-bottom: 8rpx;
+  padding: 20rpx 40rpx;
+  background-color: #fff;
+}
+.question-box .tag-item .title {
+  flex: 1
+}
+.question-box .tag-item .title .intro {
+  font-size: 32rpx;
+  color: #666;
+}
+.question-box .tag-item .title .intro .complete {
+  color: #52c4f0;
+}
+.question-box .tag-item .arrow {
+  display: flex;
+  align-items: center;
+}

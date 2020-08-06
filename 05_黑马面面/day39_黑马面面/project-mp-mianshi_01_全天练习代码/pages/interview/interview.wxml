@@ -1,0 +1,24 @@
+<!--template/interview/interview.wxml-->
+<view class='interview'>
+  <view class='index-box'>
+    <view class='bg-image'>
+      <image src='../../images/interview_bg.jpg' style='width: 100%' mode='widthFix'></image>
+    </view>
+    <view class='intro-text'>
+      <view class='text'>到目前为止共收录</view>
+      <view class='text'>
+        <span class="b-text">2999</span>个面试者</view>
+    </view>
+
+  </view>
+  <view class='choose-btn'>
+    <view class='text'>开启模拟面试</view>
+  </view>
+  <view class='modal-mask' bindtap='handleShowModal' data-status='close' wx:if='{{showModal}}'>
+    <view class='modal-content'>
+      <view class='modal-title'>标题</view>
+      <view class='modal-content'>内容</view>
+      <view class='btns'>按钮</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全选和全不选</title>
+		<script type="text/javascript">
+            /**
+			 * 函数,实现复选框的全选和全不选
+			 * 上面的复选框: 总选框
+			 * 下面的4个复选框: 分选框
+			 *
+			 * 分选框的状态:跟随总选框
+			 *
+			 * object参数,接收到的 复选框对象
+			 *
+			 * type="checkbox" 复选框属性 checked="checked" 决定是否勾选
+			 *
+			 * checked属性,在JS中是真假值,是true,勾选
+             */
+			function selectAll(object) {
+				//console.log(object.checked);
+				//获取所有的分选框,属性 checked跟随总选框
+				var inputs = document.getElementsByClassName("itemSelect");
+				for(var i=0;i<inputs.length;i++){
+				    inputs[i].checked = object.checked;
+				}
+
+            }
+		</script>
+		
+	</head>
+	<body>
+		<table id="tab1" border="1" width="800" align="center">
+			<tr>
+				<td colspan="5"><input type="button" value="删除"></td>
+			</tr>
+			<tr>
+				<!--
+				   onclick = selectAll  注册鼠标点击事件,自动调用函数 selectAll
+				   传递参数this,传递是当前标签对象
+				-->
+				<th><input type="checkbox" id="zong" onclick="selectAll(this)"></th>
+				<th>分类ID</th>
+				<th>分类名称</th>
+				<th>分类描述</th>
+				<th>操作</th>
+			</tr>
+			<tr>
+				<td><input type="checkbox"  class="itemSelect"></td>
+				<td>1</td>
+				<td>手机数码</td>
+				<td>手机数码类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>2</td>
+				<td>电脑办公</td>
+				<td>电脑办公类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>3</td>
+				<td>鞋靴箱包</td>
+				<td>鞋靴箱包类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>4</td>
+				<td>家居饰品</td>
+				<td>家居饰品类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+		</table>
+	</body>
+</html>

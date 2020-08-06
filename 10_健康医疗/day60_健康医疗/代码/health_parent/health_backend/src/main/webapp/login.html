@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 页面meta -->
+        <meta charset="utf-8">
+        <title>传智健康</title>
+        <meta name="description" content="传智健康">
+        <meta name="keywords" content="传智健康">
+        <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="plugins/elementui/index.css">
+        <link rel="stylesheet" href="css/loginstyle.css">
+    </head>
+    <body class="mainBg">
+        <div id="app">
+            <div class="loginMain">
+              <div class="loginCon">
+                <div class="loginLogo"></div>
+                <el-form id="form" :model="form" action="/login.do" class="loginForm clear" method="post">
+                  <el-form-item>
+                    <span class="userIcon"></span>
+                    <el-input v-model="form.username" name="username"  placeholder="请输入用户名">
+                    </el-input>
+                  </el-form-item>
+                  <el-form-item>
+                      <span class="pwdIcon"></span>
+                      <el-input v-model="form.password" name="password" placeholder="请输入密码" show-password>
+                      </el-input>
+                    </el-form-item>
+                  <div class="loginBtn">
+                    <el-button type="primary" @click="onSubmit">登录</el-button>
+                  </div>
+                </el-form>
+              </div>
+            </div>
+        </div>
+    </body>
+    <!-- 引入组件库 -->
+    <script src="js/vue.js"></script>
+    <script src="plugins/elementui/index.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                form:{
+                    username:'',
+                    password:'',
+                    code:''
+                }
+            },
+            created() {
+
+            },
+            methods: {
+              onSubmit(){
+                document.getElementById("form").submit();
+              }
+            }
+        });
+        window.onload = windowHeight; //页面载入完毕执行函数
+        function windowHeight() {
+            var asieHeight=document.getElementById("app")
+            asieHeight.style.height=document.documentElement.clientHeight + 'px'
+        }
+    </script>
+</html>

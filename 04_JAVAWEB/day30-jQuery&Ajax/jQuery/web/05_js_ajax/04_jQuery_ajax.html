@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery的AJAX函数</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js">
+
+    </script>
+
+    <script type="text/javascript">
+            /**
+             * jQuery的ajax请求的函数
+             * 函数名字就是ajax
+             *
+             * ajax函数是get,post的底层实现
+             * get,post是ajax的上层函数,高层函数
+             *
+             * get,post本质就是调用ajax
+             *
+             * 高层: 代码少,使用简单,推荐
+             * 底层: 代码多,灵活性更强,不推荐
+             *
+             * 方法签名:
+             *   async : 写布尔值, true(默认)异步请求,  false 同步请求
+             *   success: 服务器响应成功后调用
+             *   error:服务器响应失败后调用
+             *   type:请求方式: get,post  默认是get
+             */
+            function ajaxFn() {
+                $.ajax({
+                    url:"/ajax",
+                    data:"name=zhangsan&age=20",
+                    success:function(data){
+                        console.log(data)
+                    },
+                    error:function(data){
+                        console.log("服务器响应失败");
+                    },
+                    dataType:"text",
+                    type:"POST"
+                });
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="ajax请求" onclick="ajaxFn()">
+</body>
+</html>

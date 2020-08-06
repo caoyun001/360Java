@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--属性值，必须和接口全名一致-->
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <!--用户名模糊查询-->
+    <select id="queryUserByName" resultType="user" parameterType="com.itheima.pojo.UserVO">
+        select * from user where username like #{user.username}
+    </select>
+
+    <!--配置新增-->
+    <insert id="saveUser" parameterType="user">
+          insert into user values (null,#{username},#{sex},#{birthday},#{address})
+    </insert>
+
+    <!--配置主键查询-->
+    <select id="queryUserById" parameterType="Integer" resultType="user">
+        select * from user where id = #{id}
+    </select>
+
+   <!--配置查询所有的user表数据-->
+    <select id="queryUser" resultType="user">
+        select * from user
+    </select>
+
+</mapper>

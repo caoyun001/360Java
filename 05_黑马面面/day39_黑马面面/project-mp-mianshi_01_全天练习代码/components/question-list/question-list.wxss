@@ -1,0 +1,77 @@
+.questiongit {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* tab-title  */
+
+.swiper-tab {
+  display: flex;
+  margin-bottom: 6rpx;
+  border-top: 2rpx solid #eaeaea;
+  background-color: #fff;
+}
+
+.tab-item {
+  flex: 1;
+  line-height: 2.6;
+  border-right: 2rpx solid #eaeaea;
+  text-align: center;
+}
+
+.tab-item:last-child {
+  border-right: none;
+}
+
+.tab-item.on {
+  border-bottom: 2px solid #2ccac7;
+}
+
+/*scroll area  */
+
+.scroll-view {
+  height: 100%;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+  padding: 20rpx 40rpx;
+  background-color: #fff;
+}
+
+.title {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.intro {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.complete {
+  color: #52c4f0;
+}
+
+/* 
+.swiper-box {
+  margin-top: 14rpx;
+  position: relative;
+}
+
+.swiper {
+  display: block;
+}
+
+.questiongit swipter-item {
+  height: 100%;
+} */
+
+/*
+.question-box .tag-item .arrow {
+   display: flex;
+  align-items: center; 
+} */

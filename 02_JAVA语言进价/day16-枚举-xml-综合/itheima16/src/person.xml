@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persons>
+    <person className="com.itheima.domain.Person">
+        <property name="name">李四</property>
+        <property name="sex">男</property>
+    </person>
+</persons>

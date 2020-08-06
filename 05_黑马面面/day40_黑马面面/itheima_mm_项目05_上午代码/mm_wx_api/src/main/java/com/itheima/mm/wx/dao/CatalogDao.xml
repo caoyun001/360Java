@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.CatalogDao">
+    <select id="selectCatalogList" resultType="java.util.Map">
+        select id,name as title,
+                    (select count(*) from t_question where catalog_id = c.id) as allCount,
+                  (select count(*) from t_question
+					where catalog_id = c.id
+						and id in (select question_id from tr_member_question where member_id=#{memberId}) ) as finishedCount
+        from t_catalog c
+        where status = 0 and course_id = #{courseId}
+        <if test =" categoryID != null ">
+            and c.id = #{categoryID}
+        </if>
+     </select>
+</mapper>

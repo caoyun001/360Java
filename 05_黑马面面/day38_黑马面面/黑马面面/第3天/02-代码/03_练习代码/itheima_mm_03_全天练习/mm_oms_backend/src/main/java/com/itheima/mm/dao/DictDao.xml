@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.DictDao">
+
+    <resultMap id="mapForAll" type="Dict">
+        <id column="id" property="id"/>
+        <collection property="subList" column="id" javaType="ArrayList" ofType="Dict"
+                    select="com.itheima.mm.dao.DictDao.selectSubListByPid"/>
+    </resultMap>
+
+    <sql id="select_from_dict_base">
+         SELECT id,data_value as dataValue
+        FROM t_dict
+    </sql>
+    <select id="selectListByType" resultMap="mapForAll">
+       <include refid="select_from_dict_base"/>
+        WHERE data_type = #{typeId}
+        ORDER  by order_no desc
+    </select>
+    <!--获取数据的级联数据-->
+    <select id="selectSubListByPid" resultType="com.itheima.mm.pojo.Dict">
+        <include refid="select_from_dict_base"/>
+        WHERE pid = #{id}
+        ORDER  by order_no desc
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS嵌入HTML</title>
+
+    <!--
+       标签 script
+       属性: type="text/javascript"
+    -->
+    <script type="text/javascript">
+        alert("hello JS");
+    </script>
+
+    <!--
+       标签 script
+       属性: src = "外部文件路径"
+
+       js代码定义在另一个文件中
+
+       注意: 标签src引入了外部文件
+       标签体内容,失效,不执行
+    -->
+    <script src="../js/my.js" type="text/javascript">
+        alert("标签体代码");
+    </script>
+</head>
+<body>
+
+</body>
+</html>

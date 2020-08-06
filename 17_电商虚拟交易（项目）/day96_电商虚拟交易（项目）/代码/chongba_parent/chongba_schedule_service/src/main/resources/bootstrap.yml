@@ -1,0 +1,17 @@
+spring:
+   application:  
+    name: schedule-service
+   profiles:
+    active: dev
+   cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        serviceName: ${spring.application.name}
+      config:
+        enabled: true
+        format: yaml         
+        prefix: config
+        defaultContext: schedule-sharding-month
+        data-key: data

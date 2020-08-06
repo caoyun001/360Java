@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.WxMemberDao">
+    <resultMap id="baseResultMap" type="WxMember">
+        <id property="id" column="id"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="open_id" property="openId"/>
+        <result column="union_id" property="unionId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_category_kind" property="lastCategoryKind"/>
+        <result column="last_category_type" property="lastCategoryType"/>
+        <result column="last_question_id" property="lastQuestionId"/>
+    </resultMap>
+    <select id="selectByOpenId" resultMap="baseResultMap">
+        SELECT *
+        FROM t_wx_member
+        WHERE open_id = #{openId}
+    </select>
+
+    <insert id="addWxMemeber">
+        INSERT  INTO t_wx_member (nick_name, avatar_url, gender, city, province, country,language,open_id, union_id, create_time)
+        VALUES (#{nickName},#{avatarUrl},#{gender},#{city},#{province},#{country},#{language},#{openId},#{unionId},#{createTime})
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateCityAndCourse">
+        UPDATE t_wx_member
+        set city_id = #{cityID},course_id=#{subjectID}
+        where open_id=#{openId}
+    </update>
+    <update id="updateMemberLastAnswer">
+       update t_wx_member
+       set last_category_kind = #{categoryKind}, last_category_type=#{categoryType},
+        last_category_id=#{categoryID}, last_question_id=#{id}
+       where open_id = #{openId}
+    </update>
+
+    <select id="selectCenter" resultType="java.util.Map">
+        select
+            (select count(*) from tr_member_question mq WHERE mq.member_id = m.id) as answerCount,
+            last_category_kind as categoryKind ,
+            last_category_type as categoryType ,
+            last_category_id as categoryID,
+            last_question_id as lastQuestionId,
+            city_id as cityID,
+            (select data_value from t_dict where id = m.city_id) as cityName,
+            course_id as subjectID
+        from t_wx_member m
+        WHERE m.open_id = #{openId}
+    </select>
+
+    <select id="selectCategoryNameByQueryParams" resultType="java.lang.String">
+        <if test="categoryKind==1">
+            select name  as categoryTitle from t_catalog  WHERE  id = #{categoryID}
+        </if>
+        <if test="categoryKind==2">
+            select short_name  as categoryTitle from t_company  WHERE  id = #{categoryID}
+        </if>
+        <if test="categoryKind==3">
+            select name  as categoryTitle from t_industry  WHERE  id = #{categoryID}
+        </if>
+    </select>
+</mapper>

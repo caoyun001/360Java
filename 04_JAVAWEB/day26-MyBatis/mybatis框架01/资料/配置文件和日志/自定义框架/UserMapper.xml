@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mapper namespace="test">
+	<select id="queryUserList" resultType="com.itheima.pojo.User">
+		select * from user
+	</select>
+</mapper>

@@ -1,0 +1,12 @@
+# 端口${port:如果引入参数port不存在，则使用默认端口9091}
+server.port: ${port:9091}
+# 数据库连接配置信息
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.datasource.url: jdbc:mysql://127.0.0.1:3306/springcloud?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.datasource.password: root
+spring.datasource.username: root
+
+# 配置应用名称
+spring.application.name: user-service
+# 配置注册中心地址
+eureka.client.service-url.defaultZone: http://127.0.0.1:10086/eureka

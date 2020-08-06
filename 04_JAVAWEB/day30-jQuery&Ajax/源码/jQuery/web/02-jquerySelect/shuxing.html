@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>表单属性过滤选择器</title>
+		<meta charset="UTF-8">
+		<style type="text/css">
+			div,
+			span {
+				width: 180px;
+				height: 180px;
+				margin: 20px;
+				background: #9999CC;
+				border: #000 1px solid;
+				float: left;
+				font-size: 17px;
+				font-family: Roman;
+			}
+
+			div .mini {
+				width: 50px;
+				height: 50px;
+				background: #CC66FF;
+				border: #000 1px solid;
+				font-size: 12px;
+				font-family: Roman;
+			}
+
+			div .mini01 {
+				width: 50px;
+				height: 50px;
+				background: #CC66FF;
+				border: #000 1px solid;
+				font-size: 12px;
+				font-family: Roman;
+			}
+
+			#job {
+				margin: 20px;
+			}
+
+			#edu {
+				margin-top: -70px;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				//<input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内可用 <input> 元素的值"  id="b1"/>
+				//限定文本输入框
+				//属性选择器: $("标签[属性=值]:属性")
+				$("#b1").click(function() {
+				    //获取所有的input标签,属性必须是text : enabled可用的
+					var inputs = $("input[type=text]:enabled");
+					//改变文本框内容
+					for(var i=0;i<inputs.length;i++){
+					    //jquery函数val() 直接调用输出值, val(参数)设置值
+						//jQuery对象本质是数组,存储的是多个DOM对象
+						$(inputs[i]).val("tom");
+					}
+				});
+
+				// <input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内不可用 <input> 元素的值"  id="b2"/>
+				$("#b2").click(function() {
+                    //获取所有的input标签,属性必须是text : disabled可用的
+                    var inputs = $("input[type=text]:disabled");
+                    //改变文本框内容
+                    for(var i=0;i<inputs.length;i++){
+                        //jquery函数val() 直接调用输出值, val(参数)设置值
+                        //jQuery对象本质是数组,存储的是多个DOM对象
+                        $(inputs[i]).val("jerry");
+                    }
+				});
+
+				//<input type="button" value=" 利用 jQuery 对象的 length 属性获取多选框选中的个数"  id="b3"/>
+				$("#b3").click(function() {
+				    //获取复选框 type=checkbox的选中的个数
+					//获取到选中的即可
+					var inputs = $("input[type=checkbox]:checked");
+					console.log(inputs.length);
+				});
+
+				// <input type="button" value=" 利用 jQuery 对象的 text() 方法获取下拉框选中的内容"  id="b4"/>
+				$("#b4").click(function() {
+				    //获取的是所有的option标签:selected 被选中的
+					//标签体的内容,jquery函数 text()
+					var options = $("option:selected");
+					for(var i=0;i<options.length;i++){
+					    console.log( $(options[i]).text()  );
+					}
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<input type="button" value="保存" class="mini" name="ok" class="mini" />
+		<input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内可用 <input> 元素的值" id="b1" />
+		<input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内不可用 <input> 元素的值" id="b2" />
+		<input type="button" value=" 利用 jQuery 对象的 length 属性获取多选框选中的个数" id="b3" />
+		<input type="button" value=" 利用 jQuery 对象的 text() 方法获取下拉框选中的内容" id="b4" />
+		<br><br>
+		<input type="text" value="不可用值1" disabled="disabled">
+		<input type="text" value="可用值1" >
+		<input type="text" value="不可用值2" disabled="disabled">
+		<input type="text" value="可用值2">
+		<br><br>
+		<input type="checkbox" name="items" value="美容">美容
+		<input type="checkbox" name="items" value="IT">IT
+		<input type="checkbox" name="items" value="金融">金融
+		<input type="checkbox" name="items" value="管理">管理
+		<input type="radio" name="sex" value="男">男
+		<input type="radio" name="sex" value="女">女
+		<br><br>
+		<select name="job" id="job" multiple="multiple" size=4>
+			<option>程序员</option>
+			<option>中级程序员</option>
+			<option>高级程序员</option>
+			<option>系统分析师</option>
+		</select>
+		<select name="edu" id="edu">
+			<option>本科</option>
+			<option>博士</option>
+			<option>硕士</option>
+			<option>大专</option>
+		</select>
+		<br />
+		<div id="two" class="mini">
+			id为two class是 mini div
+			<div class="mini">class是 mini</div>
+		</div>
+		<div class="one">
+			class是 one
+			<div class="mini">class是 mini</div>
+			<div class="mini">class是 mini</div>
+		</div>
+		<div class="one">
+			class是 one
+			<div class="mini01">class是 mini01</div>
+			<div class="mini">class是 mini</div>
+		</div>
+	</body>
+</html>

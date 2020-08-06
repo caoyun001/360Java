@@ -1,0 +1,55 @@
+<!--index.wxml-->
+<view class='page-activate'>
+  <view class='scroll'>
+    <scroll-view scroll-y='true' class='scroll-view'>
+      <!-- city  -->
+      <view class='location-city'>
+        <view class='current-city' data-id='{{currentCityID}}' data-name='{{currentCity}}' bindtap='cityChoose'>
+          <view>
+            <span class="icon icon-location"></span>
+          </view>
+          <view class="city-name">{{currentCity}}市</view>
+          <view class="ico">
+            <span class="icon icon-rit-arrow"></span>
+          </view>
+        </view>
+        <view class='citys'>
+          <view class='city-list'>
+            <block wx:for='{{cityList}}' wx:key="{{index}}">
+              <view class="item {{item.id==currentCityID?'active':''}}" data-title='{{item.title}}' data-id='{{item.id}}' bindtap='handleChangecity'>{{item.title}}</view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <!-- title  -->
+      <view class='q-title'>
+        <view>
+          <span class="icon icon-git-go"></span>题库方向</view>
+
+      </view>
+      <!-- q-type  -->
+      <view class='q-type'>
+        <block wx:for='{{subjectsList}}' wx:key="{{index}}">
+          <view class="item {{item.id==subjectID?'active':''}}" data-id='{{item.id}}' bindtap='changeTechnology'>
+            <view class='item-content'>
+              <view class='mark'>
+                <image src="/images/{{item.title}}.png" width="36"></image>
+              </view>
+              <view class='title'>{{item.title}}</view>
+            </view>
+
+          </view>
+        </block>
+      </view>
+
+    </scroll-view>
+  </view>
+
+
+  <!-- 确定按钮  -->
+  <view class='sure'>
+    <button hover-class="change-btn" open-type="getUserInfo" bindgetuserinfo="handleLogin" >确定</button>
+  </view>
+  <!-- 顶部消息 -->
+  <i-message id="message" />
+</view>

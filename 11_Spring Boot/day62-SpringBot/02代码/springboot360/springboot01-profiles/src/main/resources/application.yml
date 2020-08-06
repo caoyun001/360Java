@@ -1,0 +1,31 @@
+# 多环境的配置文件，
+# 第一种，yml配置文件中，多块(---)
+# 第二种，通过配置文件的命名，application-{dev、pro、test}.yml
+
+# 激活多环境配置文件中的一个，
+spring.profiles.active: pro
+# 松散绑定
+# itheima.spring-boot.one-example: dilireba
+#itheima.springBoot.oneExample: dilireba
+itheima.spring_boot.one_example: dilireba
+
+#---
+## 开发环境的配置
+#server.port: 8081
+#spring.profiles: dev
+#
+#
+#
+#---
+## 测试环境的配置
+#server.port: 9090
+#spring.profiles: test
+#
+#
+#
+#
+#---
+## 生产环境的配置
+#server.port: 80
+#spring.profiles: pro
+

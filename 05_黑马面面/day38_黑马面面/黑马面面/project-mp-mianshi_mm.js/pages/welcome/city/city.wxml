@@ -1,0 +1,11 @@
+<!--pages/city/city.wxml-->
+<view class='page'>
+  <view class='title'>城市选择</view>
+  <view class='citys'>
+    <view class='city-list'>
+      <block wx:for='{{cityList}}' wx:key="{{index}}">
+        <view class="item {{item.id==currentItemId?'active':''}}" data-title='{{item.title}}' data-id='{{item.id}}' bindtap='changeCity'>{{item.title}}</view>
+      </block>
+    </view>
+  </view>
+</view>

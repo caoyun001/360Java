@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>传统遍历</title>
+    <script type="text/javascript">
+        function fn() {
+            var lis = document.getElementsByTagName("li");
+            for(var i=0;i<lis.length;i++){
+                console.log(lis[i].innerHTML);
+            }
+        }
+    </script>
+</head>
+<body onload="fn()">
+<ul id="city">
+    <li>北京</li>
+    <li>上海</li>
+    <li>天津</li>
+    <li>重庆</li>
+</ul>
+</body>
+</html>

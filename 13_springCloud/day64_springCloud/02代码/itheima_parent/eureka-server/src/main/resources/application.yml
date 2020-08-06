@@ -1,0 +1,15 @@
+# 端口
+server.port: 10086
+# 当前应用的名称
+spring.application.name: eureka-server
+# 注册中心的地址
+eureka.client.service-url.defaultZone: http://127.0.0.1:10086/eureka
+
+
+
+# 是否抓取注册列表
+eureka.client.fetch-registry: false
+# 是否注册服务中心Eureka
+eureka.client.register-with-eureka: false
+#向Eureka服务中心集群注册服务
+eureka.server.enable-self-preservation: false # 关闭自我保护模式（默认值是打开）

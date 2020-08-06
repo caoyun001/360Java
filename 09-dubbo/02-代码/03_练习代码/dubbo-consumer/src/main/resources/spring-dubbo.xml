@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--spring包扫描-->
+    <context:component-scan base-package="com.itheima.study.dubbo.controller"/>
+
+    <!--    基本配置-->
+    <!--    服务名-->
+    <dubbo:application name="dubbo-consumer"/>
+    <!--    注册中心-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+<!--    <dubbo:reference id="userService" interface="com.itheima.study.dubbo.service.UserService"/>-->
+<!--    <bean class="com.itheima.study.dubbo.controller.UserController">-->
+<!--        <property name="userService" ref="userService"/>-->
+<!--    </bean>-->
+
+    <!--    dubbo注解支持-->
+    <dubbo:annotation package="com.itheima.study.dubbo.controller"/>
+</beans>

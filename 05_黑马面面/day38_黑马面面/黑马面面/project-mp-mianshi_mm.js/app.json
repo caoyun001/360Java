@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/welcome/activate/activate",
+    "pages/main/main",
+    "pages/exam/exam",
+    "pages/welcome/city/city",
+    "pages/questiongit/questiongit",
+    "pages/mywrongbook/mywrongbook",
+    "components/question-list/question-list",
+    "pages/myexercise/myexercise",
+    "pages/mycollect/mycollect",
+    "pages/home/home",
+    "pages/ability/ability"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "黑马面面",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "根据你的当前位置推送题库"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

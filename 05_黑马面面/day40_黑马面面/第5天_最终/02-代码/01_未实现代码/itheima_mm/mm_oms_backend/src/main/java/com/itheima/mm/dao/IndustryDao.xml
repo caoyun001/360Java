@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.IndustryDao">
+    <select id="selectListAll" resultType="Industry">
+        SELECT id,name
+        FROM t_industry
+    </select>
+
+    <select id="selectIndustryListByCompany" resultType="Industry">
+        SELECT id,name
+        from tr_company_industry ci ,t_industry i
+        where ci.company_id  = #{id} and ci.industry_id = i.id
+    </select>
+
+    <insert id="add">
+        INSERT  INTO t_industry (name, remark,order_no)
+        VALUES (#{name},#{remark},#{orderNo})
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+</mapper>

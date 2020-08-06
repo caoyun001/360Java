@@ -1,0 +1,131 @@
+/*profile  */
+.myhome .profile {
+  display: flex;
+  padding: 10rpx 50rpx 70rpx;
+  border-bottom: 2rpx solid #eaeaea;
+  background-color: #fff;
+}
+
+.profile .media-left {
+  width: 80px;
+  height: 80px;
+  margin-right: 30rpx;
+}
+
+.profile .media-left image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.profile .media-rit .name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #495155;
+}
+
+.profile .media-rit .msg {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  color: #ccc;
+}
+
+/*current  */
+
+.current {
+  display: flex;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ececec;
+}
+
+.current .block {
+  padding: 26rpx 0;
+  flex: 1;
+}
+
+.current .block.border {
+  border-right: 2rpx solid #eaeaea;
+}
+
+.current .number {
+  font-size: 40rpx;
+  color: #333;
+}
+.current .border .number {
+  font-weight: bold;
+}
+
+.current .text {
+  color: #999;
+  font-size: 28rpx;
+  line-height: 2;
+}
+
+.current .go-btn {
+  overflow: hidden;
+}
+
+.current .number .go-btn {
+  padding: 6rpx 24rpx;
+  font-size: 32rpx;
+  border-radius: 6rpx;
+  color: #fff;
+  background: linear-gradient(90deg, #50c4ee, #2ecac8);
+}
+
+/*list  */
+
+.my-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.my-list .item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 30rpx;
+  background-color: #fff;
+}
+
+.my-list .item  .ico {
+  line-height: 1.5;
+  font-size: 36rpx;
+   background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(53, 201, 209)), to(rgb(81, 196, 238))); 
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;   
+}
+
+.my-list .item .bdr {
+  width: 100%;
+  display: flex;
+  padding: 30rpx 16rpx 30rpx 0;
+  border-bottom: 1px solid #eaeaea;
+  justify-content: space-between;
+  line-height: 1.5;
+  
+}
+
+.myhome .my-list .item:nth-child(3) .bdr,
+.myhome .my-list .item:nth-child(4) .bdr {
+  border-bottom: 0;
+}
+
+.myhome .my-list .item .text {
+  padding-left: 14rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.myhome .my-list .item .icon {
+  color: #eaeaea;
+}
+.myhome .my-list .item .icon-arrows {
+  font-size: 38rpx;
+}
+.myhome .my-list .item.space {
+  margin-top: 10rpx;
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.QuestionDao">
+    <sql id="select_where_by_page">
+        <where>
+            <if test="queryParams.isClassic != null ">
+                AND tq.is_classic = #{queryParams.isClassic}
+            </if>
+            <if test="queryParams.courseId != null ">
+                AND tq.course_id = #{queryParams.courseId})
+            </if>
+            <if test="queryParams.status != null ">
+                AND tq.status = #{queryParams.status}
+            </if>
+            <if test="queryParams.difficulty != null ">
+                AND tq.difficulty = #{queryParams.difficulty}
+            </if>
+            <if test="queryParams.type != null ">
+                AND tq.type = #{queryParams.type}
+            </if>
+            <if test="queryParams.keyWord != null ">
+                AND tq.subject like "%"#{queryParams.keyWord}"%" or tq.number like "%"#{queryParams.keyWord}"%"
+            </if>
+            <if test="queryParams.reviewStatus != null ">
+                AND tq.review_status = #{queryParams.reviewStatus}
+            </if>
+        </where>
+    </sql>
+    <select id="selectIsClassicByPage" resultType="com.itheima.mm.pojo.Question">
+        SELECT tq.id,(1000+tq.id) as number,tc.name as courseName,type,`subject`,tq.create_date as createDate,
+		difficulty, (SELECT  count(*) FROM tr_member_question tmq WHERE tmq.question_id = tq.id ) as usedQty, tu.username as creator,tq.`status`
+        FROM t_question tq
+        JOIN t_course tc ON tq.course_id = tc.id
+        JOIN t_user tu ON tc.user_id = tu.id
+        <include refid="select_where_by_page"/>
+        order by id desc
+        limit #{offset},#{pageSize}
+
+    </select>
+    <select id="selectCountIsClassicByPage" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM t_question tq
+        <include refid="select_where_by_page"/>
+    </select>
+
+    <insert id="add">
+        INSERT INTO t_question (subject, type, difficulty, analysis, analysis_video, remark, is_classic, review_status, status, create_date, user_id, company_id, catalog_id,course_id)
+        VALUES (#{subject},#{type},#{difficulty},#{analysis}, #{analysisVideo}, #{remark}, #{isClassic}, #{reviewStatus},#{status}, #{createDate}, #{userId}, #{companyId}, #{catalogId},#{courseId})
+        <selectKey order="AFTER" resultType="integer" keyProperty="id" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <update id="update">
+       UPDATE t_question
+           set number=#{number},subject=#{subject},type=#{type},difficulty=#{difficulty},analysis=#{analysis},analysis_video=#{analysisVideo},remark=#{remark},company_id=#{companyId},catalog_id=#{catalogId}
+       WHERE id = #{id}
+    </update>
+
+    <update id="updateIsClassic">
+        UPDATE t_question
+        set is_classic = #{isClassic}
+        where id = #{id}
+    </update>
+    <update id="updateStatusAndReviewStatus" parameterType="ReviewLog">
+        UPDATE t_question
+        set status = #{status},review_status = #{reviewStatus}
+        where id = #{questionId}
+    </update>
+
+</mapper>

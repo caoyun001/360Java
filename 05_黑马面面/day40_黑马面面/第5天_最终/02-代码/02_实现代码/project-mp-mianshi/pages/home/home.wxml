@@ -1,0 +1,3 @@
+<view class='home'>
+  <image src='/images/homeBG.png' mode='widthFix' class='bg-image'></image>
+</view>

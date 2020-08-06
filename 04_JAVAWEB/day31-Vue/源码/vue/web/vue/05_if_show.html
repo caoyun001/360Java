@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的指令-if-show</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!--
+          根据布尔值,判断是否渲染标签,是否显示
+
+          v-show  取值是false  采用CSS技术 display=none 隐藏
+          v-if    取值是false,标签浏览器中没有了
+        -->
+        <p v-if="message">v-if</p>
+        <p v-show="message">v-show</p>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+           el:"#app",
+           data:{
+               message:false
+           }
+        });
+    </script>
+</body>
+</html>

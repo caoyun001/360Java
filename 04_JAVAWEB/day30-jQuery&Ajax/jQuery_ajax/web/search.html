@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        .content {
+            width: 643px;
+            margin: 200px auto;
+            text-align: center;
+        }
+
+        input[type='text'] {
+            width: 530px;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        input[type='button'] {
+            width: 100px;
+            height: 46px;
+            background: #38f;
+            border: 0;
+            color: #fff;
+            font-size: 15px
+        }
+
+        .show {
+            position: absolute;
+            width: 535px;
+           /* height: 100px;*/
+            border: 1px solid #999;
+            border-top: 0;
+            display: none;
+        }
+    </style>
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+        function searchWord() {
+
+            var show = $("#show");
+
+            //获取文本框的值
+            var keyWord = $("#keyWord").val();
+            if(keyWord.trim()==""){
+                //div隐藏
+                show.hide();
+                //文本框什么也没写
+                return;
+            }
+
+            //发生请求,提交关键词
+            $.get(
+                "/search",
+                "keyWord="+keyWord,
+                function (data) {
+                    //显示div
+                    show.show();//jQuery函数,标签显示
+                    var str="";
+                    //data响应的是服务器json数据  本质是数组,数组中的元素是对象,对象的键name
+                    //遍历数组
+                    $.each(data,function(index,element){
+                        //element.name用户名,填充div
+                        //拼接字符串  拼接div标签
+                        //div标签添加鼠标悬停事件 传递this,传递当前标签对象
+                        str += "<div  onmouseover='overFn(this)' onmouseout='outFn(this)'>"+ element.name +"</div>";
+                    });
+                    //字符串,填充div
+                        show.html(str);
+                },
+                "json"
+            );
+
+        }
+
+        //鼠标悬停事件
+        function overFn(obj) {
+            //div改变背景色
+            $(obj).css("background-color","yellow");
+        }
+
+        //鼠标离开事件
+        function outFn(obj) {
+            $(obj).css("background-color","");
+        }
+    </script>
+</head>
+<body>
+<div class="content">
+    <img alt="" src="img/logo.png"><br/><br/>
+    <!--搜索框,绑定键盘弹起事件-->
+    <input id="keyWord" type="text" name="word" onkeyup="searchWord()">
+    <input type="button" value="搜索一下">
+    <!--查询后,补全的数据,填充div中-->
+    <div id="show" class="show"></div>
+</div>
+</body>
+</html>

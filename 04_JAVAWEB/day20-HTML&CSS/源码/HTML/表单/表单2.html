@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- 
+		     表单标签 input(输入)
+			 属性 type  类型
+			   type属性值:
+			   
+			属性值="text"  输入文本框
+			属性 palceholder="属性值"就是文本框中提示信息
+			属性 name="文本框定义名字" (JavaWeb技术有关)
+			属性 value=""文本框的默认值
+			
+			
+			属性值="password" 密码输入框
+			属性 name="文本框定义名字" (JavaWeb技术有关)
+			
+			
+			属性值="radio" 单选按钮
+			同组的按钮才能单向选择
+			同组: 标签的name属性值相同
+			设置默认值: 添加属性 checked="checked"
+			
+			
+			属性值="checkbox" 多选按钮,复选框
+			属性 name="文本框定义名字"
+			
+			
+			属性值="file" 文件上传域
+			属性 name="文本框定义名字"
+			
+			
+			属性值="reset" 重置按钮
+			输入的所有内容,全部清空
+			
+			
+			属性值="button" 按钮
+			属性 value=""按钮上面的文字
+			按钮单独使用没有意义,配合 JavaScript脚本语言
+			
+			
+			属性值="submit" 提交按钮
+			点击按钮,表单全部数据,发送到服务器
+			
+			属性值="image" 图片按钮
+			
+			
+			表单标签 select(下拉菜单)
+			菜单项 标签 option
+			默认选项  option标签上添加属性 selected="selected"
+			
+			
+			多行文本区域: 标签 textarea
+			
+		 -->
+	<form action="" method="get">	 
+		用户名: <input type="text" placeholder="请输入用户名" name="user" /> <br />
+		密码 : <input type="password" placeholder="请输入密码" /><br />
+		男<input type="radio" name="gender"  checked="checked"/>   女<input type="radio" name="gender" /><br />
+		爱好: <input type="checkbox" /> 抽烟 <input type="checkbox" /> 喝酒 <input type="checkbox" /> 烫头<br />
+		上传头像: <input type="file" /> <br />
+		
+		<input type="button" value="点点我试试"/>
+		<input type="submit" value="注册" />
+		<input type="image"  src="../img/btn.jpg"/><br />
+		
+		选择省份<select>
+			<option>北京市</option>
+			<option>天津市</option>
+			<option selected="selected">辽宁省</option>
+			<option>河北省</option>
+			<option>山东省</option>
+		</select><br />
+		
+		<textarea cols="50" rows="50"></textarea>
+		
+   </form>
+	</body>
+</html>

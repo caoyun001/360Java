@@ -1,0 +1,2 @@
+# 配置当前的自动配置加载
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.itcast.config.HeimaAutoConfiguration

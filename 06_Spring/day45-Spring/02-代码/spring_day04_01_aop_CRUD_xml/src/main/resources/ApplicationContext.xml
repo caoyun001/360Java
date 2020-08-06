@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--dao层-->
+    <!--加载properties配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!--配置数据源-->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+    <!--配置SQLSessionFactoryBean-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="druidDataSource"></property>
+        <property name="typeAliasesPackage" value="com.itheima.pojo"></property>
+        <!--可选项, 加载Mybatis的配置文件-->
+        <!--<property name="configLocation" value="classpath:SqlMapConfig.xml"></property>-->
+    </bean>
+    <!--扫描dao层接口, 配置扫描器-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.itheima.dao"></property>
+    </bean>
+
+    <!--service-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+
+    <!--aop事务-->
+    <!--配置事务切面通知类-->
+    <bean id="transactionManager" class="com.itheima.utils.TransactionManager" init-method="init">
+        <property name="dataSource" ref="druidDataSource"></property>
+    </bean>
+    <!--aop配置-->
+    <aop:config>
+        <!--配置通用的切入点表达式-->
+        <aop:pointcut id="pc" expression="execution(* com.itheima.service..*.*(..))"></aop:pointcut>
+        <!--配置织入, 实现事务增强方法与 service层方法进行绑定-->
+        <aop:aspect id="transactionManager" ref="transactionManager">
+            <!--前置通知-->
+            <aop:before method="begin" pointcut-ref="pc"></aop:before>
+            <!--后置通知-->
+            <aop:after-returning method="commit" pointcut-ref="pc"></aop:after-returning>
+            <!--异常通知-->
+            <aop:after-throwing method="rollback" pointcut-ref="pc"></aop:after-throwing>
+            <!--最终通知-->
+            <aop:after method="close" pointcut-ref="pc"></aop:after>
+        </aop:aspect>
+    </aop:config>
+</beans>

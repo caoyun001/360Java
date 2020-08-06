@@ -1,0 +1,75 @@
+<view class='myhome'>
+  <!--profile  -->
+  <view class='profile'>
+    <view class='media-left'>
+      <image src='{{userInfo.avatarUrl}}' width='100%'></image>
+    </view>
+    <view class='media-rit'>
+      <view class='name'>{{userInfo.nickName}}</view>
+      <view class='msg'>一起努力奋斗吧</view>
+    </view>
+  </view>
+  <!--number -->
+  <view class='current'>
+    <view class='block border'>
+      <view class='number'>{{answerCounts}}</view>
+      <view class='text'>累计答题</view>
+    </view>
+    <view class='block' wx:if="{{answerCounts == 0}}" bindtap='handleGoLib'>
+      <view class='number'>
+        <span class="go-btn">开始答题</span>
+      </view>
+      <view class='text'>拼了，Fighting~</view>
+    </view>
+    <view class='block' wx:else bindtap='handleGoExam'>
+      <view class='number'>
+        <span class="go-btn">继续答题</span>
+      </view>
+      <view class='text'>拼了，Fighting~</view>
+    </view>
+
+
+  </view>
+  <!--list  -->
+  <view class='my-list'>
+
+    <view class='item' bindtap='handleAbility'>
+      <span class='icon icon-arrows ico'></span>
+      <view class='bdr'>
+        <span class="text">能力图谱</span>
+        <span class='icon icon-rit-arrow'></span>
+      </view>
+    </view>
+
+    <view class='item space' bindtap='handleIncorrect'>
+      <span class='icon icon-incorrect-book ico'></span>
+      <view class='bdr'>
+        <span class="text">错题本</span>
+        <span class='icon icon-rit-arrow'></span>
+      </view>
+    </view>
+
+    <view class='item' bindtap='handleExercise'>
+      <span class='icon icon-mybook  ico'></span>
+      <view class='bdr'>
+        <span class="text">我的练习</span>
+        <span class='icon icon-rit-arrow'></span>
+      </view>
+    </view>
+    <view class='item' bindtap='handleCollect'>
+      <span class='icon icon-collect-dot ico'></span>
+      <view class='bdr'>
+        <span class="text">收藏题库</span>
+        <span class='icon icon-rit-arrow'></span>
+      </view>
+    </view>
+
+    <view class='item space' bindtap='handleIndex'>
+      <span class='icon icon-arrows ico'></span>
+      <view class='bdr'>
+        <span class="text">切换方向</span>
+        <span class='icon icon-rit-arrow'></span>
+      </view>
+    </view>
+  </view>
+</view>

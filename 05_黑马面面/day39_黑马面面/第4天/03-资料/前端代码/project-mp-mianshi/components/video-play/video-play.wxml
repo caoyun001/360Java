@@ -1,0 +1,16 @@
+<!-- components/video-play/video-play.wxml -->
+<block wx:if="{{show}}">
+  <view class="dialog_mask">
+    <view class="dialog_container">
+      <view class='dialog_bar'>
+        <span  class="btnClose" bindtap="hide" size="mini">关闭</span>
+      </view>
+      <view class='video'>
+        <video src="{{video}}" poster="{{videoPoster}}" controls></video>
+      </view>
+      
+      <view class='dialog_bar'></view>
+
+    </view>
+  </view>
+</block>

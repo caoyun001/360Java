@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>获取属性</title>
+		<style type="text/css">
+			div,
+			span {
+				width: 140px;
+				height: 140px;
+				margin: 20px;
+				background: #9999CC;
+				border: #000 1px solid;
+				float: left;
+				font-size: 17px;
+				font-family: Roman;
+			}
+
+			div.mini {
+				width: 30px;
+				height: 30px;
+				background: #CC66FF;
+				border: #000 1px solid;
+				font-size: 12px;
+				font-family: Roman;
+			}
+
+			div.visible {
+				display: none;
+			}
+		</style>
+		<script src="../js/jquery-3.3.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			//页面加载完成
+			$(function() {
+				//获取北京节点的name属性值
+				//jQuery框架函数 attr()获取,设置标签的属性
+				//attr("属性名")  获取属性值
+				//attr("属性名","属性值")设置属性
+				console.log($("#bj").attr("name"));
+
+
+				//设置北京节点的name属性的值为dabeijing
+				$("#bj").attr("name","dabeijing");
+
+
+				//新增北京节点的discription属性 属性值是 地图
+                $("#bj").attr("discription","地图");
+
+			});
+
+            //获得hobby的的选中状态
+            //复选框的属性 checked
+            /**
+			 * jQuery,版本1.6开始,新增函数 prop函数
+			 * 函数 attr : 使用,其他情况使用attr
+			 * 函数 prop : 使用,遇到固有属性的时候,使用prop
+			 *            checked="checked" 属性名和属性值相同
+			 *            属性,写不写都是存在的!!
+             */
+            function fn() {
+
+                console.log( $("#hobby").prop("checked") );
+            }
+		</script>
+	</head>
+
+	<body>
+		<ul>
+			<li id="bj" name="beijing" xxx="yyy">北京</li>
+			<li id="tj" name="tianjin">天津</li>
+		</ul>
+		<input type="checkbox" id="hobby"  onclick="fn()" />hobby
+
+	</body>
+</html>

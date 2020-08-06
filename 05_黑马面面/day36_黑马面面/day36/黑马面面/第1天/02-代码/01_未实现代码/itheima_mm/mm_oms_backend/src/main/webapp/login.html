@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <title>黑马面面</title>
+    <meta name="description" content="黑马面面">
+    <meta name="keywords" content="黑马面面">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+    
+    </style>
+</head>
+
+<body class="loginBg">
+    <div id="app" class="mainBg">
+        <div class="loginMain">
+          <div class="logoInfo clear">
+            <em class="logo"></em>
+            <span class="logoFontZ">黑马面面</span>
+            <span>用户登录</span>
+          </div>
+            <span v-html="form.info"></span>
+          <div class="loginCon">
+            <el-form ref="form" :model="form" :rules="rules">
+              <el-form-item>
+                <el-input v-model="form.userName" placeholder="用户名">
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input v-model="form.pwd" type="password" placeholder="密码">
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="onSubmit">登录</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
+    </div>
+</body>
+<!-- 引入组件库 -->
+<script src="js/vue.js"></script>
+<script src="js/element-ui.js"></script>
+<script src="plugins/jquery/dist/jquery.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/base.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                form:{
+                  mobile:'',
+                  code:'',
+                  checked:'',
+                    info:''
+                },
+                rules: {
+                    userName: [
+                        { required: true, message: '请填写', trigger: 'blur' }
+                    ],
+                    pwd: [
+                        { required: true, message: '请填写', trigger: 'blur' }
+                    ]
+                },
+                mobileShow:false,
+                codeShow:false
+            }
+        },
+        created() {},
+        methods: {
+          onSubmit(){
+              var t = this;
+              this.$refs['form'].validate((valid) => {
+                  if (valid) {
+                    this.$refs['form'].validate((valid) => {
+                      if (valid) {
+                        var formData = {
+                          username: this.form.userName,
+                          password: this.form.pwd
+                        };
+                        window.location.href = "pages/index.html";
+                      }
+                    });
+                  }
+              });
+          }
+        }
+    })
+    $("#app").height($(window).height())
+</script>
+</html>

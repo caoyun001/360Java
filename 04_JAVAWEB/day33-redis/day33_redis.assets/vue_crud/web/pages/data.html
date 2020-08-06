@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue用户数据案例</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="app" class="box">
+                    <div class="box-header">
+                        <button type="button" class="btn btn-success" @click="add()">添加</button>
+                    </div>
+                    <div class="box-body">
+                        <!--数据表格-->
+                        <table id="data_table" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="sorting_asc">ID</th>
+                                <th class="sorting_desc">账号名</th>
+                                <th class="sorting">余额</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--循环次tr,插值表达式赋值 -->
+                            <!--vue的指令 v-for 标签遍历-->
+                            <tr v-for="(item,index) in userList" align="center">
+                                <!--取出数组的元素,填充到 td中,插值表达式-->
+                                <td>{{item.id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.money}}</td>
+                                <td>
+                                    <!--按钮修改,绑定点击事件,调用函数findById 传递主键!!-->
+                                    <button type="button" class="btn btn-info" @click="findById(item.id)">修改</button>
+                                    <button type="button" class="btn btn-danger" @click="deleteUser(item.id)">删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--修改 模块-->
+                    <div id="update_modal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">修改--用户信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!--隐藏域,保存主键-->
+                                    <input type="hidden" class="form-control" v-model="userInfo.id">
+                                    <div class="box-body">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label">账户名</label>
+                                                <div class="col-sm-10">
+                                                    <!--双向绑定,Vue对象的userInfo获取-->
+                                                    <input type="text" class="form-control" placeholder="name" v-model="userInfo.name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-2 control-label" >余额</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="money" v-model="userInfo.money">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="box-footer">
+                                            <button type="button" class="btn btn-outline" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button" class="btn btn-outline" data-dismiss="modal" @click="update()">修改
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!--添加  模块-->
+                    <div id="add_modal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">添加--用户信息</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="box-body">
+                                        <form class="form-horizontal">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="inputEmail3" class="col-sm-2 control-label">账户名</label>
+
+                                                    <div class="col-sm-10">
+                                                        <!--数据双向绑定技术 vue对象中键:userInfo中的数据放在文本框中-->
+                                                        <input type="text" class="form-control" id="inputEmail3"
+                                                               placeholder="name" v-model="userInfo.name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputPassword3"
+                                                           class="col-sm-2 control-label">余额</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="inputPassword3"
+                                                               placeholder="money" v-model="userInfo.money">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- /.box-body -->
+                                            <div  class="box-footer">
+                                                <button type="button" class="btn btn-outline" data-dismiss="modal">关闭
+                                                </button>
+                                                <button type="button" class="btn btn-outline"  data-dismiss="modal" @click="register()">添加
+                                                </button>
+                                            </div>
+                                            <!-- /.box-footer -->
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+</div>
+</body>
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script src="../js/user.js"></script>
+</html>

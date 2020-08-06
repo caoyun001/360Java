@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.DictDao">
+    <select id="selectByCityName" resultType="com.itheima.mm.pojo.Dict">
+        select id,data_value as title
+        from t_dict where data_value = #{cityName} and data_type = 1
+    </select>
+    <select id="selectCityListByFs" resultType="com.itheima.mm.pojo.Dict">
+        <if test="fs==0">
+            select id,data_value as title
+            from t_dict
+            where data_type = 1
+        </if>
+        <if test="fs==1">
+            select id,data_value as title
+            from t_dict
+            where data_type = 1 and data_tag =10
+        </if>
+    </select>
+</mapper>

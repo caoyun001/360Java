@@ -1,0 +1,62 @@
+/* template/interview/interview.wxss */
+
+.interview {
+  position: relative
+}
+.interview .index-box .bg-image {
+  position: relative;
+  font-size: 0;
+}
+
+.interview .index-box .intro-text {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  line-height: 2.5;
+  top: 18%;
+  color: #fff;
+  font-size: 38rpx;
+}
+.interview .index-box .intro-text .b-text {
+  font-size: 50rpx;
+}
+.interview .choose-btn {
+  position:absolute;
+  width:50%;
+  height:50%;
+  bottom:-25%;
+  left:50%;
+  transform:translateX(-50%);
+  background-image:linear-gradient(48deg, #4cc5ea, #31c9cc);
+  color:#fff;
+  border-radius:50%;
+  box-shadow:0 0 8px 1px #4bc5e8;
+
+
+}
+.interview .choose-btn .text {
+  display:flex;
+  justify-content:center;
+  padding-top:40%;
+  font-weight: bold;
+  font-size: 40rpx;
+}
+/* modal mask  */
+
+.modal-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: #000;
+  opacity: .5;
+}
+.modal-mask .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%;
+  background-color: #fff;
+}
+.modal-title {}

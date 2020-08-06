@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Nov 08 23:35:10 CST 2019
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1573227310857
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact commons-dbutils\:commons-dbutils\:pom\:1.6 from/to central (https\://repo.maven.apache.org/maven2)\: repo.maven.apache.org

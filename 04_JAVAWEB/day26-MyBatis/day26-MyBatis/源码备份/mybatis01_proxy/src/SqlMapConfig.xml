@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+        配置标签，引入外部的 properties文件
+        实用价值不大
+    -->
+    <properties resource="db.properties"></properties>
+
+    <!--别名配置typeAliases-->
+    <typeAliases>
+        <!--配置一个别名，数据类型是、pojo对象，简化为user-->
+        <!--<typeAlias type="com.itheima.pojo.User" alias="user"/>-->
+
+        <!--
+                定义别名，是用package包扫描，扫描到pojo包
+                类名就是重命名
+        -->
+        <package name="com.itheima.pojo"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+
+            <transactionManager type="JDBC" />
+
+            <dataSource type="POOLED">
+                <!--配置的是，数据库连接四大信息-->
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+
+
+
+    </environments>
+
+    <!--
+      配置的是映射关系  ORM Java对象和数据表
+    -->
+    <mappers >
+        <!--
+             自动扫描配置
+             mapper配置的xml文件的路径（SQL语句配置文件）
+             一个数据表对应一个xml
+
+             mapper标签的属性 resource="xml路径"
+             package标签的属性 name="包名"
+
+             <package name="com.itheima.mapper"></package>
+             框架自动扫描配置的包下的xml文件
+        -->
+        <package name="com.itheima.mapper"></package>
+
+        <!--<mapper resource="StudentMapper.xml"/>-->
+    </mappers>
+</configuration>    

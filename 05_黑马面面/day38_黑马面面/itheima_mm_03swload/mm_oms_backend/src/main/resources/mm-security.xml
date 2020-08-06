@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <!--授权列表-->
+    <security pattern="/pages/index.html"
+              has_role="ROLE_ADMIN,ROLE_QUESTION_RECORDER"/>
+    <security pattern="/pages/questionBasicList.html"
+              has_role="ROLE_ADMIN,ROLE_QUESTION_RECORDER"/>
+    <security pattern="/pages/questionClassicList.html"
+              has_role="ROLE_ADMIN"/>
+    <security pattern="/pages/userList.html"
+              has_role="ROLE_ADMIN"/>
+
+    <!--注解扫描包-->
+    <scan package="com.itheima.mm.controller" />
+</beans>

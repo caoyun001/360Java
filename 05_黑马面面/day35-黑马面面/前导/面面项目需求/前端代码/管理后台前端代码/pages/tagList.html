@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 页面meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>黑马面面</title>
+		<meta name="description" content="黑马面面">
+		<meta name="keywords" content="黑马面面">
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="../css/element-ui.css">
+		<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+	</head>
+
+	<body class="hold-transition">
+		<div id="app">
+			<div class="content-header common-search-border1">
+				<el-button class="butAdd" @click="handleCreate"><i class="fa fa-plus" aria-hidden="true"></i> 新增标签</el-button>
+				<el-button class="butAdd" @click="goToCourseView"><i class="fa fa-arrow-left" aria-hidden="true"></i> 返回学科</el-button>
+			</div>
+			<div class="app-container">
+				<div class="box common-search-border2">
+					<div class="filter-container">
+						<!-- 搜索栏 -->
+						<el-form :inline="true" :model="requestParameters" ref="requestParameters" class="formInfo" label-width="70px">
+							<el-form-item label="标签名称" prop="name">
+								<el-input placeholder="请输入" v-model="requestParameters.name" style="width: 200px;" class="filter-item"></el-input>
+							</el-form-item>
+							<el-form-item label="状态" prop="status" prop="status">
+								<el-select placeholder="请选择" v-model="requestParameters.status">
+									<el-option :key="item.id" :label="item.value" :value="item.id" v-for="item in baseData.isDis"></el-option>
+								</el-select>
+							</el-form-item>
+							<el-form-item>
+								<el-button @click="handleRest">清除</el-button>
+								<el-button type="primary" class="butOK" @click="handleSearch">搜索</el-button>
+							</el-form-item>
+						</el-form>
+					</div>
+				</div>
+				<div class="box common-table-border" style="margin:8px 0 0;">
+					<el-table :data="items" fit highlight-current-row style="width: 100%;">
+						<el-table-column label="序号" align="center" width="50px">
+							<template slot-scope="scope">
+								<span>{{ scope.$index+1 }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="标签名称" align="center">
+							<template slot-scope="scope">
+								<span class="link-type">{{ scope.row.name }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="创建者" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.creator }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="创建日期" align="center">
+							<template slot-scope="scope">
+								<span class="link-type">{{ scope.row.createDate | dateTransform }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="面试题数量" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.questionQty }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="状态" align="center">
+							<template slot-scope="scope">
+								<span>{{ scope.row.status === 0 ? '启用': '禁用' }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="400px">
+							<template slot-scope="scope">
+								<div class="operation">
+									<el-button type="primary" size="mini" @click="handleUpdate(scope.row)"><i class="fa fa-pencil-square-o"
+										 aria-hidden="true"></i> 修改
+									</el-button>
+									<el-button type="primary" size="mini" @click="handleDisable(scope.row)"><i class="fa fa-pencil-square-o"
+										 aria-hidden="true"></i> 禁用
+									</el-button>
+									<el-button size="mini" type="danger" @click="handleDeleted(scope.row)"><i class="fa fa-trash-o" aria-hidden="true"></i>
+										删除
+									</el-button>
+								</div>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div class="pagination-container">
+						<el-pagination class="pagiantion" v-show="pagination.total>0" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+						 :current-page="pagination.pageNum" :page-sizes="[10, 20, 50, 100]" :page-size="pagination.pageSize" layout="total, sizes, prev, pager, next, jumper"
+						 :total="pagination.total">
+						</el-pagination>
+					</div>
+				</div>
+				<!-- 新增标签弹层 -->
+				<el-dialog title="新增标签" :visible.sync="dialogFormVisible" width="40%" top="8vh">
+					<el-form label-width="120px" :model="form" :rules="rules" ref="form">
+						<el-form-item label="标签：" prop="name">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+					</el-form>
+					<div slot="footer" class="dialog-footer">
+						<el-button @click="handleCancel">取 消</el-button>
+						<el-button type="primary" @click="handleConfirm">确 定</el-button>
+					</div>
+				</el-dialog>
+				<!-- end -->
+			</div>
+		</div>
+	</body>
+	<!-- 引入组件库 -->
+	<script src="../js/vue.js"></script>
+	<script src="../js/element-ui.js"></script>
+	<script src="../plugins/jquery/dist/jquery.js"></script>
+	<script src="../js/data.json"></script>
+	<script src="../js/base.js"></script>
+	<script src="../js/axios-0.18.0.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					pagination: {
+						total: 0,
+						pageNum: 1,
+						pageSize: 10
+					},
+					loading: false,
+					items: [],
+					baseData: base,
+					requestParameters: {
+						name: '',
+						status: ''
+					},
+					dialogFormVisible: false,
+					form: {
+						id: 0,
+						name: '',
+						courseId: 0
+					},
+					rules: {
+						name: [{
+							required: true,
+							message: '请填写',
+							trigger: 'blur'
+						}]
+					}
+				}
+			},
+			created() {
+				this.form.courseId = parseInt(this.getUrlParam("courseId"), 10);
+				this.getList();
+			},
+			filters: {
+				dateTransform: (value) => {
+					let index = value.lastIndexOf('.');
+					return value.substr(0, index);
+				}
+			},
+			methods: {
+				//获取url参数
+				getUrlParam(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+					var r = window.location.search.substr(1).match(reg);
+					if (r != null) return unescape(r[2]);
+					return null;
+				},
+				getList() {
+					let t = this;
+
+					// 必传参数
+					let params = {
+						currentPage: t.pagination.pageNum,
+						pageSize: t.pagination.pageSize,
+						queryParams: {
+							courseId: t.form.courseId
+						}
+					};
+					// 选传参数
+					let name = t.requestParameters.name;
+					if (name) {
+						params.queryParams.name = name;
+					}
+					let status = t.requestParameters.status;
+					if (status !== '') {
+						params.queryParams.status = status;
+					}
+					console.log("学科标签分页列表请求参数：");
+					console.log(params);
+					// 发送请求
+
+					let response = {
+						data:{
+							"flag": true,
+							"message": "获取学科标签列表成功",
+							"result": {
+								"rows": [
+									{
+										"courseId": 1,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 1,
+										"name": "String字符串",
+										"questionQty": 1,
+										"status": 0
+									},
+									{
+										"courseId": 1,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 2,
+										"name": "Java类与对象",
+										"questionQty": 1,
+										"status": 0
+									},
+									{
+										"courseId": 1,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 3,
+										"name": "Servlet",
+										"questionQty": 1,
+										"status": 0
+									},
+									{
+										"courseId": 1,
+										"createDate": "2019-08-08 00:00:00.0",
+										"creator": "admin",
+										"id": 4,
+										"name": "多线程",
+										"questionQty": 1,
+										"status": 0
+									}
+								],
+								"total": 4
+							}
+						}
+					}
+
+					t.pagination.total = response.data.result.total;
+					t.items = response.data.result.rows;
+					t.loading = true;
+				},
+				// 清除
+				handleRest() {
+					if (this.$refs['requestParameters']) {
+						this.$refs['requestParameters'].resetFields();
+					}
+				},
+				//搜索
+				handleSearch() {
+					this.getList();
+				},
+				handleSizeChange(val) {
+					this.pagination.pageSize = val;
+					this.pagination.pageNum = 1;
+					this.getList();
+				},
+				handleCurrentChange(val) {
+					this.pagination.pageNum = val;
+					this.getList();
+				},
+				// 学科管理
+				goToCourseView() {
+					window.location.href = "courseList.html";
+				},
+				// 新增标签
+				handleCreate() {
+					if (this.$refs['form']) {
+						this.$refs['form'].resetFields();
+					}
+					this.dialogFormVisible = true;
+				},
+				// 修改标签
+				handleUpdate(row) {
+					if (this.$refs['form']) {
+						this.$refs['form'].resetFields();
+					}
+					this.form.id = row.id;
+					this.form.name = row.name;
+					console.log(this.form);
+					this.dialogFormVisible = true;
+				},
+				handleConfirm() {
+					if (!this.form.id) {
+						this.handleCreateConfirm();
+					} else {
+						this.handleUpdateConfirm();
+					}
+				},
+				//新增标签确定
+				handleCreateConfirm() {
+					this.$refs['form'].validate((valid) => {
+						if (valid) {
+							let params = this.form;
+							console.log("标签添加请求参数：");
+							console.log(params);
+							// 发送请求
+							this.$message.success("新增成功");
+							this.dialogFormVisible = false;
+							this.getList();
+						}
+					});
+				},
+				// 修改标签确定
+				handleUpdateConfirm() {
+					this.$refs['form'].validate((valid) => {
+						if (valid) {
+							let params = this.form;
+							console.log("标签更新请求参数：");
+							console.log(params);
+
+							let response = {
+								"flag": true,
+								"message": "标签更新成功"
+							};
+							console.log("标签更新返回数据：");
+							console.log(response);
+							if (response.flag) {
+								this.$message.success(response.message);
+								this.dialogFormVisible = false;
+							}
+						}
+					});
+				},
+				// 新增/修改标签取消
+				handleCancel() {
+					this.dialogFormVisible = false;
+				},
+				// 禁用标签
+				handleDisable(row) {
+					this.$confirm('此操作将禁用标签 ' + ', 是否继续?', '提示', {
+						type: 'warning'
+					}).then(() => {
+						let params = {
+							tagId: row.id
+						};
+						console.log("标签禁用请求参数：");
+						console.log(params);
+
+						let response = {
+							"flag": true,
+							"message": "标签禁用成功"
+						};
+						console.log("标签禁用返回数据：");
+						console.log(response);
+						if (response.flag) {
+							this.$message.success(response.message);
+						}
+					}).catch(() => {
+						this.$message.info('已取消操作!')
+					});
+				},
+				// 删除标签
+				handleDeleted(row) {
+					this.$confirm('此操作将永久删除标签 ' + ', 是否继续?', '提示', {
+						type: 'warning'
+					}).then(() => {
+						this.$message.success("删除成功");
+						this.getList();
+
+					}).catch(() => {
+						this.$message.info('已取消操作!')
+					});
+				}
+			}
+		})
+	</script>
+</html>

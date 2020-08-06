@@ -1,0 +1,1 @@
+alert("hello JS  外部文件");

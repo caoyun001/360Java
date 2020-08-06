@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BOM对象取消定时器方法</title>
+
+    <script type="text/javascript">
+        /**
+         * 取消定时器:
+         *  window对象方法 clearInterval()
+         *
+         *  setInterval()定时器方法,返回值
+         *  是什么不重要,一个页面中,所有的定时器返回值都是唯一性的
+         */
+      var id = setInterval(function () {
+            console.log("定时器");
+        },3000);
+
+        function clearFn() {
+            //点击按钮,取消定时器
+            clearInterval(id);
+        }
+    </script>
+</head>
+<body>
+   <button onclick="clearFn()">取消定时器</button>
+</body>
+</html>

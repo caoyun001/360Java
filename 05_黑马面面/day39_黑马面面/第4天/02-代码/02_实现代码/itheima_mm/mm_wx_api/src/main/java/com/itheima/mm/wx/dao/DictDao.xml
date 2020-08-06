@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.DictDao">
+    <select id="selectCityListByTag" resultType="com.itheima.mm.pojo.Dict">
+        SELECT id,data_value as title
+        FROM t_dict
+        <where>
+            data_type = 1
+            <if test=" tag == 1 ">
+               and  data_tag = #{tag}
+            </if>
+        </where>
+    </select>
+    <select id="selectByCityName" resultType="com.itheima.mm.pojo.Dict">
+        select id,data_value as title
+        FROM t_dict
+        WHERE data_value LIKE  "%"#{cityName}"%" and data_type = 1
+    </select>
+</mapper>

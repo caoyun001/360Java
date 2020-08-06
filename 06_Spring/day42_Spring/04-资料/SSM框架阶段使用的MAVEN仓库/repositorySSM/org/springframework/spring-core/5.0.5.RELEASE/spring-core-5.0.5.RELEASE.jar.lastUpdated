@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Nov 07 00:40:23 CST 2019
+https\://repo.spring.io/libs-release/.lastUpdated=1573058423429
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1573058420231
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.springframework\:spring-core\:jar\:5.0.5.RELEASE from/to central (https\://repo.maven.apache.org/maven2)\: GET request of\: org/springframework/spring-core/5.0.5.RELEASE/spring-core-5.0.5.RELEASE.jar from central failed

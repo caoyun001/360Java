@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>试题管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body class="hold-transition skin-red sidebar-mini"  >
+  <!-- .box-body -->
+                
+
+                    <div class="box-body">
+
+
+
+
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+
+                            <!--工具栏-->
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" title="新建" onclick="javascript:location.href='item_edit.html'"><i class="fa fa-file-o"></i> 新建</button>
+                                        <button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <div class="has-feedback">
+							        分类名称：<input >	<button class="btn btn-default" >查询</button>
+                                </div>
+                            </div>
+                            <!--工具栏/-->
+
+			                  <!--数据列表-->
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+			                              <th class="" style="padding-right:0px">
+			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                              </th> 
+										  <th class="sorting_asc">序号</th>
+									      <th class="sorting">试题编号</th>
+									      <th class="sorting">题型</th>
+									      <th class="sorting">题干</th>
+										  <th class="sorting">难度</th>
+										  <th class="sorting">状态</th>
+					                      <th class="text-center">操作</th>
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                          <tr >
+			                              <td ><input  type="checkbox" ></td>
+				                          <td>1</td>
+									      <td>T190419112013</td>
+									      <td>单选</td>
+									      <td>java1.0发布于哪一年？</td>
+									      <td>简单</td>
+									      <td>启用</td>
+		                                  <td class="text-center">
+											  <button type="button" class="btn  btn-xs bg-blue" onclick="javascript:location.href='item_preview.html'">预览</button>
+		                                 	  <button type="button" class="btn bg-olive btn-xs" onclick="javascript:location.href='item_edit.html'">修改</button>
+											  <button type="button" class="btn  btn-xs bg-red">禁用</button>
+											  <button type="button" class="btn  btn-xs bg-red">删除</button>
+
+		                                  </td>
+			                          </tr>
+			                      </tbody>
+			                  </table>
+			                  <!--数据列表/--> 
+                        </div>
+                        <!-- 数据表格 /-->
+                     </div>
+                    <!-- /.box-body -->
+	            <!-- 分页 -->
+
+
+    
+</body>
+
+</html>

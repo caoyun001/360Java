@@ -1,0 +1,39 @@
+绝对路径:
+  在磁盘中,路径是具有唯一性
+  E:\讲义\JavaEE16天讲义\day11-IO流
+  http://www.itheima.com
+
+相对路径:
+  路径直接的相对关系
+  E:\讲义\JavaEE16天讲义\day11-IO流
+  E:\讲义\JavaEE16天讲义\day11-IO流\md文件
+
+  E:\讲义\JavaEE16天讲义\day11-IO流\md文件  ../
+
+  E:\讲义\JavaEE16天讲义\day11-IO流\img
+  E:\讲义\JavaEE16天讲义
+
+
+URI和URL
+
+URL: 统一资源标识符 互联网中的地址 http://www.itheima.com  http://www.jd.com  http://www.12306.cn
+
+URI: 统一资源定位符 包含URL,包含了其他的网络地址
+   1234567@qq.com   thrunder://123wd21e
+
+
+
+IO流对象分类
+  按照数据流向分
+     输入流: 数据从设备中,流向内存 (读取 read)
+     输出流: 数据从内存中,流向设备 (写入 write)
+
+  按照数据类型分
+     字节数据: 字节,任何文件都是字节
+     字符数据: 字符,字符为单位操作 ,文本文件
+                 使用文本工具,记事本,notepad++ 打开文件,人能看懂
+
+  字节输入流: java.io.InputStream 所有字节输入流的父类
+  字节输出流: java.io.OutputStream所有字节输出流的父类
+  字符输入流: java.io.Reader 所有字符输入流的父类
+  字符输出流: java.io.Writer 所有字符输出流的父类

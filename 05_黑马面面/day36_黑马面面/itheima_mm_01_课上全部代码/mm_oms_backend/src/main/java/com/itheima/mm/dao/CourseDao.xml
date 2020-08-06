@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.CourseDao">
+    <insert id="insertCourse" parameterType="Course">
+        INSERT INTO t_course (name, create_date, is_show, user_id)
+        VALUES (#{name},#{createDate},#{isShow},#{userId})
+    </insert>
+    <update id="updateCourse" parameterType="Course">
+        UPDATE t_course
+        set name = #{name},is_show=#{isShow}
+        WHERE id = #{id}
+    </update>
+    <select id="selectListByPage" resultType="com.itheima.mm.pojo.Course" >
+        select id,name,create_date as createDate,is_show as isShow,
+            (select username from t_user where id = c.user_id ) as creator,
+            (SELECT count(*) from t_tag where course_id = c.id) as tagQty,
+            (select count(*) from t_question where course_id = c.id) as questionQty,
+            (select count(*) from t_catalog where course_id = c.id) as catalogQty
+        from t_course c
+            <where>
+                <if test="queryParams.status != null">
+                    AND is_show = #{queryParams.status}
+                </if>
+            </where>
+            limit #{offset},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_course
+        <where>
+            <if test="queryParams.status != null">
+                AND is_show = #{queryParams.status}
+            </if>
+        </where>
+    </select>
+</mapper>

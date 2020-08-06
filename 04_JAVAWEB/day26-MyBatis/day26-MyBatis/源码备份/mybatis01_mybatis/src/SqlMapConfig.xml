@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        environments 运行环境，可以配置多个
+        default="development"  默认，值=development  开发环境
+
+        environment 运行环境，配置一个
+         id="development"  id唯一性的属性 值=id="development"  开发环境
+         id="product"  生产环境
+         id="test"     测试环境
+    -->
+
+    <environments default="development">
+        <environment id="development">
+            <!--
+                 transactionManager 事务管理配置
+                 type="JDBC"  使用的是最原始的JDBC的事务处理机制
+                 type="MANAGERED" 不管理事务
+            -->
+            <transactionManager type="JDBC" />
+            <!--
+                dataSource 配置数据源，连接池
+                type="POOLED" 使用连接池
+                MyBatis自带连接池  （type=""UNPOOLED）
+            -->
+            <dataSource type="POOLED">
+                <!--配置的是，数据库连接四大信息-->
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?characterEncoding=utf8" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+<!--
+        <environment id="produce">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatisProduce?characterEncoding=utf8" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatisTest?characterEncoding=utf8" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>-->
+
+
+
+    </environments>
+
+    <!--
+      配置的是映射关系  ORM Java对象和数据表
+    -->
+    <mappers>
+        <!--
+               单独的映射关系
+               resource资源，映射文件的路径
+               UserMapper.xml 配置的是数据表user的SQL语句
+        -->
+        <mapper resource="UserMapper.xml" />
+
+        <!--<mapper resource="StudentMapper.xml"/>-->
+    </mappers>
+</configuration>    

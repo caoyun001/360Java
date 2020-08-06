@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>黑马面面</title>
+    <meta name="description" content="黑马面面">
+    <meta name="keywords" content="黑马面面">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../css/element-ui.css">
+    <link rel="stylesheet" href="../css/quill.core.css"/>
+    <link rel="stylesheet" href="../css/quill.snow.css"/>
+    <link rel="stylesheet" href="../css/quill.bubble.css"/>
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <div class="box common-table-border" style="margin-top: 15px;min-height: calc(100vh - 55px);">
+            <el-form :model="formData" :rules="rules" ref="formData" label-width="100px" class="question" size="small">
+                <el-form-item label="学科：" prop="courseId">
+                    <el-select v-model="formData.courseId" placeholder="请选择" @change="changeCourse">
+                        <el-option :key="item.id" :label="item.name" :value="item.id"
+                                   v-for="item in courses"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="目录：" prop="catalogId">
+                    <el-select v-model="formData.catalogId" placeholder="请选择">
+                        <el-option :key="item.id" :label="item.name" :value="item.id"
+                                   v-for="item in catalogs"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="企业：" prop="companyId">
+                    <el-select v-model="formData.companyId" placeholder="请选择" @change="changeCompany">
+                        <el-option :key="item.id" :label="item.shortName" :value="item.id"
+                                   v-for="item in companys"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="城市：">
+                    <el-cascader v-model="formData.cityIds" :options="dicts" :props="cascaderProps"></el-cascader>
+                </el-form-item>
+                <el-form-item label="方向：" prop="industryIds">
+                    <el-select v-model="formData.industryIds" allow-create multiple filterable placeholder="请选择">
+                        <el-option :key="item.id" :label="item.name" :value="item.id"
+                                   v-for="item in industrys"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="题型：" prop="type">
+                    <el-radio-group v-model="formData.type" @change="changeType">
+                        <el-radio :key="item.id" :label="item.id" v-for="item in baseData.questionsType">{{ item.value
+                            }}
+                        </el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="难度：" prop="difficulty">
+                    <el-radio-group v-model="formData.difficulty">
+                        <el-radio :key="item.id" :label="item.id" v-for="item in baseData.difficulty">{{ item.value }}
+                        </el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="题干：" prop="subject" class="formBox">
+                    <div style="margin-left: -100px;" class="quill-editor-box">
+                        <quill-editor v-model="formData.subject" :options="editorOption"></quill-editor>
+                    </div>
+                </el-form-item>
+                <el-form-item label="选项：" class="formBox" v-if="formData.type !== 5">
+                    <div style="margin-left: -100px;">
+                        <template v-if="formData.type === 1">
+                            <div v-for="(item, index) in formData.questionItemList" class="questionItemList">
+                                <el-radio :key="index" :label="index" v-model="radioIndex" @change="changeRadio">
+                                    {{ baseData.selectData[index].value + ':' }}
+                                </el-radio>
+                                <el-input type="textarea" v-model="item.content"></el-input>
+                                <div style="width:300px;display:inline-block;">
+                                    <el-upload
+                                            class="avatar-uploader"
+                                            action=""
+                                            :show-file-list="false"
+                                            :http-request="function(params) {return handleHttpRequest(params, index)}">
+                                        <img v-if="item.imgUrl" :src="appPath + '/' + item.imgUrl" class="avatar">
+                                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                    </el-upload>
+                                </div>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div v-for="(item, index) in formData.questionItemList" class="questionItemList">
+                                <el-checkbox :key="index" v-model="item.isRight">{{
+                                    baseData.selectData[index].value + ':' }}
+                                </el-checkbox>
+                                <el-input type="textarea" v-model="item.content"></el-input>
+                                <div style="width:300px;display:inline-block;">
+                                    <el-upload
+                                            class="avatar-uploader"
+                                            action=""
+                                            :show-file-list="false"
+                                            :http-request="function(params) {return handleHttpRequest(params, index)}">
+                                        <img v-if="item.imgUrl" :src="appPath + '/' + item.imgUrl" class="avatar">
+                                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                    </el-upload>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </el-form-item>
+                <el-form-item label="视频解析：" class="formBox">
+                    <div style="margin-left: -100px;">
+                        <el-input v-model="formData.analysisVideo" placeholder="请输入视频地址，以http(s)://开头"></el-input>
+                    </div>
+                </el-form-item>
+                <el-form-item label="答案解析：" prop="analysis" class="formBox">
+                    <div style="margin-left: -100px;" class="quill-editor-box">
+                        <quill-editor v-model="formData.analysis" :options="editorOption"></quill-editor>
+                    </div>
+                </el-form-item>
+                <el-form-item label="题目备注：" prop="remark" class="formBox">
+                    <div style="margin-left: -100px;">
+                        <el-input type="textarea" v-model="formData.remark"></el-input>
+                    </div>
+                </el-form-item>
+                <el-form-item label="标签：">
+                    <el-select v-model="formData.tagIds" allow-create multiple filterable placeholder="请选择">
+                        <el-option :key="item.id" :label="item.name" :value="item.id" v-for="item in tags"></el-option>
+                    </el-select>
+                </el-form-item>
+                <div class="submitInfo">
+                    <el-button type="primary" @click="createItem">提交</el-button>
+                    <el-button @click="cancelItem">取消</el-button>
+                </div>
+            </el-form>
+        </div>
+    </div>
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="../js/vue.js"></script>
+<script src="../js/element-ui.js"></script>
+<script src="../js/quill.js"></script>
+<script src="../js/vue-quill-editor.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    Vue.use(VueQuillEditor);
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                appPath: app_path,
+                baseData: base,
+                questionId: 0,
+                // 学科下拉列表
+                courses: [],
+                // 目录下拉列表
+                catalogs: [],
+                // 企业下拉列表
+                companys: [],
+                // 地区级联选择器
+                dicts: [],
+                cascaderProps: {
+                    label: 'dataValue',
+                    value: 'id',
+                    children: 'subList'
+                },
+                // 方向下拉列表
+                industrys: [],
+                // 标签下拉列表
+                tags: [],
+                // 单选题型：选中的索引
+                radioIndex: '',
+                formData: {
+                    // 试题id
+                    id: 0,
+                    // 是否精选题目
+                    is_classic: 0,
+                    // 学科id
+                    courseId: '',
+                    // 目录id
+                    catalogId: '',
+                    // 企业id
+                    companyId: '',
+                    // 区域ids
+                    cityIds: [],
+                    // 方向ids
+                    industryIds: [],
+                    // 题型
+                    type: 1,
+                    // 难度
+                    difficulty: 1,
+                    // 题干
+                    subject: '',
+                    // 选项
+                    questionItemList: [{
+                        id: 0,
+                        content: '',
+                        isRight: false,
+                        imgUrl: ""
+                    }, {
+                        id: 0,
+                        content: '',
+                        isRight: false,
+                        imgUrl: ""
+                    }, {
+                        id: 0,
+                        content: '',
+                        isRight: false,
+                        imgUrl: ""
+                    }, {
+                        id: 0,
+                        content: '',
+                        isRight: false,
+                        imgUrl: ""
+                    }, {
+                        id: 0,
+                        content: '',
+                        isRight: false,
+                        imgUrl: ""
+                    }, {
+                        id: 0,
+                        content: '',
+                        isRight: false,
+                        imgUrl: ""
+                    }],
+                    // 答案解析
+                    analysis: '',
+                    // 视频解析
+                    analysisVideo: '',
+                    // 题目备注
+                    remark: '',
+                    // 试题标签
+                    tagIds: ''
+                },
+                editorOption: {
+                    placeholder: "输入任何内容，支持html"
+                },
+                rules: {
+                    courseId: [{
+                        required: true,
+                        message: '请选择',
+                        trigger: 'change'
+                    }],
+                    catalogId: [{
+                        required: true,
+                        message: '请选择',
+                        trigger: 'change'
+                    }],
+                    companyId: [{
+                        required: true,
+                        message: '请选择',
+                        trigger: 'change'
+                    }],
+                    industryIds: [{
+                        required: true,
+                        message: '请选择',
+                        trigger: 'change'
+                    }],
+                    type: [{
+                        required: true,
+                        message: '请至少选择一个',
+                        trigger: 'change'
+                    }],
+                    difficulty: [{
+                        required: true,
+                        message: '请至少选择一个',
+                        trigger: 'change'
+                    }],
+                    subject: [{
+                        required: true,
+                        message: '请填写',
+                        trigger: 'change'
+                    }],
+                    analysis: [{
+                        required: true,
+                        message: '请填写',
+                        trigger: 'change'
+                    }]
+                }
+            }
+        },
+        components: {
+            VueQuillEditor
+        },
+        created() {
+            // 学科下拉列表
+            this.initCourses();
+            // 企业下拉列表
+            this.initCompanys();
+            // 地区级联选择器
+            this.intDicts();
+            // 方向下拉列表
+            this.initIndustrys();
+
+            // 是否精选题目
+            let is_classic = parseInt(this.getUrlParam("is_classic"), 10);
+            this.formData.is_classic = is_classic;
+        },
+        methods: {
+            //获取url参数
+            getUrlParam(name) {
+                let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                let r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            },
+            initQuestionById() {
+                let questionId = parseInt(this.getUrlParam("questionId"), 10);
+                if (questionId) {
+                    // 初始化试题
+                    this.questionId = questionId;
+                    this.initFormData();
+                }
+            },
+            // 初始化试题
+            initFormData() {
+                console.log("初始化试题返回结果：");
+                let response = {
+                    data:{
+                        "flag": true,
+                        "message": "获取成功",
+                        "result": {
+                            "analysis": "<p>图片选择</p>",
+                            "analysisVideo": "",
+                            "answerIsRight": false,
+                            "catalog": {
+                                "courseId": 1,
+                                "courseName": "Java",
+                                "createDate": "2019-08-08 00:00:00.0",
+                                "id": 1,
+                                "name": "Java基础",
+                                "status": 0,
+                                "userId": 1
+                            },
+                            "catalogId": 1,
+                            "company": {
+                                "city": "北京",
+                                "id": 1,
+                                "industryList": [
+                                    {
+                                        "id": 1,
+                                        "name": "电商平台"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "金融服务"
+                                    }
+                                ],
+                                "industryNameList": [
+                                    "电商平台",
+                                    "金融服务"
+                                ],
+                                "shortName": "北京淘宝网"
+                            },
+                            "companyId": 1,
+                            "createDate": "2019-08-22 10:52:49.0",
+                            "difficulty": 1,
+                            "id": 654,
+                            "isFamous": false,
+                            "isFavorite": false,
+                            "isFinished": false,
+                            "number": "",
+                            "questionItemList": [
+                                {
+                                    "content": "aaa",
+                                    "id": 72,
+                                    "imgUrl": "",
+                                    "isRight": true
+                                },
+                                {
+                                    "content": "bbb",
+                                    "id": 73,
+                                    "imgUrl": "",
+                                    "isRight": false
+                                },
+                                {
+                                    "content": "cccc",
+                                    "id": 74,
+                                    "imgUrl": "",
+                                    "isRight": false
+                                },
+                                {
+                                    "content": "ddd",
+                                    "id": 75,
+                                    "imgUrl": "",
+                                    "isRight": false
+                                }
+                            ],
+                            "remark": "图片选择",
+                            "reviewStatus": 0,
+                            "status": 0,
+                            "subject": "<p>图片选择</p>",
+                            "tagList": [
+                                {
+                                    "id": 1,
+                                    "name": "String字符串"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Java类与对象"
+                                }
+                            ],
+                            "tagNameList": [
+                                "String字符串",
+                                "Java类与对象"
+                            ],
+                            "type": 1,
+                            "userId": 1
+                        }
+                    }
+
+                }
+                this.transformFormData(response.data.result);
+            },
+            // 转换后端返回的数据
+            transformFormData(result) {
+                let t = this;
+
+                let companyId = result.companyId;
+                let cityIds = this.transformCityIds(companyId);
+                let industryIds = [];
+                result.company.industryList.forEach(val => {
+                    industryIds.push(val.id);
+                });
+                let type = result.type;
+                let questionItemList = result.questionItemList;
+                let tagIds = [];
+                result.tagList.forEach(val => {
+                    tagIds.push(val.id);
+                });
+                // 试题id
+                t.formData.id = result.id;
+                // 学科id
+                t.formData.courseId = result.catalog.courseId;
+                // 目录id
+                t.formData.catalogId = result.catalogId;
+                // 企业id
+                t.formData.companyId = companyId;
+                // 区域ids
+                t.formData.cityIds = cityIds;
+                // 方向ids
+                t.formData.industryIds = industryIds;
+                // 题型
+                t.formData.type = type;
+                // 难度
+                t.formData.difficulty = result.difficulty;
+                // 题干
+                t.formData.subject = result.subject;
+                // 选项
+                t.formData.questionItemList = result.questionItemList;
+                // 答案解析
+                t.formData.analysis = result.analysis;
+                // 视频解析
+                t.formData.analysisVideo = result.analysisVideo;
+                // 题目备注
+                t.formData.remark = result.remark;
+                // 视频解析
+                t.formData.tagIds = tagIds;
+
+                // 单选题型时，回显radio选中
+                if (type === 1) {
+                    let radioIndex = questionItemList.findIndex(val => {
+                        return val.isRight === true;
+                    });
+                    if (radioIndex !== -1) {
+                        this.radioIndex = radioIndex;
+                    }
+                }
+
+                let courseId = this.formData.courseId;
+                let course = this.courses.find((val) => {
+                    return val.id === courseId;
+                });
+                this.catalogs = course.catalogList;
+                this.tags = course.tagList;
+            },
+            // 学科下拉列表
+            initCourses() {
+                let t = this;
+                // let response = {}
+                // t.courses = response.data.result;
+                // 发送请求
+                axios.get(app_path + "/course/findListAll.do").then((response) => {
+                    if (response.data.flag) {
+                        //this.$message.success(response.data.message);
+                        t.courses = response.data.result;
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+            },
+            changeCourse() {
+                let courseId = this.formData.courseId;
+                let course = this.courses.find((val) => {
+                    return val.id === courseId;
+                });
+                this.catalogs = course.catalogList;
+                this.formData.catalogId = '';
+                this.formData.tagIds = [];
+
+                //this.initTags(tagList);
+                this.tags = course.tagList;
+            },
+            // 企业下拉列表
+            initCompanys() {
+                let t = this;
+                //let response = {}
+                //t.companys = response.data.result;
+                // 初始化试题(初始化公司时，需要在初始化公司之后再初始化)
+                //this.initQuestionById()
+                axios.get(app_path + "/company/findListAll.do").then((response) => {
+                    if (response.data.flag) {
+                        //  this.$message.success(response.data.message);
+                        t.companys = response.data.result;
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                    // 初始化试题(初始化公司时，需要在初始化公司之后再初始化)
+                    this.initQuestionById()
+                })
+            },
+            changeCompany(val) {
+                let companyId = this.formData.companyId;
+
+                this.formData.cityIds = this.transformCityIds(companyId);
+
+                let company = this.companys.find((item) => {
+                    return item.id === companyId;
+                });
+                let industryIds = [];
+                company.industryList.forEach(val => {
+                    industryIds.push(val.id);
+                });
+                this.formData.industryIds = industryIds;
+            },
+            // 地区级联选择器
+            intDicts() {
+                let t = this;
+                // 获取省市数据
+                // let response = {}
+                // t.dicts = response.data.result;
+                // 获取省市数据
+                axios.get(app_path + "/dict/findListByType.do?typeId=0").then((response) => {
+                    if (response.data.flag) {
+                        //this.$message.success(response.data.message);
+                        t.dicts = response.data.result;
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+            },
+            // 方向下拉列表
+            initIndustrys() {
+                let t = this;
+                // let response = {}
+                // t.industrys = response.data.result;
+                axios.get(app_path + "/industry/findListAll.do").then((response) => {
+                    if (response.data.flag) {
+                        //this.$message.success(response.data.message);
+                        t.industrys = response.data.result;
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+            },
+            // 切换题型，重置选项选中状态
+            changeType(val) {
+                this.formData.questionItemList.forEach(val => {
+                    val.isRight = false;
+                });
+                this.radioIndex = '';
+            },
+            // 切换单选按钮，改变选中状态
+            changeRadio(index) {
+                let questionItemList = this.formData.questionItemList;
+                questionItemList.forEach(val => {
+                    val.isRight = false;
+                });
+                questionItemList[index].isRight = true;
+            },
+            // 转换选中省市数据
+            transformCityIds(companyId) {
+                let cityIds = [];
+
+                // 由于后端只返回了cityId,所以需要前端遍历所有省市,找到provinceId
+                let company = this.companys.find((item) => {
+                    return item.id === companyId;
+                });
+                let provinceId = 0;
+
+                let cityId = company.cityId;
+                for (let i = 0; i < this.dicts.length; i++) {
+                    let dict = this.dicts[i];
+                    let index = dict.subList.findIndex(subDict => {
+                        return subDict.id === cityId;
+                    });
+                    if (index !== -1) {
+                        provinceId = dict.id;
+                        break;
+                    }
+                }
+                if (!provinceId) {
+                    cityIds = [];
+                } else {
+                    cityIds = [provinceId, cityId];
+                }
+                return cityIds;
+            },
+            // 自定义上传的实现
+            handleHttpRequest(params, index) {
+                let file = params.file;
+
+                let formData = new FormData();
+                formData.append(file.name, file);
+                let response = {};
+                axios.defaults.headers.post['Content-Type'] = 'multipart/form-data;charse=UTF-8';
+                axios.post(app_path + '/common/upload.do', formData).then((response) => {
+                    let result = response.data.result[0];
+                    console.log("upload-result:"+result);
+                    let name = Object.keys(result)[0];
+                    this.formData.questionItemList[index].imgUrl = result[name];
+
+                });
+            },
+            // 提交表单
+            createItem() {
+                // 表单校验
+                let isValid = false;
+                this.$refs['formData'].validate((valid) => {
+                    isValid = valid;
+                });
+                if (!isValid) {
+                    return;
+                }
+                let formData = this.formData;
+
+                // 包装企业相关数据
+                let industrys = this.industrys;
+                let industryList = [];
+                formData.industryIds.forEach(industryId => {
+                    let industry = industrys.find(industry => {
+                        return industry.id === industryId;
+                    });
+                    // TODO 会有新增的方向
+                    //industryList.push(industry);
+					if(industry){
+						industryList.push(industry);
+					}else{
+						industryList.push({
+							id:0,
+							name:industryId
+						});
+					}
+					
+                });
+                let company = {
+                    id: formData.companyId,
+                    cityId: formData.cityIds[1],
+                    industryList: industryList
+                };
+                formData.company = company;
+                // 包装选项相关数据
+                let questionItemList = this.formData.questionItemList;
+                questionItemList.forEach(val => {
+                    val.isRight = val.isRight ? 1 : 0;
+                });
+                // 包装标签相关数据
+                let tags = this.tags;
+                let tagList = [];
+                formData.tagIds.forEach(tagId => {
+                    let tag = tags.find(tag => {
+                        return tag.id === tagId;
+                    });
+                    // TODO 会有新增的标签
+                    //tagList.push(tag);
+					if(tag){
+						tagList.push(tag);
+					}else{
+						tagList.push({
+							id:0,
+							name:tagId
+						});
+					}
+                });
+                formData.tagList = tagList;
+                console.log("新增更新题库请求参数：");
+                console.log(this.formData);
+                //this.$message.success("操作成功");
+                // 返回到上一级
+                /*
+                if (!this.formData.is_classic) {
+                    setTimeout(function () {
+                            //window.location.href = "questionBasicList.html";
+                        }
+                        , 1000);
+                } else {
+                    setTimeout(function () {
+                        //window.location.href = "questionClassicList.html";
+                    }, 1000);
+                }
+                */
+                axios.post(app_path + "/question/addOrUpdate.do", formData).then((response) => {
+                    if (response.data.flag) {
+                        this.$message.success(response.data.message);
+                        // 返回到上一级
+                        if (!this.formData.is_classic) {
+                            setTimeout(function () {
+                                    // 暂时可以先注释掉，调试结束后完关闭注释
+                                    //window.location.href = "questionBasicList.html";
+                                }
+                                , 1000);
+                        } else {
+                            setTimeout(function () {
+                                window.location.href = "questionClassicList.html";
+                            }, 1000);
+                        }
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+            },
+            // 取消提交
+            cancelItem() {
+                if (!this.formData.is_classic) {
+                    window.location.href = "questionBasicList.html";
+                } else {
+                    window.location.href = "questionClassicList.html";
+                }
+            }
+        }
+    })
+</script>
+</html>

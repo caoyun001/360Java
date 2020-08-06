@@ -1,0 +1,71 @@
+<view class='main-page'>
+  <view class='page-content'>
+    <view class="tab-content  {{onContent == 100? 'on': ''}}">
+      <block>
+        <include src="../home/home.wxml" />
+      </block>
+    </view>
+    <!--content  -->
+    <view class="tab-content {{onContent == 101? 'on': ''}}">
+      <block>
+        <quesiont-list 
+        id="question-list"
+        icon-class="icon-rit-arrow" 
+        pagetype="{{pagetype}}" 
+        questionList="{{questionList}}" 
+        scrollHeight="{{scrollHeight}}" 
+        bindtapswitch="loadSwitchData" 
+        bindhandleroute="handleExam">
+        </quesiont-list>
+      </block>
+    </view>
+    <view class="tab-content  {{onContent == 102? 'on': ''}}">
+      <block>
+        <include src="../interview/interview.wxml" />
+      </block>
+    </view>
+    <!--myhome  -->
+    <view class="tab-content  {{onContent == 103? 'on': ''}}">
+      <block>
+        <include src="../myhome/myhome.wxml" />
+      </block>
+    </view>
+  </view>
+  <!-- tabbar  -->
+  <view class='type-tab'>
+
+    <view class="type-item {{onContent == 100? 'on': ''}}" type='100' data-type='100' bindtap='changPage'>
+      <view class='tab-index'>
+        <view class='ico location'>
+          <span class='icon icon-location'></span>
+        </view>
+        <view class='title'>首页</view>
+      </view>
+    </view>
+    <view class="type-item {{onContent == 101? 'on': ''}}" type='101' data-type='101' bindtap='changPage'>
+      <view class='tab-index'>
+        <view class='ico git'>
+          <span class='icon icon-git'></span>
+        </view>
+        <view class='title'>面试题库</view>
+      </view>
+
+    </view>
+     <view class="type-item {{onContent == 102? 'on': ''}}" type='102' data-type='102' bindtap='changPage'>
+     <view class='tab-index'>
+        <view class='ico myhome'>
+          <span class='icon icon-interview'></span>
+        </view>
+        <view class='title'>模拟面试</view>
+      </view>
+    </view> 
+    <view class="type-item {{onContent == 103? 'on': ''}}" type='103' data-type='103' bindtap='changPage'>
+      <view class='tab-index'>
+        <view class='ico myhome'>
+          <span class='icon icon-myhome'></span>
+        </view>
+        <view class='title'>我的主页</view>
+      </view>
+    </view>
+  </view>
+</view>

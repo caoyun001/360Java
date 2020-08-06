@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>异步请求,服务器响应的数据是JSON</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+        function jsonFn() {
+            /**
+             * 服务器发生AJAX异步请求
+             * 响应回来的数据是json
+             */
+            $.get(
+                "/ajaxJson",
+                "name=zhangsan",
+                function(data){
+                    console.log(data)
+                },
+                "json"
+            );
+        }
+    </script>
+</head>
+<body>
+   <input type="button" value="请求" onclick="jsonFn()">
+</body>
+</html>

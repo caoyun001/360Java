@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+         定义别名，批量定义 typeAliases
+
+         typeAliase 标签定义一个类的别名
+         <typeAlias type="com.itheima.pojo.Users" alias="user"/>
+
+         package 标签批量定义，包扫描，写包名
+         <package name="com.itheima.pojo"/> 自动扫描包，包下的类，进行别名定义
+         定义的别名，就是类名
+    -->
+    <typeAliases>
+        <package name="com.itheima.pojo"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?characterEncoding=utf8" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--
+       配置的是SQL语句配置文件的路径
+       一个表，对应XML
+
+       数据库中：user,orders,role
+       package标签，自动扫描包下的xml文件
+    -->
+    <mappers>
+        <package name="com.itheima.mapper"/>
+
+        <!--<mapper resource="UserMapper.xml" />-->
+        <!--<mapper resource="OrdersMapper.xml" />-->
+        <!--<mapper resource="UserMapper.xml" />-->
+    </mappers>
+
+
+</configuration>    

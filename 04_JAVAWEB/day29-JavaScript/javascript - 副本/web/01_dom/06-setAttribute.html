@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>form.html</title>
+		<meta charset="UTF-8">
+		
+	</head>
+	<body>
+
+		您喜欢的城市:<br>
+		<ul>
+			<li id="bj" value="beijing">北京</li>
+			<li id="sh" value="shanghai">上海</li>
+			<li id="cq" value="chongqing">重庆</li>
+		</ul>
+
+		您喜欢的游戏:<br>
+		<ul>
+			<li id="cj" value="chiji">吃鸡</li>
+			<li id="wzry" value="wangzherongyao">王者荣耀</li>
+			<li id="kxxxl" value="xiaoxiaole">开心消消乐</li>
+		</ul>
+
+		<br />
+		<br />
+		<input type="button" value="需求1: 为列表项值为吃鸡 标签 添加的name属性值为chiji, 并获取添加后的name属性值" onclick="fun1()" />
+
+	  <script type="text/javascript">
+		  //需求1: 为列表项值为吃鸡 标签 添加的name属性值为chiji, 并获取添加后的name属性值
+		  function fun1() {
+			  var cj = document.getElementById("cj");
+			  //设置属性,方法setAttribute
+			  cj.setAttribute("name","chiji");
+
+			  console.log(cj.getAttribute("name"));
+          }
+	  </script>
+	</body>
+</html>

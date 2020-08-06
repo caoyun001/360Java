@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS全局函数each</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js">
+        
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            /**
+             * jQuery遍历:
+             *  定义全局函数 each()
+             *  上一个案例: each()函数的调用者,是jQuery对象
+             *  全局函数: 调用不需要jQuery对象,
+             *  使用的是核心函数调用
+             *
+             *  $.each(要遍历的数组,function(索引,元素){})
+             *  第一个参数,是数组,或者是jQuery获取的对象
+             *
+             *  优势: 遍历的容器可以传递
+             */
+            var lis = $("li");
+            $.each(lis,function(index,element){
+                console.log( index+"=="+ $(element).html() );
+            });
+
+            var arr = [1,2,3,4,5];
+            $.each(arr,function(index,element){
+                console.log( index+"=="+element );
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+<ul id="city">
+    <li>北京</li>
+    <li>上海</li>
+    <li>天津</li>
+    <li>重庆</li>
+</ul>
+</body>
+</html>

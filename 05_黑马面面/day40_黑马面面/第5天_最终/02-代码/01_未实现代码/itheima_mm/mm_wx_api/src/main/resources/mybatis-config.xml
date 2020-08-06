@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//com.itheima.mm.database.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 配置属性
+      先加载内部属性，再加载外部属性，如果有同名属性会覆盖。
+   -->
+    <properties resource="db.properties"/>
+    <!-- 配置pojo别名 -->
+    <typeAliases>
+        <!-- 扫描包的形式创建别名，别名就是类名，不区分大小写 -->
+        <package name="com.itheima.mm.pojo"/>
+    </typeAliases>
+    <!--environments配置-->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用jdbc事务管理-->
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <property name="poolMaximumIdleConnections" value="0"/>
+                <property name="poolMaximumActiveConnections" value="1000"/>
+                <property name="poolPingQuery" value="SELECT 1 FROM DUAL" />
+                <property name="poolPingEnabled" value="true" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- mapper文件和接口在同一包下，可以批量注册 -->
+        <!-- 使用扫描包的形式加载dao和mapper文件 -->
+        <package name="com.itheima.mm.wx.dao"/>
+    </mappers>
+</configuration>

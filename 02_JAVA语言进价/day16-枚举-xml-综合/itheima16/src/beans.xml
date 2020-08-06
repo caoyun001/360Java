@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    根标签 beans
+    两个子标签 bean
+-->
+<beans>
+    <!--
+       bean标签含有2个属性
+       id属性, className属性
+       含有2个子标签property
+    -->
+    <bean id="001" className="cn.itcast.demo.User">
+        <!--
+           bean的子标签 property
+           property的属性 name 和 value
+        -->
+        <property name="user" value="jack">杰克</property>
+        <property name="user" value="rose">露丝</property>
+    </bean>
+
+    <bean id="002" className="cn.itcast.demo.Admin">
+        <property name="user" value="admin">管理员</property>
+        <property name="user" value="write">怀特</property>
+    </bean>
+</beans>

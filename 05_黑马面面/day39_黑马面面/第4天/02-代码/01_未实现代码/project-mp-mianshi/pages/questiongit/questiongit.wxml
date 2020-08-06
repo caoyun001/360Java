@@ -1,0 +1,28 @@
+<view class='questiongit'>
+  <view class='swiper-tab'>
+    <view class="tab-item {{currentTab == 0? 'on': ''}}" data-current='0' data-kind='1' bindtap='swichnav'>TAG</view>
+    <view class="tab-item {{currentTab == 1? 'on': ''}}" data-current='1' data-kind='2' bindtap='swichnav'>企业</view>
+    <view class="tab-item {{currentTab == 2? 'on': ''}}" data-current='2' data-kind='3' bindtap='swichnav'>方向</view>
+  </view>
+
+  <swiper class='swiper-box' style='height: {{scrollHeight}}px' current="{{currentTab}}" bindchange='bindChange'>
+    <block wx:for="{{swiperData}}" wx:key="{{index}}">
+      <swiper-item>
+        <scroll-view class='question-box' scroll-y="true" style='height: {{scrollHeight}}px'>
+          <block wx:for='{{questionList}}' wx:key='{{index}}'>
+            <view class='tag-item' bindtap='handleExam' data-id='{{item.id}}' data-title='{{item.title}}'>
+              <view class='title'>
+                <view class='name'>{{item.title}}</view>
+                <view class='intro'>{{item.allCount}}题 | 已做
+                  <span class="complete">{{item.finishedCount}}</span>题</view>
+              </view>
+              <view class='arrow'>
+                <span class="icon icon-rit-arrow"></span>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

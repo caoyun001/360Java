@@ -1,0 +1,20 @@
+# 普通数据类型
+username1: zhoukun
+#简写形式
+person.name: zhoukun
+person.age: 18
+person.sex: female
+person.birthday: 1949/10/01
+# 数组
+person.citys:
+  - beijing
+  - xizang
+  - dongwan
+# 集合
+person.animals:
+  - name: dog
+    age: 2
+  - name: tiger
+    age: 3
+person.map.k1: value1
+person.map.k2: value2

@@ -1,0 +1,165 @@
+<wxs src="exam.wxs" module="tools" />
+<view class="page-exam">
+  <image wx:if="{{!hiddenBG}}" class="bgImage" src="../../images/examBG.jpg" />
+  <view class="tag-name">{{categoryTitle}}</view>
+  <!-- 滑动视图 -->
+  <swiper class="main-swiper" current="{{currPosition}}" bindchange="swiperChange">
+    <block wx:for="{{questions.items}}" wx:for-item="question" wx:key="{{index}}">
+      <swiper-item item-id="{{index}}" class="swiper-item">
+        <!-- 题目 -->
+        <view class="fixed-box">
+          <view class="question">
+            <view class="question-title">{{question.title}}</view>
+            <view class="question-tag">
+              <span class="tag company" wx:if="{{question.isFamous}}">名企</span>
+              <span class="tag grade" wx:if="{{question.grade <= 2}}">简单</span>
+              <span class="tag grade" wx:if="{{question.grade === 3 || question.grade === 4}}">
+                普通
+              </span>
+              <span class="tag grade" wx:if="{{question.grade === 5}}">困难</span>
+            </view>
+            <view class="line" wx:if="{{question.type === QuestionType.SHORT && !question.answerDisplay}}"></view>
+          </view>
+        </view>
+        <view class='scroll-view'>
+          <scroll-view scroll-y class="scroll-box" style="height: 100%">
+            <!-- 1 主观题 2 单选题 3 多选题 -->
+            <!-- 简答题按钮 -->
+            <view class="buttons" wx:if="{{question.type === QuestionType.SHORT && !question.answerDisplay}}" bindtap="handleShowAnswer">
+              <span class="answer-btn">
+                <i>查看解析</i>
+                <i class="icon icon-video" wx:if="{{question.video!==''}}" ></i>
+              </span>
+            </view>
+            <!-- 单选题选项 -->
+            <view class="option-answer" wx:if="{{(question.type === QuestionType.SINGLE) && (index === currPosition)}}">
+              <radio-group bindchange="handleRadioGroupChange">
+                <label wx:for="{{question.selection}}" wx:for-item="item" wx:key="{{index}}">
+                  <radio hidden="{{true}}" value="{{item.code}}" />
+                  <view class='option-content'>
+                    <view class='mark'>
+                      <view class='mark-ico'>
+                        <span wx:if="{{!question.isFinished}}" class="code">{{item.code}}</span>
+                        <icon wx:if="{{question.isFinished}}" class="icon" type="{{item.isRight ? 'success' : 'clear'}}" color="{{item.isRight ? '' : 'red'}}" size="22" />
+                      </view>
+                    </view>
+                    <view class='content'>
+                      <view wx:if="{{item.title !== null}}" class="title">{{item.title}}</view>
+                      <view class='img' wx:if="{{item.img != null}}">
+                        <image mode="widthFix" class="selection-image" src="{{item.img}}" />
+                      </view>
+                    </view>
+                  </view>
+
+                </label>
+              </radio-group>
+            </view>
+            <!-- 多选题 -->
+            <view class="checkbox-answer" wx:if="{{(question.type === QuestionType.MULTIPLE) && (index === currPosition)}}">
+              <checkbox-group bindchange="handleCheckboxGroupChange">
+                <label wx:for="{{question.selection}}" wx:for-item="item" wx:key="{{index}}">
+
+                  <view class='option-content'>
+                    <view class='mark'>
+                   
+                      <view class='mark-ico'>
+                        <icon wx:if="{{question.isFinished}}" class="icon" type="{{item.isRight ? 'success' : 'clear'}}" color="{{item.isRight ? '' : 'red'}}" size="22" />
+                        <!-- <view wx:if="{{!question.isFinished}}" class="code" data-code="{{selection.code}}">{{selection.code}}</view> -->
+                      </view>
+                    </view>
+                    <view class='content'>
+                      <view wx:if="{{question.title !== null}}" class="title">{{item.title}}</view>
+                      <view class='img' wx:if="{{item.img != null}}">
+                        <image mode="aspectFit" class="selection-image"  src="{{item.img}}" />
+                      </view>
+                    </view>
+                  </view>
+                  <view class='check-box'>
+                    <checkbox hidden="{{question.isFinished}}" value="{{item.code}}" />
+                  </view>
+                </label>
+              </checkbox-group>
+              <view class="sure" wx:if="{{!question.isFinished}}">
+                <button class="exam-btn" bindtap="handleCheckboxAnswerIsFinished">确认答案</button>
+              </view>
+            </view>
+            <!-- 解析区 -->
+            <view class="solution" wx:if="{{(question.isFinished || question.answerDisplay) && (index === currPosition)}}">
+              <view class="answer-index">
+                <span class="title">查看解析</span>
+              </view>
+              <view class="answer-detail">
+                <view class="point" wx:if="{{question.tags !== null}}">
+                  <view class="type-title">考点</view>
+                  <view class="type-info">
+                    <span wx:for="{{question.tags}}" wx:for-item="tag" wx:key="{{index}}">
+                      <text class="point-item">{{tag.title}}</text>
+                    </span>
+                  </view>
+                </view>
+                <view class="detail">
+                  <view class="type-title">解读</view>
+                  <view class="type-info">
+                    <rich-text class="detail-answer" nodes="{{question.content}}"></rich-text>
+                    <button size="mini" class="exam-btn" wx:if="{{question.video!==''}}" bindtap="handlePlayVideo">
+                      播放视频
+                      <i class="icon icon-video"></i>
+                    </button>
+                    <!-- <image mode="aspectFit" class="detail-image" wx:if="{{question.videoPoster!==''}}" src="{{question.videoPoster}}" /> -->
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 底部操作区 -->
+  <view class="operate">
+    <view class="content">
+      <view class="star {{questions.items[currPosition].isFavorite ? 'on': ''}}" bindtap="handleFavor">
+        <span class="icon icon-collect"></span>
+        收藏
+      </view>
+      <view class="feedback">
+        <view class="right {{questions.items[currPosition].isFinished && questions.items[currPosition].answerIsRight ? 'ongood': ''}}" data-current="{{true}}" bindtap="handleAnswerIsRight">
+          <span class="icon icon-smile"></span>
+          <span wx:if="{{questions.items[currPosition].type === QuestionType.SHORT}}">理想</span>
+          <span wx:else>正确</span>
+        </view>
+        <view class="wrong {{questions.items[currPosition].isFinished && questions.items[currPosition].answerIsRight === false ? 'onbad': ''}}" data-current="{{false}}" bindtap="handleAnswerIsRight">
+          <span class="icon icon-cry"></span>
+          <span wx:if="{{questions.items[currPosition].type === QuestionType.SHORT}}">不理想</span>
+          <span wx:else>错误</span>
+        </view>
+        <view class="result" bindtap="handleOpen">
+          <span class="icon icon-total"></span>
+          <i class="cur-num">{{currPosition + 1}}</i>
+          /{{questions.items.length}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <i-action-sheet class="action-sheet" visible="{{ actionSheetVisible }}" bind:cancel="handleActionSheetCancel" mask-closable>
+    <view slot="header">
+      <view class="title">
+        <view>答题卡</view>
+        <view class="brush" bindtap="handleQuestionsEmpty">
+          <span class="icon icon-brush"></span>
+          清空
+        </view>
+      </view>
+      <scroll-view scroll-y style="height: 800rpx;">
+        <view class="total">
+          <view class="numbers">
+            <view wx:for="{{questions.items}}" wx:key="{{index}}" bindtap="handleSelectItem" data-current="{{index}}" class="num {{item.isFinished && item.answerIsRight ? 'right':''}} {{item.isFinished && !item.answerIsRight ? 'wrong':''}} {{item.id === questions.items[currPosition].id ? 'current' : ''}}">
+              {{index+1}}
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </i-action-sheet>
+  <heima-video class="heima-video" video="{{questions.items[currPosition].video}}" videoPoster="{{questions.items[currPosition].videoPoster}}" />
+</view>

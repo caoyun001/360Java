@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS内置对象String</title>
+
+    <script type="text/javascript">
+        /**
+         * 字符串对象创建方法
+         * var str = "";
+         */
+
+        //字符串长度 length属性,Java使用的是length()
+
+        var str = "HelloWorld";
+        console.log(str.length);
+
+        //截取字符串 substring(开始索引,结束索引) 包含开头,不包含结尾
+        console.log( str.substring(1,5) );
+
+        //截取字符串 substr(开始索引,截取的个数)
+        console.log( str.substr(1,7));
+
+        console.log( str.charAt(25));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

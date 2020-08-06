@@ -1,0 +1,42 @@
+# 端口配置
+server:
+  port: 8888
+
+# 单引号忽略转义字符
+message1: 'hello \n world'
+# 双引号识别转义字符 \n == 换行符号
+message2: "hello \n world"
+
+
+name: zhangsandema
+
+person:
+  # 配置值的引用
+  name: ${name}
+  age: 31
+  addr: beijing
+# 行内写法
+# person: {name: haohao, age: 31, addr: beijing}
+  citys:
+    - beijing
+    - shanghai
+    - guangzhou
+  # 行内写法
+  #city: [beijing,shanghai,guangzhou]
+  #集合中的元素是对象形式，为了方便注入到Spring的对象中去
+  animals:
+    - name: dog
+      age: 2
+    - name: tomcat
+      age: 3
+    - name: pig
+      age: 5
+
+# 随机字符串，Random
+my.secret: ${random.value}
+# 随机数
+my.number: ${random.int}
+# 随机数小于10
+my.number.less.than.ten: ${random.int(10)}
+# 随机数范围在1024-65536之间，为了不让端口冲突，可以随机生成一个端口
+my.number.in.range: ${random.int[1024,65536]}

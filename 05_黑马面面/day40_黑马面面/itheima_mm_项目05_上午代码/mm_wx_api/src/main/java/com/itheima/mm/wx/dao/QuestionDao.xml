@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.QuestionDao">
+    <resultMap id="resultMapForQuestionList" type="Question">
+        <id property="id" column="id" />
+        <collection property="tags" javaType="ArrayList" ofType="Tag" column="id"
+            select="selectTagsByQuestionId"/>
+        <collection property="selection" javaType="ArrayList" ofType="QuestionItem" column="id"
+            select="selectQuestionItemByQuestionId"  />
+    </resultMap>
+    <select id="selectQuestionListByQueryParam" resultMap="resultMapForQuestionList">
+        SELECT q.id,
+            q.`subject` as title,
+            difficulty as grade,
+            analysis as content,
+            analysis_video as video,
+            '' as videoPoster,
+            if(mq.tag is null,0,1) as isFinished,
+            if(mq.is_favorite=1,1,0) as isFavorite,
+            q.type,
+            mq.tag as answerTag
+        from t_question q LEFT JOIN tr_member_question mq
+        on q.id = mq.question_id and status = 1
+        <where>
+            <if test="categoryKind != null and categoryKind == 1 ">
+                and q.catalog_id = #{categoryID}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectTagsByQuestionId" resultType="Tag">
+        select t.id,t.name as title
+        from t_tag t
+        where t.id in (select qt.tag_id from tr_question_tag qt where qt.question_id = #{id})
+    </select>
+    <select id="selectQuestionItemByQuestionId" resultType="QuestionItem">
+       SELECT qi.id,'' as code ,qi.is_right as isRight,qi.content as title
+       FROM t_question_item qi
+       where qi.question_id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue指令v-model</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+            数据的双向绑定
+            页面中的文本框,获取到vue对象中的数据
+
+            文本框中获取值后,页面可以修改,Vue对象中的数据也改了
+            Vue对象中的数据也改,文本框的数据跟随改变
+        -->
+        用户名:<input type="text" v-model="username"><br>
+        密的码:<input type="text" v-model="password"><br>
+        <button @click="fun1()">修改按钮</button>
+        <button @click="fun2()">手动修改按钮</button>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el:"#app",
+            data:{
+                username:"tom",
+                password:"123"
+            },
+            methods:{
+                /**
+                 * 函数fun1中,使用data键中的数据
+                 */
+                fun1:function(){
+                    console.log(this.username+"=="+this.password);
+                },
+
+                /**
+                 * 函数fun2中,手动修改username和password值
+                 * 反映到文本框中
+                 */
+                fun2:function () {
+                    this.username="jerry";
+                    this.password="7890";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

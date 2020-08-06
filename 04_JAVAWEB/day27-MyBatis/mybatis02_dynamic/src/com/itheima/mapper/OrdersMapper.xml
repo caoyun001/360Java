@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper 标签属性 namespace 固定值和接口名一致，全名
+-->
+<mapper namespace="com.itheima.mapper.OrdersMapper">
+    <!--
+      配置一对一的查询
+      一个订单,对应一个用户,基准是订单表
+    -->
+    <select id="queryOrdersUser"  resultMap="queryOrdersUserResultMap">
+        SELECT u.id uid,u.username,u.sex,u.birthday,u.address,o.id,o.user_id,o.number,o.createtime,o.note
+        FROM orders o LEFT OUTER JOIN USER u ON u.id = o.user_id;
+    </select>
+
+    <!--手动映射配置,数据表的列和pojo对象属性对应-->
+    <resultMap id="queryOrdersUserResultMap" type="orders">
+        <!--配置orders-->
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime"/>
+        <result column="note" property="note"/>
+        
+        <!--
+            配置用户数据,orders对象中包含user
+            association 配置对应关系
+            property 属性: 和orders对象的哪个属性关联
+            javaType 属性: 属性数据类型
+        -->
+        <association property="user" javaType="user">
+            <id column="uid" property="id"/>
+            <result column="username" property="username"/>
+            <result column="sex" property="sex"/>
+            <result column="birthday" property="birthday"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+
+</mapper>

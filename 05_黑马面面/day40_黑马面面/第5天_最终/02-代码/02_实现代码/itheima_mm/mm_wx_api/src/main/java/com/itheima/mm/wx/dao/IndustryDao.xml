@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.wx.dao.IndustryDao">
+    <select id="selectIndustryListByQueryParam" resultType="java.util.Map">
+        select i.id,i.name as title,
+                (select count(*) from t_question tq
+                  where tq.company_id in
+                    (select tci.company_id from tr_company_industry tci where tci.industry_id = i.id ))  as allCount,
+                (select count(*)
+                  from t_question tq join tr_member_question tmq
+                      on tq.id = tmq.question_id
+                  where  tmq.member_id = #{memberId}
+                    and tq.company_id in (select tci.company_id from tr_company_industry tci where tci.industry_id = i.id )
+                ) as finishedCount
+        from t_industry i
+        <where>
+            <if test="categoryID != null ">
+                and i.id = #{categoryID}
+            </if>
+        </where>
+    </select>
+</mapper>

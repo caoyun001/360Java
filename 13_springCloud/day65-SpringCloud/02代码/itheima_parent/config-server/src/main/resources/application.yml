@@ -1,0 +1,25 @@
+# 端口
+server.port: 12000
+# 当前应用的名称
+spring.application.name: config-server
+# 注册中心的地址
+eureka.client.service-url.defaultZone: http://127.0.0.1:10086/eureka
+
+# git仓库的地址
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/liuyaxiong01/itheima_springcloud_config360.git
+
+
+# RabbitMQ的服务host,port,用户名，和密码
+spring.rabbitmq.port: 5672
+spring.rabbitmq.host: 192.168.200.128
+spring.rabbitmq.username: guest
+spring.rabbitmq.password: guest
+
+
+# 触发配置文件广播的地址actuator的endpoint
+management.endpoints.web.exposure.include: bus-refresh

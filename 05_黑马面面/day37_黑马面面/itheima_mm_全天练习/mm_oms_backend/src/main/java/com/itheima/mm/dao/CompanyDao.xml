@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.CompanyDao">
+
+    <resultMap id="resultMapForAllList" type="Company">
+        <id column="id" property="id"/>
+        <collection property="industryList"
+                    javaType="ArrayList"
+                    ofType="Industry"
+                    column="id"
+                    select="com.itheima.mm.dao.IndustryDao.selectIndustryListByCompanyId"/>
+    </resultMap>
+    <insert id="addCompanyIndustry">
+        INSERT INTO tr_company_industry (company_id, industry_id)
+        VALUES (#{companyId},#{industryId})
+    </insert>
+    <update id="updateCompanyCity">
+        UPDATE t_company
+        SET city_id = #{cityId},user_id = #{userId}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteCompanyIndustryByCompanyId">
+        DELETE FROM tr_company_industry
+        WHERE company_id = #{id}
+    </delete>
+
+    <select id="selectListAll" resultMap="resultMapForAllList">
+        SELECT id,city_id as cityId,short_name as shortName
+        FROM  t_company
+    </select>
+</mapper>

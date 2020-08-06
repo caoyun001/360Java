@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>form.html</title>
+
+		<meta charset="UTF-8">
+		
+			
+	</head>
+	<body>
+		<form name="form1" action="test.html" method="get">
+			<input type="text" name="tname" value="传智播客10周年_1" id="tid_1"><br>
+			<input type="text" name="tname" value="传智播客10周年_2" id="tid_2"><br>
+			<input type="text" name="tname" value="传智播客10周年_3" id="tid_3"><br>
+		</form>
+
+		<select name="edu" id="edu">
+			<option value="博士">博士^^^^^</option>
+			<option value="硕士">硕士^^^^^</option>
+			<option value="本科">本科^^^^^</option>
+			<option value="幼儿园">幼儿园^^^^^</option>
+		</select>
+
+		<select name="job" id="job">
+			<option value="美容">美容^^^^^</option>
+			<option value="IT">IT^^^^^</option>
+			<option value="程序员">程序员^^^^^</option>
+			<option value="建筑师">建筑师^^^^^</option>
+		</select>
+		
+		<br />
+		<br />
+		<input type="button" value="需求1：获取所有的input元素,遍历value属性值" onclick="fun1()" /><br />
+		<input type="button" value="需求2：输出type为text的元素的 value属性值,不包含按钮(button)" onclick="fun2()" /><br />
+		<input type="button" value="需求3：输出id为edu的下拉选框中,所有option标签的value属性值" onclick="fun3()"/><br />
+		<input type="button" value="需求4：输出所有下拉选框中,被选中的option标签的value属性值" onclick="fun4()"/><br />
+
+	<script type="text/javascript">
+		//需求1：获取所有的input元素,遍历value属性值
+		function fun1() {
+			//获取input标签元素,使用标签名获取
+			var inputs = document.getElementsByTagName("input");//返回是数组
+			for(var i=0;i<inputs.length;i++){
+			    //属性值
+				console.log(inputs[i].value);
+			}
+        }
+
+        //需求2：输出type为text的元素的 value属性值,不包含按钮(button)
+		function fun2() {
+            //获取input标签元素,使用标签名获取
+            var inputs = document.getElementsByTagName("input");//返回是数组
+			for(var i=0;i<inputs.length;i++){
+			    //判断,标签对象的属性值 type的值,是text
+				if(inputs[i].type=="text")
+                //属性值
+                console.log(inputs[i].value);
+			}
+        }
+
+        //需求3：输出id为edu的下拉选框中,所有option标签的value属性值
+		function fun3() {
+			//获取select菜单
+			//获取id=edu标签
+			var selectEdu = document.getElementById("edu");//父标签
+			//再获取子标签
+			var options = selectEdu.getElementsByTagName("option");
+			for(var i=0;i<options.length;i++){
+			    console.log(options[i].value);
+			}
+        }
+
+        //需求4：输出所有下拉选框中,被选中的option标签的value属性值
+		function fun4() {
+			//获取所有的option
+			var options = document.getElementsByTagName("option");
+			//options标签,属性 selected="selected" 默认的选中项
+			//JS中,属性selected值是true,被选中的
+            for(var i=0;i<options.length;i++){
+                if(options[i].selected )
+                console.log(options[i].value);
+            }
+        }
+	</script>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+spring:
+   application:
+    name: job
+   profiles:
+    active: dev
+   cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        serviceName: ${spring.application.name}
+        register: false #不需要注册到consul
+      config:
+        enabled: true
+        format: yaml
+        prefix: config
+        defaultContext: schedule
+        data-key: data

@@ -1,0 +1,5 @@
+docker pull mongo
+
+docker volume create mongo1
+
+docker run --name mongodb1 -p 27017:27017 -v mongodb1:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root -d mongo

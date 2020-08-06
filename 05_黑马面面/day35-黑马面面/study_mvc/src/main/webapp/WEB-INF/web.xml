@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <context-param>
+        <param-name>HmScanPackage</param-name>
+        <param-value>com.itheima.study.mvc.controller</param-value>
+    </context-param>
+    <listener>
+        <listener-class>com.itheima.study.mvc.listener.HmContextListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>NiuServlet</servlet-name>
+        <servlet-class>com.itheima.study.mvc.controller.ZuiNiuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NiuServlet</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+</web-app>

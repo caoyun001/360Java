@@ -1,0 +1,14 @@
+server: 
+  port: 8081
+#spring:
+#  application:  
+#    name: job #指定服务名
+#  cloud:
+#    consul:
+#      host: 127.0.0.1
+#      port: 8500
+#      discovery:
+#       register: false #不需要注册到consul
+#       
+#chongba:
+#  selectMasterZookeeper: 192.168.200.129:2181       

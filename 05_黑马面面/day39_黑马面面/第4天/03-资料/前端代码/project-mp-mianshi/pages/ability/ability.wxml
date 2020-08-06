@@ -1,0 +1,3 @@
+<view class='ability'>
+  <image src='/images/abilityBG.jpg' mode='widthFix' class='bg-image'></image>
+</view>

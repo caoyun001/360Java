@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>黑马面面</title>
+    <meta name="description" content="黑马面面">
+    <meta name="keywords" content="黑马面面">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../css/element-ui.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <div class="box common-table-border" style="margin-top: 15px;min-height: calc(100vh - 55px);">
+            <h2 class="titleInfo"><span>试题预览</span></h2>
+            <div class="content">
+                <ul class="contentList clear">
+                    <li><label>【题库】：</label>{{ is_classic === 0 ? '基础题库' : '精选题库' }}</li>
+                    <li><label>【编号】：</label>{{ formData.number }}</li>
+                    <li><label>【学科】：</label>{{ formData.catalog.courseName }}</li>
+                    <li><label>【题型】：</label>{{ typeTransform }}</li>
+                    <li><label>【难度】：</label>{{ difficultyTransform }}</li>
+                    <li><label>【标签】：</label>{{ formData.tagNameList.join('，') }}</li>
+                    <li><label>【目录】：</label>{{ formData.catalog.name }}</li>
+                    <li><label>【企业】：</label>{{ formData.company.industryNameList.join('，') }}</li>
+                    <li><label>【城市】：</label>{{ formData.company.city }}</li>
+                </ul>
+            </div>
+            <div class="content">
+                <p>【题干】：</p>
+                <div class="info">
+                    <p class="fontBlue" v-html="formData.subject"></p>
+                </div>
+            </div>
+            <div class="content" v-if="formData.type === 1">
+                <p>【单选题选项】：（以下选中的选项为正确答案）</p>
+                <p v-for="(item, index) in formData.questionItemList" class="info">
+                    <el-radio v-model="rightRadio" :label="item.isRight" disabled>{{ baseData.selectData[index].value +
+                        ':' }}
+                    </el-radio>
+                    <template v-if="item.content">
+                        {{ item.content }}
+                    </template>
+                    <template v-else>
+                        <img :src="appPath + '/' + item.imgUrl" class="avatar">
+                    </template>
+                </p>
+            </div>
+            <div class="content" v-else-if="formData.type === 2">
+                <p>【多选题选项】：（以下选中的选项为正确答案）</p>
+                <p v-for="(item, index) in formData.questionItemList" class="info">
+                    <el-checkbox v-model="item.isRight" disabled>{{ baseData.selectData[index].value + ':' }}
+                    </el-checkbox>
+                    <template v-if="item.content">
+                        {{ item.content }}
+                    </template>
+                    <template v-else>
+                        <img :src="appPath + '/' + item.imgUrl" class="avatar">
+                    </template>
+                </p>
+            </div>
+            <div class="content" v-else>
+                <p>【简答题解析】：</p>
+                <p v-html="formData.analysis" class="info"></p>
+            </div>
+            <div class="content">
+                <p>【题目备注】：</p>
+                <p v-html="formData.remark" class="info"></p>
+            </div>
+            <div class="submitInfo" v-if="is_examine === 1 ? true : false">
+                <el-button type="primary" @click="reviewItem(1)">审核通过</el-button>
+                <el-button @click="reviewItem(2)">审核不通过</el-button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="../js/vue.js"></script>
+<script src="../js/element-ui.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                appPath: app_path,
+                baseData: base,
+                is_classic: 0,
+                is_examine: 0,
+                rightRadio: true,
+                questionId: 0,
+                // 初始化表单
+                formData: {
+                    // 编号
+                    number: '',
+                    // 目录
+                    catalog: {
+                        // 学科
+                        courseName: '',
+                        // 目录
+                        name: ''
+                    },
+                    // 题型
+                    type: 0,
+                    // 难度
+                    difficulty: 0,
+                    // 标签
+                    tagNameList: [],
+                    // 企业
+                    company: {
+                        // 方向
+                        industryNameList: [],
+                        // 城市
+                        city: ''
+                    },
+                    // 题干
+                    subject: '',
+                    // 选项
+                    questionItemList: [],
+                    // 解析
+                    analysis: '',
+                    // 备注
+                    remark: ''
+                },
+            }
+        },
+        mounted() {
+            this.questionId = parseInt(this.getUrlParam("questionId"), 10);
+            this.is_classic = parseInt(this.getUrlParam("is_classic"), 10);
+            this.is_examine = parseInt(this.getUrlParam("is_examine"), 10);
+            this.initForm();
+        },
+        computed: {
+            typeTransform: function () {
+                let type = this.formData.type;
+                let item = this.baseData.questionsType.find(val => {
+                    return val.id === type;
+                });
+                if (!item) {
+                    return '';
+                }
+                return item.value;
+            },
+            difficultyTransform: function () {
+                let difficulty = this.formData.difficulty;
+                let item = this.baseData.difficulty.find(val => {
+                    return val.id === difficulty;
+                });
+                if (!item) {
+                    return '';
+                }
+                return item.value;
+            }
+        },
+        methods: {
+            //获取url参数
+            getUrlParam(name) {
+                let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                let r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            },
+            //初始化表单
+            initForm() {
+                // 发送请求
+                // let response = {}
+                // this.formData = response.data.result;
+                axios.get(app_path + "/question/findById.do?questionId=" + this.questionId).then((response) => {
+                    if (response.data.flag) {
+                        //this.$message.success(response.data.result.message);
+                        this.formData = response.data.result;
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+            },
+            // 审核试题
+            reviewItem(status) {
+                let t = this;
+
+                // 必传参数
+                let params = {
+                    questionId: this.questionId,
+                    status: status,
+                    comments: ''
+                };
+                // this.$message.success("审核通过");
+                // window.location.href = "questionClassicList.html";
+                axios.post(app_path + "/review/add.do", params).then((response) => {
+                    if (response.data.flag) {
+                        this.$message.success(response.data.message);
+                        setTimeout(function () {
+                            window.location.href = "questionClassicList.html";
+                        }, 1000);
+                    }else if(response.data.message){
+                        this.$message.error(response.data.message);
+                    }else{
+                        this.$message.error(response.data);
+                    }
+                })
+            }
+        }
+    })
+</script>
+</html>

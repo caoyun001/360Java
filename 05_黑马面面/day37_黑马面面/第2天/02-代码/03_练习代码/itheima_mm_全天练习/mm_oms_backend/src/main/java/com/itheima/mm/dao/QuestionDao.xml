@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.QuestionDao">
+    <sql id="select_where_by_page">
+        <where>
+            <if test="queryParams.courseId != null">
+                and tq.course_id = #{queryParams.courseId}
+            </if>
+            <if test="queryParams.isClassic != null">
+                and tq.is_classic = #{queryParams.isClassic}
+            </if>
+        </where>
+    </sql>
+    <insert id="add" parameterType="Question">
+        INSERT INTO t_question (subject, type, difficulty, analysis,analysis_video, remark, is_classic, status, review_status, create_date, user_id, company_id, catalog_id, course_id)
+        VALUES (#{subject},#{type},#{difficulty},#{analysis},#{analysisVideo},#{remark},#{isClassic},#{status},#{reviewStatus},#{createDate},#{userId},#{companyId},#{catalogId},#{courseId})
+        <selectKey keyProperty="id" resultType="integer" order="AFTER">
+              select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <update id="update">
+        UPDATE t_question
+        set subject=#{subject},type=#{type},difficulty=#{difficulty},analysis=#{analysis},analysis_video=#{analysisVideo},remark=#{remark},is_classic=#{isClassic},status=#{status},review_status=#{reviewStatus},create_date=#{createDate},user_id=#{userId},company_id=#{companyId},catalog_id=#{catalogId},course_id=#{courseId}
+        WHERE id=#{id}
+    </update>
+    <select id="selectListByPage" resultType="com.itheima.mm.pojo.Question">
+        SELECT   tq.id,(1000+tq.id) as number,
+ 					(select c.name from t_course c where c.id = tq.course_id ) as courseName,
+ 				  type,
+ 				  `subject`,
+ 					tq.create_date as createDate,
+ 					difficulty,
+ 				  (SELECT  count(*) FROM tr_member_question tmq WHERE tmq.question_id = tq.id ) as usedQty,
+ 				  (select u.username from t_user u where u.id = tq.user_id) as creator,
+ 				tq.`status`
+         FROM t_question tq
+         <include refid="select_where_by_page"/>
+         limit #{offset},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="java.lang.Long">
+        SELECT count(*)
+        from t_question tq
+        <include refid="select_where_by_page"/>
+    </select>
+</mapper>

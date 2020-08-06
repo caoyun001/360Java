@@ -1,0 +1,11 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "专项面试",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "i-action-sheet": "../../lib/iview/action-sheet/index",
+    "heima-video": "../../components/video-play/video-play"
+  }
+}

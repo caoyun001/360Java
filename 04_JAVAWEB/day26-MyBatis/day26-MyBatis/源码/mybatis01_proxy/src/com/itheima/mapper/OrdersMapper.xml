@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--属性值，必须和接口全名一致-->
+<mapper namespace="com.itheima.mapper.OrdersMapper">
+
+<!--
+        配置查询所有定的的SQL
+       查询需要使用自己配置的映射！！
+       select 标签属性resultMap，属性值，请你写手动映射标签resultMap的id值
+-->
+    <select id="queryOrders" resultType="orders" resultMap="ordersResultMap">
+        select * from orders
+    </select>
+
+    <!--
+            手动映射，手动配置pojo对象的属性名和，数据表的列名resultMap
+            属性: id=""唯一性
+            type 结果类型，pojo对象
+
+    -->
+    <resultMap id="ordersResultMap" type="orders">
+        <!--配置的就是 数据表的列，和pojo对象成员变量的对应关系-->
+
+        <!--id配置的是主键
+            columns列名
+            property pojo对象属性名
+        -->
+        <id column="id" property="id"></id>
+
+        <!--配置其他列-->
+        <result column="user_Id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createtime"></result>
+        <result column="note" property="note"></result>
+    </resultMap>
+</mapper>

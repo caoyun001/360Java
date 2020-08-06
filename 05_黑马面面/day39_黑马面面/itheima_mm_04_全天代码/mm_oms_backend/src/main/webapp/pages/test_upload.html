@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 页面meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>黑马面面</title>
+		<meta name="description" content="黑马面面">
+		<meta name="keywords" content="黑马面面">
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="../css/element-ui.css">
+		<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+	</head>
+
+	<body class="hold-transition">
+		<div id="app">
+			<div class="app-container">
+				<div class="box common-table-border" style="margin-top: 15px;min-height: calc(100vh - 55px);">
+						<form>
+							<input type="file" @change="getFile($event)"><br/>
+							<input type="file" @change="getFile($event)"><br/>
+							<button type="button" @click="submitFormData()">提交</button>
+					  </form>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!-- 引入组件库 -->
+	<script src="../js/vue.js"></script>
+	<script src="../js/element-ui.js"></script>
+	<script src="../plugins/jquery/dist/jquery.js"></script>
+	<!-- Include stylesheet -->
+	<link href="../css/quill.core.css" rel="stylesheet">
+	<link href="../css/quill.snow.css" rel="stylesheet">
+	<link href="../css/quill.bubble.css" rel="stylesheet">
+	<script src="../js/base.js"></script>
+	<script src="../js/axios-0.18.0.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data:{
+				fileList:[],
+			},
+			methods: {
+				getFile(event) {
+					var file = event.target.files[0];
+					this.fileList[file.name] = file;
+					console.log(this.fileList);
+				},
+				submitFormData() {
+					//创建 formData 对象
+					var formData = new FormData();
+					// 向 formData 对象中添加文件
+					for (var item in this.fileList){
+						formData.append(item,this.fileList[item]);
+					}
+					axios.defaults.headers.post['Content-Type']='multipart/form-data;charse=UTF-8';
+					axios.post('/mm/common/upload.do', formData).then((response)=>{
+						console.log(response.data);
+					});
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,13 @@
+// 检查是否正确
+var checkRight = function(tagCode, answerResult) {
+  for (var i = 0; i < answerResult.length; i++) {
+    if (answerResult[i] === tagCode) {
+      return true
+    }
+  }
+  return false
+}
+
+module.exports = {
+  checkRight: checkRight
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+    <script type="text/javascript" src="../js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="ajaxGet()">GET请求</button>
+    <input type="text" v-model="message">
+</div>
+
+  <script type="text/javascript">
+      new Vue({
+          el:"#app",
+          data:{
+              message:"ajax"
+          },
+          methods:{
+              ajaxGet:function(){
+                //插件发请求
+                  axios.get("/ajaxServlet").
+                          //响应成功调用then
+                  //then我们自己的匿名函数,服务器响应的信息传递response
+                          //箭头函数 (参数)->{}
+                  then(response=>{
+                      //服务器响应回来的数据,赋值到message键
+                      //箭头函数,this表示Vue对象
+                      this.message = response.data;
+                  }).
+                  catch();
+              }
+          }
+
+      });
+  </script>
+</body>
+</html>

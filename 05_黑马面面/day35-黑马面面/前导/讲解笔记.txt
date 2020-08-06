@@ -1,0 +1,17 @@
+
+问题核心点：
+   如何总控制器通过访问路径，调用后端子控制器的Web方法
+需要解决问题：
+ 1.子控制器需要提前加载内存，提前实例对象并实例方法
+ 2.自定义注解
+1.无论任何请求，肯定要给Servlet
+http://localhost:8080/studymvc/test/courseAdd.do
+http://localhost:8080/studymvc/test/courseDelete.do
+http://localhost:8080/studymvc/test/courseUpdate.do
+http://localhost:8080/studymvc/test/courseQuery.do
+
+dubbo
+spring boot / cloud
+
+.Net C#
+Java EE  -Java

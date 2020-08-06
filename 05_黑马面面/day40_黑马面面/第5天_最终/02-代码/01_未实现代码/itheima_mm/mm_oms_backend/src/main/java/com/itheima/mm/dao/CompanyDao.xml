@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.CompanyDao">
+    <resultMap id="mapFormAll" type="com.itheima.mm.pojo.Company">
+        <id column="id" property="id"/>
+        <collection property="industryList"
+                    javaType="ArrayList"
+                    ofType="Industry"
+                    column="id"
+                    select="com.itheima.mm.dao.IndustryDao.selectIndustryListByCompany"
+        />
+    </resultMap>
+    <select id="selectListAll" resultMap="mapFormAll">
+        SELECT id,short_name as shortName,city_id as cityId
+        FROM t_company
+    </select>
+
+    <update id="updateCompanyCity">
+        UPDATE t_company
+        SET city_id = #{cityId},user_id = #{userId}
+        where id = #{id}
+    </update>
+    <insert id="addCompanyIndustry">
+        INSERT INTO tr_company_industry (company_id, industry_id)
+        VALUES (#{companyId},#{industryId})
+    </insert>
+    <delete id="deleteCompanyIndustryByCompanyId">
+        DELETE FROM tr_company_industry
+        WHERE company_id = #{companyId}
+    </delete>
+    <select id="selectByIdForQuestion" resultType="com.itheima.mm.pojo.Company">
+        select c.id,c.short_name as shortName,d.data_value as city
+        from t_company c,t_dict d
+        where c.id = #{id} and c.city_id = d.id
+    </select>
+
+</mapper>

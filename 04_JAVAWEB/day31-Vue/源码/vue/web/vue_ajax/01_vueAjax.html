@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+    <script type="text/javascript" src="../js/axios-0.18.0.js"></script>
+</head>
+<body>
+    <!--
+      Vue框架支持ajax技术,异步请求
+      需要插件: axios.js
+    -->
+
+   <div id="app">
+       <button @click="ajaxGet()">GET请求</button>
+       <input type="text" v-model="message">
+   </div>
+
+   <script type="text/javascript">
+       new Vue({
+           el:"#app",
+           data:{
+               message:"ajax"
+           },
+           methods:{
+               ajaxGet:function(){
+                   //this表示vue对象,保存起来备用
+                   var _this = this;
+                   /*
+                    *get的异步请求
+                    * axios插件,扩展了Vue功能
+                    * 插件定义对象 axios,对象方法get
+                    * get函数: 请求服务器地址
+                    * 方法调用链
+                    *   调用函数 then() catch()
+                    *   then()服务器响应成功的回调函数
+                    *   catch()服务器响应失败的回调函数
+                    *
+                    *   then()传递匿名函数,传递参数 response,服务器响应 回来的数据
+                    */
+                    axios.get("/ajaxServlet?name=lisi&age=20").
+                   then(function(response){
+                       //响应回来的是json数据,json中的键data,
+                       console.log(response.data);
+                       //response对象的键data,赋值到message
+                       //this当前对象,当前对象axios, this.message
+                        _this.message=response.data;
+                   }).
+                   catch(function(error){
+                        console.log(error);
+                    });
+               }
+           }
+       });
+   </script>
+</body>
+</html>

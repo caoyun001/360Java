@@ -1,0 +1,7 @@
+.idea
+.idea/
+*.iml
+/**/*.iml
+/*/target/
+target
+mm_oms_backend/src/main/webapp/img/upload/

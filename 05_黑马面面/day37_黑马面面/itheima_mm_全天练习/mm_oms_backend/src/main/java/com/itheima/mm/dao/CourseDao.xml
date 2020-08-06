@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mm.dao.CourseDao">
+    <sql id="select_where">
+        <where>
+            <if test="queryParams.name !=null and queryParams.name.length>0 ">
+                and name like "%"#{queryParams.name}"%"
+            </if>
+            <if test="queryParams.status != null ">
+                and is_show = #{queryParams.status}
+            </if>
+        </where>
+    </sql>
+    <select id="selectListByPage" resultType="com.itheima.mm.pojo.Course">
+        SELECT tc.id,name,tc.create_date as createDate,tc.is_show as isShow,
+        <!--根据学科ID，统计学科目录数量-->
+        (select count(*) from t_catalog WHERE course_id = tc.id) as catalogQty,
+        <!--根据学科ID，统计学科标签数量-->
+        (select count(*) from t_tag WHERE course_id = tc.id) as tagQty,
+        <!--
+            根据学科ID，查询隶属学科目录，在题目表中统计隶属这些学科目录的题目数量
+            题目表中也冗余设计了学科ID，可以直接用学科ID，统计题目数量
+        -->
+        (select count(*) from t_question WHERE catalog_id in (select id from t_catalog where course_id = tc.id)) as questionQty ,
+        tu.username as creator
+        FROM t_course tc join t_user tu on  tc.user_id = tu.id
+        <include refid="select_where"/>
+        limit #{offset},#{pageSize}
+    </select>
+    <select id="selectTotalCount" resultType="java.lang.Long">
+        SELECT count(*) FROM t_course
+        <include refid="select_where"/>
+    </select>
+    <insert id="addCourse">
+        INSERT INTO t_course (name, create_date, is_show, user_id)
+        VALUES (#{name},#{createDate},#{isShow},#{userId})
+    </insert>
+    <update id="updateCourse">
+        UPDATE t_course
+        SET name = #{name},is_show = #{isShow}
+        where id = #{id}
+    </update>
+    <delete id="deleteCourse">
+    DELETE FROM t_course
+    WHERE id = #{id}
+    </delete>
+        <select id="selectCountTagById" resultType="java.lang.Long">
+        SELECT count(*) FROM t_tag
+        WHERE course_id = #{id}
+    </select>
+        <select id="selectCountCatalogById" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_catalog
+        WHERE course_id = #{id}
+    </select>
+
+    <resultMap id="mapForAllList" type="Course">
+        <id column="id" property="id"/>
+        <collection property="catalogList"
+                    column="id"
+                    select="com.itheima.mm.dao.CatalogDao.selectCatalogListByCourseId"/>
+        <collection property="tagList"
+                    column="id"
+                    select="com.itheima.mm.dao.TagDao.selectTagListByCourseId"/>
+    </resultMap>
+
+    <select id="selectListAll" resultMap="mapForAllList">
+        SELECT id,name FROM t_course
+    </select>
+
+</mapper>

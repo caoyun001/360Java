@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper 标签属性 namespace 固定值和接口名一致，全名
+-->
+<mapper namespace="com.itheima.mapper.PermissionMapper">
+
+    <!--
+       查询所有数据的总条数
+    -->
+    <select id="queryByCount" resultType="Long">
+        select count(id) from t_permission
+    </select>
+
+    <!--
+       配置limit分页查询
+       SQL语句中的参数
+         1 : 单一参数, int,String
+         2: 参数是pojo对象
+         3: 多个参数,类型不一定
+    -->
+    <select id="queryByPage" resultType="permission" resultMap="">
+        select id,name,keyword,description from t_permission limit #{currentPage},#{pageSize}
+    </select>
+
+    <!--
+       配置更新数据
+    -->
+    <update id="updatePermission" parameterType="permission">
+        update t_Permission set name = #{name},keyword=#{keyword},description=#{description} where id = #{id}
+    </update>
+
+    <!--
+      配置主键查询
+    -->
+    <select id="queryById" parameterType="Integer"  resultType="permission">
+        select  id,name,keyword,description from t_permission where id = #{id}
+    </select>
+
+    <!--
+      配置删除的SQL
+    -->
+    <delete id="delPermission" parameterType="Integer">
+        delete from t_permission where id = #{id}
+    </delete>
+
+    <!--
+       数据新增的配置
+       返回值int,参数是pojo对象
+    -->
+    <insert id="addPermission" parameterType="permission">
+        insert into t_permission  values (null,#{name},#{keyword},#{description})
+    </insert>
+
+    <!--
+      配置查询,条件查询
+      返回值是pojo对象,查询条件参数pojo
+    -->
+    <select id="queryByWhere" parameterType="permission" resultType="permission">
+          select id,name,keyword,description from t_permission
+          <where>
+              <if test="name!='' and name!=null">
+                  and name LIKE #{name}
+              </if>
+
+              <if test="keyword!='' and keyword!=null">
+                  and keyword LIKE #{keyword}
+              </if>
+          </where>
+    </select>
+
+   <!--
+     配置查询,所有的权限数据
+     返回值配置pojo对象
+   -->
+    <select id="queryAll" resultType="permission">
+        select id,name,keyword,description from t_permission
+    </select>
+</mapper>

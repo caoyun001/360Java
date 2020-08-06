@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/web03/checkCode" method="post">
+  <!--
+    展示验证码
+    本质上是一个图片
+    img标签,src属性图片路径,写servlet地址
+
+    可是实现看不清,换一个图片
+    需要技术 JavaScript  js 网页的脚本语言
+  -->
+  请输入验证码:<input type="text" name="code">
+  <!--
+        onclick="change()"
+        点击图片,调用函数 change()
+  -->
+  <a href="#"><img src="/web03/code" id="img"  onclick="change()"></a>
+  <input type="submit">
+</form>
+
+  <script type="text/javascript">
+    /*
+     * 点击图片,变验证码
+     * 本质: 点击图片,从新从Servlet中获取图片
+     * 操作的是标签img
+     * JS可以操作标签,标签也是对象
+     * 通过标签的id属性,获取标签
+     *
+     * document对象方法 getElementById()id属性值获取标签
+     *
+     * 事件
+     *
+     * GET请求   GET /xxx/servlet/  HTTP/1.1
+     * 在请求地址后写参数
+     */
+
+    //定义函数(方法)
+    function change() {
+        //创建日期对象
+        var date = new Date();
+        //毫秒值
+        var time = date.getTime();
+
+        var abc =  document.getElementById("img");
+        //abc就是img标签对象
+        abc.src = "/web03/code?a="+time;
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS的函数</title>
+    <script type="text/javascript">
+        /**
+         * 函数,方法
+         *
+         * 函数定义:
+         *   function 函数名(){}
+         *   函数定义上,参数不能写var
+         *   函数可以有返回值,也可以没有
+         *   需要返回值,在函数内使用return即可
+         *
+         * JS中的函数没有重载概念
+         * 遇到相同名字的函数,直接覆盖!!
+         */
+
+        function sum( a, b) {
+           // console.log(a+b);
+            return a+b;
+        }
+
+        function sum(a,b,c) {
+            console.log("参数是abc");
+        }
+
+        //调用函数
+        var a = sum(5,6);
+        console.log(a);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
